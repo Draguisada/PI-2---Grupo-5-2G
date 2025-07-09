@@ -5,7 +5,7 @@ Integrantes:
 Bruno Tochetto
 Kayron Rian Alves
 Kauã Nunes
-Maria Antônio Bernardes
+Maria Antônia Bernardes
 Nicoly Quechine de Sá
 Samuel Vortmann
 Rômulo Perin
