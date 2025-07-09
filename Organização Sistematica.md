@@ -1,7 +1,7 @@
 Objeto poste {
-    empresa_dona: str;
-    empresas_associadas: object[empresa: serviço];
-    localização: tuple = (x, y) -> Posição global, coordenadas;
+    empresa_dona: str; \n
+    empresas_associadas: object[empresa: serviço]; \n
+    localização: tuple = (x, y) -> Posição global, coordenadas; \n
 
     conexção_outros_postes?: linked_list;
 }
@@ -27,3 +27,6 @@ Cada empresa pode cadastrar funcionários para gerenciar o domínio da empresa.
 
 
 Mapa? Minima ideia ->  Chama Ritter que ele deve saber -> Ele fez projeto mt legal sobre mapa
+
+Funcionamento do sistema
+![image](https://github.com/user-attachments/assets/377d26d3-1e99-41e3-87de-82db4379b2b5)
