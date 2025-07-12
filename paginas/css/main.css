@@ -1,5 +1,9 @@
 :root {
     --min-size: 44px;
+
+    --border-radius-padrao: 10px;
+
+    --padding-padrao: 1.5%;
 }
 
 body {
@@ -31,6 +35,11 @@ main {
 
     width: 3svh;
     height: 3svh;
+
+    background-image: url(../../assets//icones/trashfull.svg);
+    background-size: cover;
+    background-color: transparent;
+    border: 0;
 }
 
 

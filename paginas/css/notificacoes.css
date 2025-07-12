@@ -32,9 +32,11 @@
     justify-content: space-between;
     align-items: center;
 
-    padding-right:2%;
+    padding-right:var(--padding-padrao);
 
     background-color: #aaa;
+
+    border-radius: var(--border-radius-padrao);
 }
 
 .botoes {
@@ -42,6 +44,56 @@
     flex-direction: row;
 }
 
+
+.identificacao {
+    padding-left: var(--padding-padrao);
+}
+
+.dropdown-button {
+    width:56.75px;
+    min-width: fit-content;
+
+    border: 0;
+
+    border-radius: var(--border-radius-padrao);
+
+}
+
+.dropdown-button[title='Ativo'] {
+    background-color: rgb(238, 44, 10);
+}
+
+.dropdown-button[title='Feito'] {
+    background-color: rgb(17, 206, 17);
+}
+
+.dropdown-button[title='Manut'] {
+    background-color: rgb(10, 115, 185);
+}
+
 .dropdown-conteudo {
     display: none;
+
+    position: absolute;
+    transform: translateY(50%);
+
+    flex-direction: column;
+
+    background-color: #aaa;
+
+}
+
+.dropdown-conteudo button {
+    height: 1.8rem;
+    background-color: transparent;
+    border: 0;
+}
+
+.dropdown-conteudo button:hover {
+    background-color: #777;
+    border: 0;
+}
+
+.show-dropdown {
+    display: flex;
 }
