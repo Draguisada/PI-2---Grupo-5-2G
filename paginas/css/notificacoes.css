@@ -1,0 +1,27 @@
+
+
+#Snotificacoes > .header {
+    display: flex;
+    flex-direction:row;
+
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#Snotificacoes > .header > div {
+    display: flex;
+    flex-direction: row;
+
+    gap: 1vw;
+}
+
+.square-button {
+    --min-size: 44px;
+
+    min-width: var(--min-size);
+    min-height: var(--min-size);
+
+    width: 5svh;
+    height: 5svh;
+}

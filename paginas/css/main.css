@@ -1,0 +1,20 @@
+body {
+    display: flex;
+}
+
+#main-header {
+    order: 2;
+}
+
+
+
+
+
+
+/* Mobile */
+@media (max-width: 500px) {
+    #main-header {
+        order:0;
+        
+    }
+}
