@@ -1,20 +1,52 @@
+:root {
+    --min-size: 44px;
+}
+
 body {
     display: flex;
+
+    margin: 0;
+    
+    margin-left: 3svh;
+    margin-right: 3svh;
 }
 
 #main-header {
-    order: 2;
+    width: 10%;
+
+    margin-left: 1vw;
+}
+
+main {
+    width: 90%;
 }
 
 
+
+
+/* Icones */
+.lixo {
+    min-width: var(--min-size);
+    min-height: var(--min-size);
+
+    width: 3svh;
+    height: 3svh;
+}
+
+
+/* Fim icones */
 
 
 
 
 /* Mobile */
-@media (max-width: 500px) {
+@media (max-width: 650px) {
     #main-header {
-        order:0;
-        
+        width: 100vw;
+        order:-1;
+    }
+
+    body {
+        flex-wrap: wrap;
     }
 }

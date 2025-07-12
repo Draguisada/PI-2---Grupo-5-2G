@@ -11,14 +11,6 @@
 </head>
 <body>
 
-    <aside id="main-header">
-        <h1>Notificacoes</h1>
-        <h1>Mapa</h1>
-        <h1>Sair</h1>
-    </aside>
-
-
-
     <main id="Snotificacoes">
 
         <header class="header">
@@ -32,9 +24,44 @@
 
         <section id="all-notificacoes">
 
+            <!-- Inicio notificação teste -->
+            <div class="notificacao">
+
+                <div class="identificacao">
+                    <p>Notificação {data-hora}</p>
+                    <p>{id-notificação}</p>
+                </div>
+
+                <div class="descricao">
+                    <p>{descrição-notificação}</p>
+                </div>
+
+                <div class="botoes">
+                    <button class="dropdown-button">{status 1}</button>
+                    <div class="dropdown-conteudo">
+                        <button>{status 2}</button>
+                        <button>{status 3}</button>
+                    </div>
+
+                    <button class="lixo"></button>
+                </div>
+
+            </div>
+            <!-- Fim notificação teste -->
+
+
         </section>
+
         
     </main>
+
+    <!-- Header principal -->
+    <aside id="main-header">
+        <div>Pessoa</div>
+        <h1>Notificacoes</h1>
+        <h1>Mapa</h1>
+        <h1>Sair</h1>
+    </aside>
     
 </body>
 </html>

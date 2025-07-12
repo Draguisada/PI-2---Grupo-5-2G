@@ -17,11 +17,31 @@
 }
 
 .square-button {
-    --min-size: 44px;
 
     min-width: var(--min-size);
     min-height: var(--min-size);
 
     width: 5svh;
     height: 5svh;
+}
+
+.notificacao {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding-right:2%;
+
+    background-color: #aaa;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: row;
+}
+
+.dropdown-conteudo {
+    display: none;
 }
