@@ -37,6 +37,8 @@
     background-color: #aaa;
 
     border-radius: var(--border-radius-padrao);
+
+    margin-bottom: var(--padding-padrao);
 }
 
 .botoes {

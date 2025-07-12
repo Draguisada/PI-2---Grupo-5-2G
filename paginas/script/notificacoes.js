@@ -1,13 +1,14 @@
+let idNotificacao = 1
 
 // debug inicio
 const botoesObj = document.getElementsByClassName('botoes')[0];
 
-
 console.log(botoesObj);
 
 botoesObj.addEventListener('click', changeDropdown);
-
 // debug fim
+
+const allNot = document.getElementById('all-notificacoes');
 
 function dropdownButton(event) {
     let pai = event.parentNode;
@@ -49,4 +50,12 @@ function changeDropdown(event) {
     
 }
 
+function deleteNotificacao(e) {
+    e.parentElement.parentElement.remove()
+}
+
+function criarNotificacao() {
+    let texto = prompt('Descrição da notificação');
+    new Notificacao(texto);
+}
 
