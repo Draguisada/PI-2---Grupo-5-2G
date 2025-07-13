@@ -41,3 +41,6 @@ class Notificacao {
         notListened.id = '';
     }
 }
+
+
+new Notificacao('Teste');

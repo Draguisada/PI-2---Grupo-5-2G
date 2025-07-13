@@ -1,12 +1,12 @@
 let idNotificacao = 1
 
-// debug inicio
-const botoesObj = document.getElementsByClassName('botoes')[0];
+// // debug inicio
+// const botoesObj = document.getElementsByClassName('botoes')[0];
 
-console.log(botoesObj);
+// console.log(botoesObj);
 
-botoesObj.addEventListener('click', changeDropdown);
-// debug fim
+// botoesObj.addEventListener('click', changeDropdown);
+// // debug fim
 
 const allNot = document.getElementById('all-notificacoes');
 
@@ -20,17 +20,25 @@ function dropdownButton(event) {
 }
 
 function changeDropdown(event) {
+    if (event.target.childElementCount >= 1) {
+        return;
+    }
+
     let texto = event.target.innerText;
     
     let target = event.target;
-    if (target.classList.contains('dropdown-button')) {
-        // console.log('é esse');
-        return;
-    } else if (target.classList.contains('lixo')) {
-        // console.log('lixo');
-        return;
-    } else {
-        target = target.parentNode.parentNode.childNodes[1];
+    if (target.classList.length == 0) {
+        target = target.parentNode.parentNode.childNodes;
+
+        target.forEach((element) => {
+            
+            if (element.nodeName == 'BUTTON' && element.classList.contains('dropdown-button')) {
+                target = element;
+                target.click();
+                return;
+            }
+        });
+
         textoPai = target.innerText;
     }
 
