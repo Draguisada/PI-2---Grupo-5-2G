@@ -99,3 +99,51 @@
 .show-dropdown {
     display: flex;
 }
+
+
+
+/* Mobile */
+@media (max-width: 650px) {
+    #Snotificacoes > .header {
+        flex-direction: column;
+    }
+
+    main#Snotificacoes {
+        width: 100%;
+    }
+
+    .notificacao {
+        flex-direction: column;
+    }
+
+    .identificacao p {
+        text-align: center;
+    }
+    .identificacao p:first-child {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .descricao {
+        font-weight: bold;
+    }
+
+    .botoes {
+        justify-content: space-between;
+        width: 80%;
+    }
+}
+
+@media (max-width: 450px) {
+
+    body {
+    margin-left: 0px;
+    margin-right: 0px;
+    }
+
+    .notificacao {
+        width: 100%;
+    }
+
+    
+}

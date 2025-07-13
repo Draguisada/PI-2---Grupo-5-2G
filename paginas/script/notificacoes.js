@@ -55,7 +55,7 @@ function deleteNotificacao(e) {
 }
 
 function criarNotificacao() {
-    let texto = prompt('Descrição da notificação');
-    new Notificacao(texto);
+    let descricao = prompt('Descrição da notificação');
+    new Notificacao(descricao);
 }
 
