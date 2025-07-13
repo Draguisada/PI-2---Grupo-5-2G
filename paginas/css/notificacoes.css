@@ -131,6 +131,7 @@
     .botoes {
         justify-content: space-between;
         width: 80%;
+        padding-bottom: var(--padding-padrao);
     }
 }
 
