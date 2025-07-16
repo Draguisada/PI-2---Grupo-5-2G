@@ -91,7 +91,15 @@ class Poste {
             
         };
 
-    } 
+    }
+
+    adicionarEmpresaAssociadas(empresa, servico) {
+        this.associadas[empresa] = servico
+    }
+
+    adicionarServido(empresa, servico) {
+
+    }
 }
 
 new Notificacao('Teste');
