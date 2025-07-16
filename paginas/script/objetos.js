@@ -42,5 +42,56 @@ class Notificacao {
     }
 }
 
+class Poste {
+    constructor(coord_x, coord_y, empresa_dona, empresas_associadas, regiao, conexcoes, status) {
+        this.x = coord_x;
+        this.x = coord_y;
+        this.regiao = regiao; // Str
+
+        this.dona = empresa_dona; // Str
+        this.associadas = empresas_associadas; // Objeto {empresa: serviço}
+        this.status = typeStatus[status]; // Apenas -> 0: Ativo ; 1: Desligado ; 2: Em manutenção;
+
+        this.conexcoes = conexcoes; // Lista objetos de outros postes => Ou null
+        // Conexões vai servir como apenas ir, nunca voltar (se ter um loop vai dar problema)
+    }
+
+    setStatus(toStatus) {
+        toStatus = typeStatus[toStatus];
+        let element = this;
+
+        let listaConexcoes = this.conexcoes;
+
+        // Elemento atual mudar
+        if (element.status == typeStatus[0] && toStatus == typeStatus[2]) {
+            element.status = toStatus;
+        } else if (toStatus == typeStatus[1] || toStatus == typeStatus[2]) {
+            element.status = toStatus;
+        }
+
+        // SE não ter postes associados.
+        if (!(listaConexcoes)) {
+            return;
+        }
+
+        // Mudar postes associados
+        for (let i = 0; i<listaConexcoes.length; i++) {
+            element = listaConexcoes[i];
+            if (element.status == toStatus) {
+                element = listaConexcoes[i];
+                continue;
+            };
+
+            if (element.status == typeStatus[0] && toStatus == typeStatus[2]) {
+                element.setStatus(typeStatusmenos1[toStatus])
+            }
+            if (toStatus == typeStatus[1] || toStatus == typeStatus[2]){
+                element.setStatus(typeStatusmenos1[toStatus]);
+            }
+            
+        };
+
+    } 
+}
 
 new Notificacao('Teste');
