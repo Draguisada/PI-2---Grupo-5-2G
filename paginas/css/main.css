@@ -6,6 +6,10 @@
     --padding-padrao: 1.5%;
 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    --corAzulPadrao: #007BFF;
+
+    --corBackground: #FFC107;
 }
 
 body {
@@ -19,8 +23,33 @@ body {
 
 #main-header {
     width: 10%;
+    height: 100svh;
+    min-width: fit-content;
 
-    margin-left: 1vw;
+    margin-left: 1%;
+    padding-left: 0.5%;
+    border-left: 2.5px solid #777;
+
+    display: flex;
+    flex-direction: column;
+
+    & img {
+        min-width: var(--min-size);
+        min-height: var(--min-size);
+
+        height: 6svh;
+        width: 6svh;
+
+        align-self: end;
+    }
+
+    & a {
+        color:black;
+        font-size: 1.5rem;
+        font-weight: bolder;
+
+        margin-top: 1.5svh;
+    }
 }
 
 main {
@@ -30,6 +59,11 @@ main {
 .show-flex {
     display: flex;
 }   
+
+button {
+    background-color: var(--corAzulPadrao);
+    border: 0;
+}
 
 
 /* Icones */
@@ -52,11 +86,25 @@ main {
 
 
 
-/* Mobile */
+/* Responsividade */
+@media (max-width: 1200px) {
+
+}
+
 @media (max-width: 650px) {
     #main-header {
         width: 100vw;
         order:-1;
+        height: fit-content;
+
+        margin-left: 0;
+        padding-left: 0;
+        border: 0;
+        border-bottom: 2.5px solid #777;
+
+        & img {
+            align-self: auto;
+        }
     }
 
     body {
