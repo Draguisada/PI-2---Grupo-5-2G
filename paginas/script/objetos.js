@@ -1,49 +1,9 @@
-class Notificacao {
-    constructor(descricaoNotificacao='nulo') {
-        this.descricaoNotificacao = descricaoNotificacao;
-
-        this.insertNotifc();
-    }
-
-
-    insertNotifc() {
-
-        secNot.innerHTML += `<div class="notificacao">
-
-                <div class="identificacao">
-                    <p>Notificação ${new Date().toLocaleString()}</p>
-                    <p>${idNotificacao++}</p>
-                </div>
-
-                <div class="descricao">
-                    <p>${this.descricaoNotificacao}</p>
-                </div>
-
-                <div class="botoes">
-                    <button class="dropdown-button" onclick="dropdownButton(this)" title="Ativa">Ativa</button>
-                    <div class="dropdown-conteudo">
-                        <button onclick="changeStatusTo(this)">Ativa</button>
-                        <button onclick="changeStatusTo(this)">Concluida</button>
-                        <button onclick="changeStatusTo(this)">Manut.</button>
-                    </div>
-
-                    <button class="lixo" onclick="deleteNotificacao(this)"></button>
-                </div>
-
-        </div>`
-
-
-        // let notListened = document.getElementById('notListened');
-
-        // notListened.addEventListener('click', changeDropdown);
-
-
-        // notListened.id = '';
-    }
-}
+let idPostes = 0;
 
 class Poste {
     constructor(coord_x, coord_y, empresa_dona, regiao, conexcoes = null, empresas_associadas = {}, status = 2) {
+        this.nome = 'Poste #'+ ++idPostes;
+
         this.x = coord_x;
         this.y = coord_y;
         this.regiao = regiao; // Str
@@ -54,6 +14,9 @@ class Poste {
 
         this.conexcoes = conexcoes; // Lista objetos de outros postes => Ou null
         // Conexões vai servir como apenas ir, nunca voltar (se ter um loop vai dar problema)
+
+        this.notificacoes = [];
+        this.idNotificacao = 0; // id para as notificações | local
     }
 
     setStatus(toStatus) { // Recebe valor de, 0, 1, 2
@@ -94,17 +57,74 @@ class Poste {
     _mudarRegiao(regiaoNova) {
         this.regiao = regiaoNova;
     }
+
+    novaNotificacao(descricao, status) {
+        // Por enquanto, vai ser uma lista de notificações que ficam armazenadas numa lista dentro do objeto poste, que quando
+        // entra na página de notificações, você plota o poste que você quer ver e ele puxa as notificações
+        // Por enquanto, sem o banco de dados, irá ser preciso criar tudo no main.js
+
+        this.notificacoes.push([descricao, ++this.idNotificacao, new Date().toLocaleString(), status]) // Status
+
+    }
+}
+
+const typeNot = ['Ativa', 'Concluida', 'Manut.'];
+class Notificacao {
+    constructor(descricaoNotificacao='', idNotificacao, data, status) {
+        this.descricaoNotificacao = descricaoNotificacao;
+        this.idNotificacao = idNotificacao;
+        this.data = data;
+
+        this.insertNotifc();
+    }
+
+
+    insertNotifc() {
+
+        secNot.innerHTML += `<div class="notificacao">
+
+                <div class="identificacao">
+                    <p>Notificação ${this.data}</p>
+                    <p>${this.idNotificacao}</p>
+                </div>
+
+                <div class="descricao">
+                    <p>${this.descricaoNotificacao.slice(0, 160)}</p>
+                    <p>${this.descricaoNotificacao.slice(160, 360)}</p>
+                </div>
+
+                <div class="botoes">
+                    <button class="dropdown-button" onclick="dropdownButton(this)" title="${typeNot[0]}">${typeNot[0]}</button>
+                    <div class="dropdown-conteudo">
+                        <button onclick="changeStatusTo(this)">${typeNot[0]}</button>
+                        <button onclick="changeStatusTo(this)">${typeNot[1]}</button>
+                        <button onclick="changeStatusTo(this)">${typeNot[2]}</button>
+                    </div>
+
+                    <button class="lixo" onclick="deleteNotificacao(this)"></button>
+                </div>
+
+        </div>`
+
+
+        // let notListened = document.getElementById('notListened');
+
+        // notListened.addEventListener('click', changeDropdown);
+
+
+        // notListened.id = '';
+    }
 }
 
 
+// Debug
+
+let poste1 = new Poste(1, 1, '1','1', null);
+let poste2 = new Poste(2, 2, '2','2', [poste1]);
+let poste3 = new Poste(3, 3, '3','3', [poste2]);
+let poste4 = new Poste(4, 4, '4','4', [poste3]);
 
 
-
-// Debugs
-new Notificacao('Teste');
-
-
-let not1 = new Poste(1, 1, '1','1', null);
-let not2 = new Poste(2, 2, '2','2', [not1]);
-let not3 = new Poste(3, 3, '3','3', [not2]);
-let not4 = new Poste(4, 4, '4','4', [not3]);
+poste1.novaNotificacao('ola mundo');
+poste1.novaNotificacao('ola mundo denovo!');
+poste1.novaNotificacao('ola mundo denovo denovo!');
