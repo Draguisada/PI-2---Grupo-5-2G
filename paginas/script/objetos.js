@@ -19,8 +19,8 @@ class Poste {
         this.idNotificacao = 0; // id para as notificações | local
     }
 
-    setStatus(toStatus) { // Recebe valor de, 0, 1, 2
-        toStatus = typeStatus[toStatus];
+    setStatus(toStatusNum) { // Recebe valor de, 0, 1, 2
+        toStatus = typeStatus[toStatusNum];
         let element = this;
 
         let listaConexcoes = this.conexcoes;
@@ -58,7 +58,7 @@ class Poste {
         this.regiao = regiaoNova;
     }
 
-    novaNotificacao(descricao, status) {
+    novaNotificacao(descricao, status = 0) {
         // Por enquanto, vai ser uma lista de notificações que ficam armazenadas numa lista dentro do objeto poste, que quando
         // entra na página de notificações, você plota o poste que você quer ver e ele puxa as notificações
         // Por enquanto, sem o banco de dados, irá ser preciso criar tudo no main.js
@@ -69,11 +69,13 @@ class Poste {
 }
 
 const typeNot = ['Ativa', 'Concluida', 'Manut.'];
+const typeSNotmenos1 = {'Ativa': 0, 'Concluida': 1, 'Manut.': 2}
 class Notificacao {
-    constructor(descricaoNotificacao='', idNotificacao, data, status) {
+    constructor(descricaoNotificacao='', idNotificacao, data, status = 0) {
         this.descricaoNotificacao = descricaoNotificacao;
         this.idNotificacao = idNotificacao;
         this.data = data;
+        this.status = status;
 
         this.insertNotifc();
     }
@@ -81,11 +83,11 @@ class Notificacao {
 
     insertNotifc() {
 
-        secNot.innerHTML += `<div class="notificacao">
+        secNot.innerHTML = `<div class="notificacao">
 
                 <div class="identificacao">
                     <p>Notificação ${this.data}</p>
-                    <p>${this.idNotificacao}</p>
+                    <p>ID #${this.idNotificacao}</p>
                 </div>
 
                 <div class="descricao">
@@ -94,7 +96,7 @@ class Notificacao {
                 </div>
 
                 <div class="botoes">
-                    <button class="dropdown-button" onclick="dropdownButton(this)" title="${typeNot[0]}">${typeNot[0]}</button>
+                    <button class="dropdown-button" onclick="dropdownButton(this)" title="${typeNot[this.status]}">${typeNot[this.status]}</button>
                     <div class="dropdown-conteudo">
                         <button onclick="changeStatusTo(this)">${typeNot[0]}</button>
                         <button onclick="changeStatusTo(this)">${typeNot[1]}</button>
@@ -104,7 +106,7 @@ class Notificacao {
                     <button class="lixo" onclick="deleteNotificacao(this)"></button>
                 </div>
 
-        </div>`
+        </div> ${secNot.innerHTML}`
 
 
         // let notListened = document.getElementById('notListened');
@@ -126,5 +128,5 @@ let poste4 = new Poste(4, 4, '4','4', [poste3]);
 
 
 poste1.novaNotificacao('ola mundo');
-poste1.novaNotificacao('ola mundo denovo!');
+poste1.novaNotificacao('ola mundo denovo!', 1);
 poste1.novaNotificacao('ola mundo denovo denovo!');
