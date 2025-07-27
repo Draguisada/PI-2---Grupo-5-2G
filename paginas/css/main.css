@@ -7,7 +7,7 @@
 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
-    --corAzulPadrao: #007BFF;
+    --corAzulPadrao: #0082FB;
 
     --corBackground: #FFC107;
 }
@@ -19,6 +19,8 @@ body {
     
     margin-left: 3svh;
     margin-right: 3svh;
+
+    background-color: #f1f1f1;
 }
 
 #main-header {
@@ -62,6 +64,7 @@ main {
 
 button {
     background-color: var(--corAzulPadrao);
+    color: white;
     border: 0;
 }
 
