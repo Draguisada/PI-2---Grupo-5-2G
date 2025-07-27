@@ -9,8 +9,10 @@
 // // debug fim
 let postePrincipal;
 
+const popUp = document.getElementById('pop-up');
 const secNot = document.getElementById('sec-notificacoes');
 const nomePoste = document.getElementById('nomePoste');
+const descDeTextbox = document.querySelector('#pop-up #descricao');
 
 function dropdownButton(event) {
     let pai = event.parentNode;
@@ -18,7 +20,7 @@ function dropdownButton(event) {
 
     // let crioncas = conteudo.childNodes;
 
-    conteudo.classList.toggle('show-dropdown');
+    conteudo.classList.toggle('show-flex');
 }
 
 function changeStatusTo(element) {
@@ -54,7 +56,12 @@ function criarNotificacao() {
         alert('Sem nenhum poste selecionado!');
         return;
     }
-    let descricao = prompt('Descrição da notificação');
+    //
+    let descricao = descDeTextbox.value;
+    popUpToggle(false);
+    descDeTextbox.value = '';
+
+    //
     postePrincipal.novaNotificacao(descricao);
     pegarPoste(postePrincipal)
 }
@@ -71,6 +78,18 @@ function acharIndiceDeXemY(elemento, pai) {
         }
     }
 }
+
+function popUpToggle(bool) {
+    if (!(bool)) {
+        popUp.style.display = 'none';
+    } else {
+        popUp.style.display = 'flex';
+        popUp.children[2].innerText = `Criando notificação no poste ${postePrincipal.nome}`
+    }
+    
+}
+
+
 
 // 1° parte é a página, agora é a integração com o resto
 

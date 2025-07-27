@@ -130,3 +130,5 @@ let poste4 = new Poste(4, 4, '4','4', [poste3]);
 poste1.novaNotificacao('ola mundo');
 poste1.novaNotificacao('ola mundo denovo!', 1);
 poste1.novaNotificacao('ola mundo denovo denovo!');
+
+pegarPoste(poste1);
