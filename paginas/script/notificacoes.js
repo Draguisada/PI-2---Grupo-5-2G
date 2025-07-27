@@ -8,54 +8,23 @@ let idNotificacao = 1
 // botoesObj.addEventListener('click', changeDropdown);
 // // debug fim
 
-const allNot = document.getElementById('all-notificacoes');
+const secNot = document.getElementById('sec-notificacoes');
 
 function dropdownButton(event) {
     let pai = event.parentNode;
     let conteudo = pai.getElementsByClassName('dropdown-conteudo')[0];
 
-    let crioncas = conteudo.childNodes;
+    // let crioncas = conteudo.childNodes;
 
     conteudo.classList.toggle('show-dropdown');
 }
 
-function changeDropdown(event) {
-    if (event.target.childElementCount >= 1) {
-        return;
-    }
+function changeStatusTo(element) {
+    let parent = element.parentElement.parentElement.children[0];
+    let mudarPara = element.innerText;
 
-    let texto = event.target.innerText;
-    
-    let target = event.target;
-    if (target.classList.length == 0) {
-        target = target.parentNode.parentNode.childNodes;
-
-        target.forEach((element) => {
-            
-            if (element.nodeName == 'BUTTON' && element.classList.contains('dropdown-button')) {
-                target = element;
-                target.click();
-                return;
-            }
-        });
-
-        textoPai = target.innerText;
-    }
-
-    
-    target.innerText = texto;
-
-    if (texto == 'Ativo') {
-        target.title = 'Ativo';
-    } else if (texto == 'Feito') {
-        target.title = 'Feito';
-    } else {
-        target.title = 'Manut';
-    }
-    
-
-    
-    
+    parent.innerText = mudarPara;
+    parent.title = mudarPara;
 }
 
 function deleteNotificacao(e) {

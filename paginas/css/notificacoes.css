@@ -52,7 +52,7 @@
 }
 
 .dropdown-button {
-    width:56.75px;
+    width:71.28px;
     min-width: fit-content;
 
     border: 0;
@@ -61,15 +61,15 @@
 
 }
 
-.dropdown-button[title='Ativo'] {
+.dropdown-button[title='Ativa'] {
     background-color: rgb(238, 44, 10);
 }
 
-.dropdown-button[title='Feito'] {
+.dropdown-button[title='Concluida'] {
     background-color: rgb(17, 206, 17);
 }
 
-.dropdown-button[title='Manut'] {
+.dropdown-button[title='Manut.'] {
     background-color: rgb(10, 115, 185);
 }
 

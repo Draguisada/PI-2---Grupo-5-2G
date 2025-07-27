@@ -8,7 +8,7 @@ class Notificacao {
 
     insertNotifc() {
 
-        allNot.innerHTML += `<div class="notificacao">
+        secNot.innerHTML += `<div class="notificacao">
 
                 <div class="identificacao">
                     <p>Notificação ${new Date().toLocaleString()}</p>
@@ -19,12 +19,12 @@ class Notificacao {
                     <p>${this.descricaoNotificacao}</p>
                 </div>
 
-                <div class="botoes" id='notListened'>
-                    <button class="dropdown-button" onclick="dropdownButton(this)" title="Ativo">Ativo</button>
+                <div class="botoes">
+                    <button class="dropdown-button" onclick="dropdownButton(this)" title="Ativa">Ativa</button>
                     <div class="dropdown-conteudo">
-                        <button>Ativo</button>
-                        <button>Feito</button>
-                        <button>Manut.</button>
+                        <button onclick="changeStatusTo(this)">Ativa</button>
+                        <button onclick="changeStatusTo(this)">Concluida</button>
+                        <button onclick="changeStatusTo(this)">Manut.</button>
                     </div>
 
                     <button class="lixo" onclick="deleteNotificacao(this)"></button>
@@ -33,41 +33,37 @@ class Notificacao {
         </div>`
 
 
-        let notListened = document.getElementById('notListened');
+        // let notListened = document.getElementById('notListened');
 
-        notListened.addEventListener('click', changeDropdown);
+        // notListened.addEventListener('click', changeDropdown);
 
 
-        notListened.id = '';
+        // notListened.id = '';
     }
 }
 
 class Poste {
-    constructor(coord_x, coord_y, empresa_dona, empresas_associadas, regiao, conexcoes, status) {
+    constructor(coord_x, coord_y, empresa_dona, regiao, conexcoes = null, empresas_associadas = {}, status = 2) {
         this.x = coord_x;
-        this.x = coord_y;
+        this.y = coord_y;
         this.regiao = regiao; // Str
 
         this.dona = empresa_dona; // Str
-        this.associadas = empresas_associadas; // Objeto {empresa: serviço}
-        this.status = typeStatus[status]; // Apenas -> 0: Ativo ; 1: Desligado ; 2: Em manutenção;
+        this.associadas = empresas_associadas; // Objeto {empresa: serviço: array}
+        this.status = typeStatus[status]; // Apenas -> 1: Ativo ; 0: Desligado ; 2: Em manutenção;
 
         this.conexcoes = conexcoes; // Lista objetos de outros postes => Ou null
         // Conexões vai servir como apenas ir, nunca voltar (se ter um loop vai dar problema)
     }
 
-    setStatus(toStatus) {
+    setStatus(toStatus) { // Recebe valor de, 0, 1, 2
         toStatus = typeStatus[toStatus];
         let element = this;
 
         let listaConexcoes = this.conexcoes;
 
         // Elemento atual mudar
-        if (element.status == typeStatus[0] && toStatus == typeStatus[2]) {
-            element.status = toStatus;
-        } else if (toStatus == typeStatus[1] || toStatus == typeStatus[2]) {
-            element.status = toStatus;
-        }
+        this.status = toStatus;
 
         // SE não ter postes associados.
         if (!(listaConexcoes)) {
@@ -82,24 +78,33 @@ class Poste {
                 continue;
             };
 
-            if (element.status == typeStatus[0] && toStatus == typeStatus[2]) {
-                element.setStatus(typeStatusmenos1[toStatus])
-            }
-            if (toStatus == typeStatus[1] || toStatus == typeStatus[2]){
-                element.setStatus(typeStatusmenos1[toStatus]);
-            }
-            
+            element.setStatus(typeStatusmenos1[toStatus]);            
         };
 
     }
 
-    adicionarEmpresaAssociadas(empresa, servico) {
-        this.associadas[empresa] = servico
+    adicionarEmpresaAssociadas(empresa, ...servico) {
+        this.associadas[empresa] = [servico];
     }
 
-    adicionarServido(empresa, servico) {
+    adicionarServico(empresa, servico) {
+        this.associadas[empresa] = this.associadas[empresa].push(servico);
+    }
 
+    _mudarRegiao(regiaoNova) {
+        this.regiao = regiaoNova;
     }
 }
 
+
+
+
+
+// Debugs
 new Notificacao('Teste');
+
+
+let not1 = new Poste(1, 1, '1','1', null);
+let not2 = new Poste(2, 2, '2','2', [not1]);
+let not3 = new Poste(3, 3, '3','3', [not2]);
+let not4 = new Poste(4, 4, '4','4', [not3]);
