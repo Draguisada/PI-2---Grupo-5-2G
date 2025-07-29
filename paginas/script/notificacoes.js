@@ -84,7 +84,7 @@ function popUpToggle(bool) {
         popUp.style.display = 'none';
     } else {
         popUp.style.display = 'flex';
-        popUp.children[2].innerText = `Criando notificação no poste ${postePrincipal.nome}`
+        popUp.children[2].innerText = `Criando notificação no ${postePrincipal.nome}`
     }
     
 }
