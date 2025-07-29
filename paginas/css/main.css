@@ -129,7 +129,10 @@ button {
 .logo {
   display: block;
   margin: 0 auto 15px;
-  width: var(--min-size);
+  min-width: var(--min-size);
+  min-height: var(--min-size);
+  width: max(10vw, 10svh);
+  height: max(10vw, 10svh);
 }
 
 /* Fim icones */
@@ -139,7 +142,7 @@ button {
 body#login {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     height: 100svh;
@@ -173,7 +176,7 @@ body#login {
         font-size: 14px;
     }
 
-    & .selector {
+    & #selector {
         display: flex;
 
         & a:first-child {

@@ -3,7 +3,7 @@
 let estaEm = 0;
 
 
-
+const seletor = document.getElementById('selector');
 
 function setQuem(status) {
     estaEm = status;
@@ -16,9 +16,13 @@ function setQuem(status) {
 }
 
 function funcionario() {
+    seletor.children[0].classList.add('nao-selecionado')
+    seletor.children[1].classList.remove('nao-selecionado')
 
 }
 
-function funcionario() {
+function empresa() {
+    seletor.children[0].classList.remove('nao-selecionado')
+    seletor.children[1].classList.add('nao-selecionado')
 
 }

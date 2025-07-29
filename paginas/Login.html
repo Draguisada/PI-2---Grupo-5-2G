@@ -5,20 +5,22 @@
   <title>Login Empresa</title>
   <link rel="stylesheet" href="css/main.css">
 
-  <script src="script/login.js"></script>
+  <script src="script/login.js" defer></script>
 </head>
 <body id="login">
+  <img src="../assets/icones/logo.png" alt="Logo" class="logo">
+  
   <main id="Slogin">
     <div id="form-login">
-      <img src="../assets/icones/logo.png" alt="Logo" class="logo">
-      <h2>LOGIN</h2>
-      <div class="selector">
-        <a class="bigger-button">Empresa</a><a class="bigger-button nao-selecionado">Funcionário</a>
+      <h2>Login</h2>
+      <div id="selector">
+        <a class="bigger-button" onclick="setQuem(0)">Empresa</a>
+        <a class="bigger-button nao-selecionado" onclick="setQuem(1)">Funcionário</a>
       </div>  
       <form>
         <input type="email" placeholder="E-mail" class="input-texts" required>
         <input type="password" placeholder="Senha" class="input-texts" required>
-        <input type="password" placeholder="Código único" class="input-texts empresa" required>
+        <input type="password" placeholder="Código único da empresa" class="input-texts" required>
         <!-- <a href="#" class="esqueceu">ESQUECEU A SENHA?</a> -> Teria falar com sua empresa chefe -->
 
         <!-- Para o login das empresas -->
