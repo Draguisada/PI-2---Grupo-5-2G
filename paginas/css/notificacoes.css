@@ -49,19 +49,6 @@
     }
 }
 
-.square-button {
-
-    min-width: var(--min-size);
-    min-height: var(--min-size);
-
-    width: 5svh;
-    height: 5svh;
-
-    border-radius: var(--border-radius-padrao);
-
-    font-size: 2rem;
-}
-
 #sec-notificacoes > .notificacao {
     display: flex;
     flex-direction: row;

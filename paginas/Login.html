@@ -3,28 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>Login Empresa</title>
-  <link rel="stylesheet" href="css/Login.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <script src="script/login.js"></script>
 </head>
-<body>
-  <div class="container">
-    <div class="login-box">
+<body id="login">
+  <main id="Slogin">
+    <div id="form-login">
       <img src="../assets/icones/logo.png" alt="Logo" class="logo">
       <h2>LOGIN</h2>
-      <button class="empresa-btn">Empresa</button>
-
+      <div class="selector">
+        <a class="bigger-button">Empresa</a><a class="bigger-button nao-selecionado">Funcionário</a>
+      </div>  
       <form>
-        <input type="email" placeholder="EMAIL" required>
-        <input type="password" placeholder="SENHA" required>
-        <a href="#" class="esqueceu">ESQUECEU A SENHA?</a>
-        <button type="submit" class="login-btn">LOGIN</button>
+        <input type="email" placeholder="E-mail" class="input-texts" required>
+        <input type="password" placeholder="Senha" class="input-texts" required>
+        <input type="password" placeholder="Código único" class="input-texts empresa" required>
+        <!-- <a href="#" class="esqueceu">ESQUECEU A SENHA?</a> -> Teria falar com sua empresa chefe -->
+
+        <!-- Para o login das empresas -->
+        
+
+        <!-- Para o login dos funcionários -->
+
+
+        <!-- -->
+        <button type="submit" class="bigger-button">LOGIN</button>
       </form>
 
-      <div class="divider">
-        <span>ou</span>
-      </div>
+      <!-- <p class="text-centered">ou</p> -->
 
-      <p class="criar-conta">Não tem uma conta? <a href="#">Crie uma!</a></p>
+      <!-- <p class="text-centered">Não tem uma conta? <a href="#">Crie uma!</a></p> -->
     </div>
-  </div>
+  </main>
 </body>
 </html>

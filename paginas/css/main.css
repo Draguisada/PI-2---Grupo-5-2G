@@ -1,15 +1,24 @@
 :root {
+    /* Padronização */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* Tamanhos */
     --min-size: 44px;
 
-    --border-radius-padrao: 10px;
+    --border-radius-padrao: 4px;
+    --border-radius-maior: 10px;
 
     --padding-padrao: 1.5%;
 
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-
+    /* Cores */
     --corAzulPadrao: #0082FB;
-
+    --corTextoParaAzulPadrao: white;
     --corBackground: #FFC107;
+
+    --corBorderPadrao: #333;
 }
 
 body {
@@ -62,12 +71,46 @@ main {
     display: flex;
 }   
 
+.text-centered {
+    text-align: center;
+}
+
+.nao-selecionado {
+    filter:saturate(20%);
+}
+
+/* Botões */
 button {
     background-color: var(--corAzulPadrao);
-    color: white;
+    color: var(--corTextoParaAzulPadrao);
     border: 0;
 }
 
+.square-button {
+
+    min-width: var(--min-size);
+    min-height: var(--min-size);
+
+    width: 5svh;
+    height: 5svh;
+
+    border-radius: var(--border-radius-padrao);
+
+    font-size: 2rem;
+}
+
+.bigger-button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--corAzulPadrao);
+  color: var(--corTextoParaAzulPadrao);
+  border: none;
+  border-radius: var(--border-radius-maior);
+  font-weight: bold;
+  cursor: pointer;
+
+  text-align: center;
+}
 
 /* Icones */
 .lixo {
@@ -83,14 +126,106 @@ button {
     border: 0;
 }
 
+.logo {
+  display: block;
+  margin: 0 auto 15px;
+  width: var(--min-size);
+}
 
 /* Fim icones */
+
+/* Paginas de login */
+
+body#login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100svh;
+
+    & #form-login {
+    display: flex;
+    flex-direction: column;
+
+    }
+
+    & #Slogin {
+        background-color: #f7f7f7;
+        padding: 40px 30px;
+        border-radius: var(--border-radius-maior);
+        min-width: 300px;
+        width: fit-content;
+        max-width: 500px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 5px solid #ccc6c6; 
+
+    }
+
+    & .input-texts {
+        width: 100%;
+        width: -webkit-fill-available;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid var(--corBorderPadrao);
+        outline: none;
+        font-size: 14px;
+    }
+
+    & .selector {
+        display: flex;
+
+        & a:first-child {
+            border-radius: var(--border-radius-maior) 0 0 var(--border-radius-maior);
+        }
+
+         & a:last-child {
+            border-radius: 0 var(--border-radius-maior) var(--border-radius-maior) 0;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 /* Responsividade */
 @media (max-width: 1200px) {
+
+    body {
+        margin: 0;
+    }
 
 }
 
