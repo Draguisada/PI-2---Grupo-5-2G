@@ -1,11 +1,15 @@
 let idPostes = 0;
+const posteIcon = ['./icones/dedesligado.svg', './icones/ativo.svg', './icones/manutencao.svg'];
+let mapsPontos = [];
+let postes = [];
 
 class Poste {
-    constructor(coord_x, coord_y, empresa_dona, regiao, conexcoes = null, empresas_associadas = {}, status = 2) {
+    constructor(coord_lat, coord_lng, empresa_dona, regiao, conexcoes = null, empresas_associadas = {}, status = 2) {
         this.nome = 'Poste #'+ ++idPostes;
+        this.id = idPostes;
 
-        this.x = coord_x;
-        this.y = coord_y;
+        this.lat = coord_lat;
+        this.lng = coord_lng;
         this.regiao = regiao; // Str
 
         this.dona = empresa_dona; // Str
@@ -17,10 +21,13 @@ class Poste {
 
         this.notificacoes = [];
         this.idNotificacao = 0; // id para as notificações | local
+
+        this.atualizarPontoMaps();
+        postes.push(this);
     }
 
     setStatus(toStatusNum) { // Recebe valor de, 0, 1, 2
-        toStatus = typeStatus[toStatusNum];
+        let toStatus = typeStatus[toStatusNum];
         let element = this;
 
         let listaConexcoes = this.conexcoes;
@@ -65,6 +72,27 @@ class Poste {
 
         this.notificacoes.push([descricao, ++this.idNotificacao, new Date().toLocaleString(), status]) // Status
 
+    }
+
+    atualizarPontoMaps() {
+        this.obj = {
+            lat: this.lat,
+            lng: this.lng,
+            title: this.nome,
+            
+            content: `
+                <div class="maps-content">
+                    <h2>${this.nome}</h2>
+                    <h3 class="maps-status" title="${this.status}">${this.status}</h3>
+
+                    <p>Empresa dona: ${this.dona}</p>
+                    <p>Empresas associadas: ${Object.keys(this.associadas)}</p>
+
+
+                    <a href="./notificacoes.html/${this.id}" target="_blank">Notificacões</a>
+                </div>
+            `,
+        };
     }
 }
 

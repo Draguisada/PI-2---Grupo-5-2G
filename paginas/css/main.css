@@ -349,7 +349,10 @@ body#login {
 
 
 
-
+#map {
+    height: 100svh;
+    width: 100%;
+}
 
 
 .show-flex {
