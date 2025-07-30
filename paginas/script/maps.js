@@ -1,11 +1,12 @@
 const statusColor = ['#FF7979', "#7ED957", "#598EFF", "#FF0000", "#00BF63", "#0051FF"]
 
 const centroDoMapa = { lat: -27.200476, lng: -52.082809 }; // Entrada do IF
+let map;
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
-    const map = new google.maps.Map(document.getElementById("map"), {
+    map = new google.maps.Map(document.getElementById("map"), {
         center: centroDoMapa,
         zoom: 18,
         mapId: 'posteMapas'
@@ -55,7 +56,9 @@ async function initMap() {
             title: title
         });
 
-        marker.id = ponto.id;
+        marker._globalId = ponto._globalId;
+        marker._localId = ponto._localId;
+        marker._StringGlobalId = ponto._StringGlobalId;
 
         const infoWindow = new google.maps.InfoWindow({
           content: infos.content,
@@ -87,7 +90,6 @@ async function initMap() {
     }
 
     function carregarPostes() {
-        console.log('carregou!');
 
         postes.forEach(function(ponto) {
             ponto.atualizarPontoMaps();
@@ -100,7 +102,13 @@ async function initMap() {
         carregarPostes()
     }
 
-    carregarPostes()
+    carregarPostes();
+
+    postes.forEach((poste) => {
+
+
+        poste.conexcoes
+    })
 }
 
 window.initMap = initMap;
@@ -115,32 +123,34 @@ function toggleConnect(element) {
                                 // 0 => Criar postes
     if (action == 1) {
         action = 0;
+        toggleArrow(true);
     } else {
         action = 1;
+        toggleArrow(false);
     }
 
     element.classList.toggle('nao-selecionado')
     
 }
 
-function conectarPostes(elementHTML) {
-    let id = parseInt(elementHTML.id)-1;
+function conectarPostes(elementHTML) {    
     
+    let element = postes[acharIndicePoste(elementHTML._StringGlobalId)];
     
-    element = postes[id];
-    
-    console.log(element.conexcoes);
     if (posteSelecionado == element) {
+        
         posteSelecionado = null;
-        console.log('des-selecionado');
+        element.style.background = '';
+        console.log('des-selecionado - igual');
     }
     else if (posteSelecionado) {    
         posteSelecionado.conexcoes.push(element);
 
+        desenharLinhaEntre(posteSelecionado, element);
+
         posteSelecionado.objHtml.style.background = '';
-        
         posteSelecionado = null;
-        console.log('des-selecionado');
+        console.log('des-selecionado - sucesso');
     } 
     else {
         posteSelecionado = element;
@@ -149,5 +159,70 @@ function conectarPostes(elementHTML) {
         console.log('selecionado')
     }
 
+}
+
+// Local pro mapa, sla como fica no BD
+let Linhas = [];
+
+function desenharLinhaEntre(lat1, lng1, lat2, lng2, mostrar = true) {
+    let obj1 = lat1;
+    let obj2 = lng1;
+    if (typeof(lat1) == 'object') {
+        lat1 = obj1.lat;
+        lng1 = obj1.lng;
+        lat2 = obj2.lat;
+        lng2 = obj2.lng;
+    }
+
+
+    const setaIcon = {
+    icon: {
+        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        scale: 3,
+        strokeColor: '#FFC107' //'var(--corBackground)'
+    },
+    offset: '100%'
+    }
     
+    setaLine = new google.maps.Polyline({
+        path: [
+        { lat: lat1, lng: lng1 },
+        { lat: lat2, lng: lng2 }
+        ],
+        strokeColor: mostrar ? '#FFC107' : 'transparent', //'var(--corBackground)'
+        strokeOpacity: 1.0,
+        strokeWeight: 2,
+        icons: [setaIcon]
+    });
+
+    setaLine.setMap(map);
+    Linhas.push(setaLine);
+    
+}
+
+function toggleArrow(mostrar) {
+    if (!Linhas) return;
+    Linhas.forEach((linha) => {
+
+    if (mostrar) {
+        linha.setMap(map)
+    } else {
+        linha.setMap(null)
+    }
+    
+    });
+}
+
+/* Função de apoio */
+function acharIndicePoste(achar) {
+    for (let indice = 0; indice<postes.length; indice++){
+        let posteStringId = postes[indice]._StringGlobalId;
+        if (posteStringId.slice(0,5) != achar.slice(0,5)) {
+            continue;
+        }
+
+        if (posteStringId == achar) {
+            return indice;
+        }
+    }
 }

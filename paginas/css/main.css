@@ -399,14 +399,16 @@ main#maps {
 
 gmp-advanced-marker {
 
-    border-radius: 50%;
+    border-radius: 30%;
 
     &:hover {
         filter:hue-rotate(10deg);
     }
 }
 
-
+.linhaMaps {
+    display: block;
+}
 
 
 div#map {

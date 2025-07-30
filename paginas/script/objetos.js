@@ -1,12 +1,20 @@
+// Global -> Todas empresas lê essas variáveis
+let globalIdPostes = 0;
+
+// Local -> Apenas empresa logada lê
 let idPostes = 0;
-const posteIcon = ['./icones/dedesligado.svg', './icones/ativo.svg', './icones/manutencao.svg'];
-let mapsPontos = [];
 let postes = [];
+
+// Banco de dados -> Depende do usuário de entrada
+// Composta por 4 caractéres.
+const empresa_cod = '0413'; // 0413#1 -> empresa cód 0413 # poste 1
 
 class Poste {
     constructor(coord_lat, coord_lng, empresa_dona, regiao, conexcoes = [], empresas_associadas = {}, status = 2) {
-        this.nome = 'Poste #'+ ++idPostes;
-        this.id = idPostes;
+        this.titulo = 'Poste #'+ ++idPostes;
+        this._globalId = globalIdPostes;
+        this._localId = idPostes;
+        this._StringGlobalId = `${empresa_cod}#${++globalIdPostes}`;
 
         this.lat = coord_lat;
         this.lng = coord_lng;
@@ -65,34 +73,37 @@ class Poste {
         this.regiao = regiaoNova;
     }
 
+    adicionarConexcao(conectar) {
+        this.conexcoes.push(conectar);
+    }
+
     novaNotificacao(descricao, status = 0) {
         // Por enquanto, vai ser uma lista de notificações que ficam armazenadas numa lista dentro do objeto poste, que quando
         // entra na página de notificações, você plota o poste que você quer ver e ele puxa as notificações
         // Por enquanto, sem o banco de dados, irá ser preciso criar tudo no main.js
 
         this.notificacoes.push([descricao, ++this.idNotificacao, new Date().toLocaleString(), status]) // Status
-
     }
 
     atualizarPontoMaps() {
         this.obj = {
             lat: this.lat,
             lng: this.lng,
-            title: this.nome,
+            title: this.titulo,
             
             content: `
                 <div class="maps-content">
-                    <h2>${this.nome}</h2>
+                    <h2>${this.titulo}</h2>
                     <h3 class="maps-status" title="${this.status}">${this.status}</h3>
 
                     <p>Empresa dona: ${this.dona}</p>
                     <p>Empresas associadas: ${Object.keys(this.associadas)}</p>
 
 
-                    <a href="./notificacoes.html/${this.id}" target="_blank">Notificacões</a>
-                    <p onclick="postes[${this.id-1}].setStatus(0)">set Desativo</p>
-                    <p onclick="postes[${this.id-1}].setStatus(1)">set Ativo</p>
-                    <p onclick="postes[${this.id-1}].setStatus(2)">set Manutenção</p>
+                    <a href="./notificacoes.html/${this._localId-1}" target="_blank">Notificacões</a>
+                    <p onclick="postes[${this._localId-1}].setStatus(0)">set Desativo</p>
+                    <p onclick="postes[${this._localId-1}].setStatus(1)">set Ativo</p>
+                    <p onclick="postes[${this._localId-1}].setStatus(2)">set Manutenção</p>
                 </div>
             `,
         };
