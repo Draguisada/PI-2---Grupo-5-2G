@@ -7,11 +7,11 @@
 
     <link rel="stylesheet" href="css/main.css">
 
-    <script src="script/main.js"></script>
     <script src="script/objetos.js"></script>
+    <script src="script/main.js" defer></script>
     <script src="script/debug.js" defer></script>
     
-    <script src="script/maps.js"></script>
+    <script src="script/maps.js" defer></script>
 </head>
 <body id="maps">
     <div id="map"></div>
@@ -22,9 +22,16 @@
     <main id='maps'>
       <aside id="left">
 
+        <button class="square-button" id="criarPoste" onclick="togglePopUp(true)">
+          <!-- <img src="../assets/icones/lampada.svg" alt="Criar postes"> -->
+           +
+        </button>
+
         <button class="square-button nao-selecionado" id="connect" onclick="toggleConnect(this)">
           <img src="../assets/icones/pessoa.svg" alt="Conectar postes">
         </button>
+
+        
 
       </aside>
 
@@ -34,6 +41,21 @@
         <a href="notificacoes.html">Notificações</a>
         <a>Sair</a>
       </aside>
+
+      <div id="pop-up"> 
+            <h1>Criando poste</h1>
+            <p>Este menu é utilizado para criação mais precisa usando <br> latitude e longitude informados por escrito.</p>
+            <div>
+              <label>Latitude:</label>
+              <input type="text" name="lat" id="PopUpLat" placeholder="-27.200476" required>
+              <label>Longitude:</label>
+              <input type="text" name="lat" id="PopUpLng" placeholder="27°18'36.9''S" required>
+
+            <button onclick="criarPoste(event)" class="bigger-button">Criar</button>
+            </div>
+            
+            
+        </div>
     </main>
   </body>
 </html>

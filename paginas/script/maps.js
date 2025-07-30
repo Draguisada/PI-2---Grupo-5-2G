@@ -1,4 +1,4 @@
-
+const popUp = document.getElementById('pop-up')
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -20,7 +20,7 @@ async function initMap() {
         if (confirmacao) {        
             let lat = e.latLng.lat();
             let lng = e.latLng.lng();
-            new Poste(lat, lng, "Isada's Corp", 'IFC - Campus Concórdia');
+            new Poste(lat, lng, empresa_logada.nome, 'IFC - Campus Concórdia');
         }
         atualizarMapa();
     });
@@ -212,6 +212,29 @@ function toggleArrow(mostrar) {
     });
 }
 
+function togglePopUp(bool) {
+    if (bool) {
+        popUp.style.display = 'flex';
+    } else {
+        popUp.style.display = 'none';
+    }
+}
+
+function criarPoste(e) {
+
+    let lat = document.getElementById('PopUpLat').value;
+    let lng = document.getElementById('PopUpLng').value;
+
+    if (!(lat && lng)) return
+    
+    if (lat.includes('°')) lat = coordsStringToNumber(lat)
+    if (lng.includes('°')) lng = coordsStringToNumber(lng)
+    
+    new Poste(lat, lng, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+    togglePopUp(false);
+    
+}
+
 /* Função de apoio */
 function acharIndicePoste(achar) {
     for (let indice = 0; indice<postes.length; indice++){
@@ -224,4 +247,31 @@ function acharIndicePoste(achar) {
             return indice;
         }
     }
+}
+
+function coordsStringToNumber(coords) {
+    //27°18'36.9"S 52°11'53.7"W
+    let rosaVento = {
+        'S': -1,
+        'W': -1,
+        'N': 1,
+        'E': 1
+    }
+    let I_grau = coords.indexOf('°')//°
+    let I_minuto = coords.indexOf("'")//'
+    let I_segundo = coords.indexOf('"')//"
+    let L_rosa = coords[coords.length-1]//letra NEWS
+
+    let grau = coords.slice(0, I_grau);
+    let minuto = coords.slice(I_grau+1, I_minuto);
+    let segundo = coords.slice(I_minuto+1, I_segundo);
+
+    mostrarVariaveis(grau, minuto, segundo, L_rosa);
+
+    let total = grau + "%" + minuto + segundo;
+    total = parseFloat(total.replaceAll('.', '').replace('%', '.')) * rosaVento[L_rosa];
+    
+    console.log(total)
+    return total;
+    
 }

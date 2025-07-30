@@ -8,8 +8,10 @@ let postes = [];
 
 // Banco de dados -> Depende do usuário de entrada
 // Composta por 4 caractéres.
-const empresa_cod = '0413'; // 0413#1 -> empresa cód 0413 # poste 1
+// const empresa_cod = '0413'; // 0413#1 -> empresa cód 0413 # poste 1
+const empresa_logada = new Empresa("Isada's corp", '0413')
 //
+
 
 // front-end => Variaveis mudáveis
 const statusColor = ['#FF7979', "#7ED957" ,"#598EFF", "#FF0000", "#00BF63", "#0051FF"]

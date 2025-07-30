@@ -1,11 +1,9 @@
-
-
 class Poste {
     constructor(coord_lat, coord_lng, empresa_dona, regiao, conexcoes = [], empresas_associadas = {}, status = 1) {
         this.titulo = 'Poste #'+ ++idPostes;
         this._globalId = globalIdPostes;
         this._localId = idPostes-1;
-        this._StringGlobalId = `${empresa_cod}#${++globalIdPostes}`;
+        this._StringGlobalId = `${empresa_logada.__cod}#${++globalIdPostes}`;
 
         this.lat = coord_lat;
         this.lng = coord_lng;
@@ -152,4 +150,12 @@ class Notificacao {
     }
 }
 
+class Empresa {
+    constructor(nome, cod) {
+        this.nome = nome;
+        this.__cod = cod;
 
+        this.__postes = [];
+        this.__idPostes;
+    }
+}
