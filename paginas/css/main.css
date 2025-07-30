@@ -359,17 +359,18 @@ main#maps {
         top: 10%;
 
         height: 50svh;
-        width: 10%;
+        width: fit-content;
         background-color: var(--corQuaseBranco);
     }
 
     & #left {
         left: 0;
+        
 
         border: 2.5px solid #777;
 
-        padding-left: 1%;
-        padding-top: 1%;
+        padding: 0.8%;
+        
 
         & #connect {
             display: flex;
@@ -480,6 +481,50 @@ div#map {
         justify-content: space-between;
         width: 80%;
         padding-bottom: var(--padding-padrao);
+    }
+
+    #maps aside#left {
+        display: none;
+    }
+
+    body#maps {
+        & main#maps {
+            display: flex;
+            position: relative;
+
+            height: fit-content;
+        }
+
+        & div#map {
+            height: 80svh;
+        }
+
+        & aside#right {
+            position: relative;
+            left: 0;
+            transform: translateX(0);
+
+            border: 0;
+            border-top: 2.5px solid #777;
+
+            width: calc(100vw - 2*(var(--padding-padrao)));
+ 
+            padding: 0 var(--padding-padrao);
+
+            flex: none;
+
+            height: fit-content;
+        }
+
+        & .main-header {
+            justify-content: space-around;
+            flex-direction: row;
+
+
+            & > * {
+                display: flex;
+            }
+        }
     }
 }
 

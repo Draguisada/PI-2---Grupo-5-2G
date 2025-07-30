@@ -1,78 +1,85 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Histórico</title>
-  <link rel="stylesheet" href="css/historico.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificações</title>
+
+
+    <link rel="stylesheet" href="css/notificacoes.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="script/main.js" defer></script>
+    <script src="script/historico.js" defer></script>
+    <script src="script/objetos.js" defer></script> 
+    
+    <script src="script/debug.js" defer></script> 
 </head>
 <body>
 
-  <!-- Cabeçalho superior azul -->
-  <div class="header-top">
-    <img src="https://i.ytimg.com/vi/1vLOXCI996A/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGHIgSyhDMA8=&rs=AOn4CLDXvt8PxL2mM85DcaKlMHQR-xfYUw" alt="Ícone" />
-    <h1>HISTÓRICO</h1>
-  </div>
+    <main id="Snotificacoes">
 
-  <div class="container">
-    <table>
-      <thead>
-        <tr>
-          <th>Data</th>
-          <th>Evento</th>
-          <th>Responsável</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>01/06/2025</td>
-          <td>Manutenção</td>
-          <td>Equipe A</td>
-          <td class="status">
-            <img src="https://img.icons8.com/ios-filled/50/000000/ok.png" alt="Resolvido" />
-            <span class="status-resolvido">Resolvido</span>
-          </td>
-        </tr>
-        <tr>
-          <td>15/05/2025</td>
-          <td>Notificação ANEEL</td>
-          <td>Em análise</td>
-          <td class="status">
-            <img src="https://img.icons8.com/ios-filled/50/000000/cancel.png" alt="Pendente" />
-            <span class="status-pendente">Pendente</span>
-          </td>
-        </tr>
-        <tr>
-          <td>08/05/2025</td>
-          <td>Vistoria técnica</td>
-          <td>Eng. Carlos Amorim</td>
-          <td class="status">
-            <img src="https://img.icons8.com/ios-filled/50/000000/ok.png" alt="Resolvido" />
-            <span class="status-resolvido">Resolvido</span>
-          </td>
-        </tr>
-        <tr>
-          <td>02/05/2025</td>
-          <td>Reclamação de fio solto</td>
-          <td>Cidadão</td>
-          <td class="status">
-            <img src="https://img.icons8.com/ios-filled/50/000000/ok.png" alt="Resolvido" />
-            <span class="status-resolvido">Resolvido</span>
-          </td>
-        </tr>
-        <tr>
-          <td>27/04/2025</td>
-          <td>Troca de transformador</td>
-          <td>Téc. Rafael Spada</td>
-          <td class="status">
-            <img src="https://img.icons8.com/ios-filled/50/000000/cancel.png" alt="Pendente" />
-            <span class="status-pendente">Pendente</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        <header class="header">
+            <h1>Últimas notificações</h1>
+            <h1 id="nomePoste">Poste Inválido</h1>
+            <div onclick="popUpToggle(true)">
+                <p>Criar notificação</p>
+                <button type="button" class="square-button">+</button>
+            </div>
+        </header>
+        <hr>
 
+        <section id="sec-notificacoes">
+
+            <!-- Inicio notificação teste -->
+            <!-- <div class="notificacao">
+
+                <div class="identificacao">
+                    <p>Notificação {data-hora}</p>
+                    <p>{id-notificação}</p>
+                </div>
+
+                <div class="descricao">
+                    <p>{descrição-notificação}</p>
+                </div>
+
+                <div class="botoes" onclick="changeDropdown">
+                    <button class="dropdown-button" onclick="dropdownButton(this)" title="Ativo">Ativo</button>
+                    <div class="dropdown-conteudo">
+                        <button onclick="changeStatusTo">Ativa</button>
+                        <button onclick="changeStatusTo">Feito</button>
+                        <button onclick="changeStatusTo">Manut.</button>
+                    </div>
+
+                    <button class="lixo" onclick="deleteNotificacao(this)"></button>
+                </div>
+
+            </div> -->
+            <!-- Fim notificação teste -->
+
+
+        </section>
+
+        <div id="pop-up"> 
+            <h1>Criando notificação</h1>
+
+            <textarea name="descricao" id="descricao" cols="30" rows="3" placeholder="Descrição da notificação"></textarea>
+
+            <h2>Criando notificação no {id-poste}</h2>
+            <button onclick="criarNotificacao()">Criar</button>
+        </div>
+
+        
+    </main>
+
+    <!-- Header principal -->
+    <aside class="main-header">
+        <img src="../assets/icones/pessoa.svg" alt="Seu perfil">
+        <!-- <h1>Histórico</h1> -->
+        <a href="notificacoes.html">Notificações</a>
+        <a href="mapa.html">Mapa</a>
+        <a>Sair</a>
+    </aside>
+    
 </body>
 </html>

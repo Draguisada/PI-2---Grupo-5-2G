@@ -30,11 +30,11 @@ function postesToString() {
     // Esse código utiliza localId, então "não funcionaria" no global
     postes.forEach((e) => {
         if (e.conexcoes != []){
-            // conexcoes += e.conexcoes.map((p) => `(postes[${p._localId-1}])`).join(`, postes[${localId}].adicionarConexcao`);
+            // conexcoes += e.conexcoes.map((p) => `(postes[${p._localId}])`).join(`, postes[${localId}].adicionarConexcao`);
             // conexcoes += `, postes[${localId}].adicionarConexcao \n`;
 
             e.conexcoes.forEach((p) => {
-            conexcoes += `postes[${e._localId-1}].adicionarConexcao(postes[${p._localId-1}]) \n`;}
+            conexcoes += `postes[${e._localId}].adicionarConexcao(postes[${p._localId}]) \n`;}
         )};
 
 

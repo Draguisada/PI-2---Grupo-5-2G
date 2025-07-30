@@ -1,19 +1,10 @@
-// Global -> Todas empresas lê essas variáveis
-let globalIdPostes = 0;
 
-// Local -> Apenas empresa logada lê
-let idPostes = 0;
-let postes = [];
-
-// Banco de dados -> Depende do usuário de entrada
-// Composta por 4 caractéres.
-const empresa_cod = '0413'; // 0413#1 -> empresa cód 0413 # poste 1
 
 class Poste {
     constructor(coord_lat, coord_lng, empresa_dona, regiao, conexcoes = [], empresas_associadas = {}, status = 2) {
         this.titulo = 'Poste #'+ ++idPostes;
         this._globalId = globalIdPostes;
-        this._localId = idPostes;
+        this._localId = idPostes-1;
         this._StringGlobalId = `${empresa_cod}#${++globalIdPostes}`;
 
         this.lat = coord_lat;
@@ -31,7 +22,7 @@ class Poste {
         this.idNotificacao = 0; // id para as notificações | local
 
         this.atualizarPontoMaps();
-        postes.push(this);
+        localStorage.postes.push(this);
     }
 
     setStatus(toStatusNum) { // Recebe valor de, 0, 1, 2
@@ -100,10 +91,10 @@ class Poste {
                     <p>Empresas associadas: ${Object.keys(this.associadas)}</p>
 
 
-                    <a href="./notificacoes.html/${this._localId-1}" target="_blank">Notificacões</a>
-                    <p onclick="postes[${this._localId-1}].setStatus(0)">set Desativo</p>
-                    <p onclick="postes[${this._localId-1}].setStatus(1)">set Ativo</p>
-                    <p onclick="postes[${this._localId-1}].setStatus(2)">set Manutenção</p>
+                    <a href="./historico.html" onclick="localStorage.setItem('poste', ${this._localId})" target="_blank">Histórico</a>
+                    <p onclick="localStorage.postes[${this._localId}].setStatus(0)">set Desativo</p>
+                    <p onclick="localStorage.postes[${this._localId}].setStatus(1)">set Ativo</p>
+                    <p onclick="localStorage.postes[${this._localId}].setStatus(2)">set Manutenção</p>
                 </div>
             `,
         };

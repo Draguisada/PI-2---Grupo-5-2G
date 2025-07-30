@@ -1,7 +1,4 @@
-const statusColor = ['#FF7979', "#7ED957", "#598EFF", "#FF0000", "#00BF63", "#0051FF"]
 
-const centroDoMapa = { lat: -27.200476, lng: -52.082809 }; // Entrada do IF
-let map;
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -91,7 +88,7 @@ async function initMap() {
 
     function carregarPostes() {
 
-        postes.forEach(function(ponto) {
+        localStorage.postes.forEach(function(ponto) {
             ponto.atualizarPontoMaps();
             addAdvancedMarker(ponto);
     });
@@ -104,9 +101,8 @@ async function initMap() {
 
     carregarPostes();
 
-    postes.forEach((poste) => {
-
-
+    localStorage.postes.forEach((poste) => {
+        // To-do
         poste.conexcoes
     })
 }
@@ -135,7 +131,7 @@ function toggleConnect(element) {
 
 function conectarPostes(elementHTML) {    
     
-    let element = postes[acharIndicePoste(elementHTML._StringGlobalId)];
+    let element = localStorage.postes[acharIndicePoste(elementHTML._StringGlobalId)];
     
     if (posteSelecionado == element) {
         
@@ -215,8 +211,8 @@ function toggleArrow(mostrar) {
 
 /* Função de apoio */
 function acharIndicePoste(achar) {
-    for (let indice = 0; indice<postes.length; indice++){
-        let posteStringId = postes[indice]._StringGlobalId;
+    for (let indice = 0; indice<localStorage.postes.length; indice++){
+        let posteStringId = localStorage.postes[indice]._StringGlobalId;
         if (posteStringId.slice(0,5) != achar.slice(0,5)) {
             continue;
         }

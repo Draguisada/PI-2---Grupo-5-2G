@@ -84,7 +84,7 @@ function popUpToggle(bool) {
         popUp.style.display = 'none';
     } else {
         popUp.style.display = 'flex';
-        popUp.children[2].innerText = `Criando notificação no ${postePrincipal.nome}`
+        popUp.children[2].innerText = `Criando notificação no ${postePrincipal.titulo}`
     }
     
 }
@@ -96,7 +96,7 @@ function popUpToggle(bool) {
 function pegarPoste(poste) { // Objeto poste
     postePrincipal = poste;
     limparHTMLNot();
-    nomePoste.innerText = poste.nome;
+    nomePoste.innerText = poste.titulo;
     let postes = [...poste.notificacoes]
     postes.forEach((infos) => {
         new Notificacao(...infos)
@@ -105,3 +105,7 @@ function pegarPoste(poste) { // Objeto poste
 
 
 
+let postePegado = localStorage.getItem('poste');
+
+if (postePegado) pegarPoste(localStorage.postes[parseInt(postePegado)]);
+localStorage.setItem('poste', null);
