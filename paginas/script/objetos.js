@@ -1,7 +1,7 @@
 
 
 class Poste {
-    constructor(coord_lat, coord_lng, empresa_dona, regiao, conexcoes = [], empresas_associadas = {}, status = 2) {
+    constructor(coord_lat, coord_lng, empresa_dona, regiao, conexcoes = [], empresas_associadas = {}, status = 1) {
         this.titulo = 'Poste #'+ ++idPostes;
         this._globalId = globalIdPostes;
         this._localId = idPostes-1;
@@ -85,24 +85,25 @@ class Poste {
             content: `
                 <div class="maps-content">
                     <h2>${this.titulo}</h2>
-                    <h3 class="maps-status" title="${this.status}">${this.status}</h3>
+                    <h3 class="maps-status" title="${this.status}">Status: ${this.status}</h3>
 
                     <p>Empresa dona: ${this.dona}</p>
                     <p>Empresas associadas: ${Object.keys(this.associadas)}</p>
 
 
-                    <a href="./historico.html" onclick="localStorage.setItem('poste', ${this._localId})" target="_blank">Histórico</a>
-                    <p onclick="postes[${this._localId}].setStatus(0)">set Desativo</p>
-                    <p onclick="postes[${this._localId}].setStatus(1)">set Ativo</p>
-                    <p onclick="postes[${this._localId}].setStatus(2)">set Manutenção</p>
+                    <a href="./historico.html" onclick="localStorage.setItem('poste', ${this._localId})" target="_blank">Histórico de notificações</a>
+                    <div class="setStatus">
+                        <p onclick="postes[${this._localId}].setStatus(0)">set Desativo</p>
+                        <p onclick="postes[${this._localId}].setStatus(1)">set Ativo</p>
+                        <p onclick="postes[${this._localId}].setStatus(2)">set Manutenção</p>
+                    </div>
                 </div>
             `,
         };
     }
 }
 
-const typeNot = ['Ativa', 'Concluida', 'Manut.'];
-const typeSNotmenos1 = {'Ativa': 0, 'Concluida': 1, 'Manut.': 2}
+
 class Notificacao {
     constructor(descricaoNotificacao='', idNotificacao, data, status = 0) {
         this.descricaoNotificacao = descricaoNotificacao;

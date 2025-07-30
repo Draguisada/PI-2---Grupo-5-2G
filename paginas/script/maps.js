@@ -13,6 +13,9 @@ async function initMap() {
     // addAdvancedMarker(centroDoMapa, "teste");
 
     map.addListener("click", (e) => {
+        // Se estar no mobile, então não pode criar postes clicando
+        if (window.innerWidth <= 425) return;
+
         const confirmacao = confirm("Deseja adicionar um novo marcador aqui?");
         if (confirmacao) {        
             let lat = e.latLng.lat();
@@ -27,7 +30,7 @@ async function initMap() {
         const infos = ponto.obj;
 
         glyphColor = statusColor[typeStatusmenos1[ponto.status]]
-        glyphBorderColor = statusColor[typeStatusmenos1[ponto.status]+3]
+        glyphBorderColor = statusColor[typeStatusmenos1[ponto.status] + (statusColor.length/2) ] // 
 
         let lat = infos.lat;
         let lng = infos.lng;

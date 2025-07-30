@@ -309,6 +309,11 @@ body#login {
     background-color: rgb(20, 128, 20);
 }
 
+.dropdown-button[title='Meia-fase'] {
+    background-color: #ff9a00;
+    color: #333;
+}
+
 .dropdown-button[title='Manut.'] {
     background-color: rgb(10, 115, 185);
 }
@@ -347,6 +352,27 @@ body:has(main#maps) {
 
 .gm-svpc {
     display: none;
+}
+
+.setStatus {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: var(--padding-padrao);
+    row-gap: 10px;
+
+    & > * {
+        width: 40%;
+        border: 2px solid #777;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+
+        border-radius: var(--border-radius-padrao);
+
+        padding: var(--padding-padrao);
+        margin: 0;
+    }
 }
 
 main#maps {
@@ -432,7 +458,7 @@ div#map {
 }
 
 @media (max-width: 650px) {
-    #main-header {
+    .main-header {
         width: 100vw;
         order:-1;
         height: fit-content;
@@ -528,7 +554,7 @@ div#map {
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 425px) {
 
     body {
     margin-left: 0px;
@@ -539,5 +565,38 @@ div#map {
         width: 100%;
     }
 
-    
+    body#maps {
+        & main#maps {
+            display: flex;
+            position: relative;
+
+            height: fit-content;
+        }
+
+        & div#map {
+            height: 80svh;
+        }
+
+        & aside#right {
+            position: relative;
+            left: 0;
+            transform: translateX(0);
+
+            border: 0;
+            border-top: 2.5px solid #777;
+
+            width: calc(100vw - 2*(var(--padding-padrao)));
+ 
+            padding: 0 var(--padding-padrao);
+
+            flex: none;
+
+            height: fit-content;
+        }
+
+        & .main-header {
+            justify-content: space-around;
+            flex-direction: column;
+        }
+    }
 }
