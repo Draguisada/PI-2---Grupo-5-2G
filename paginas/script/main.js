@@ -4,7 +4,7 @@ let globalIdPostes = 0;
 
 // Local -> Apenas empresa logada lê
 let idPostes = 0;
-localStorage.postes = [];
+let postes = [];
 
 // Banco de dados -> Depende do usuário de entrada
 // Composta por 4 caractéres.

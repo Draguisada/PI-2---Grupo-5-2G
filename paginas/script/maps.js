@@ -88,7 +88,7 @@ async function initMap() {
 
     function carregarPostes() {
 
-        localStorage.postes.forEach(function(ponto) {
+        postes.forEach(function(ponto) {
             ponto.atualizarPontoMaps();
             addAdvancedMarker(ponto);
     });
@@ -101,7 +101,7 @@ async function initMap() {
 
     carregarPostes();
 
-    localStorage.postes.forEach((poste) => {
+    postes.forEach((poste) => {
         // To-do
         poste.conexcoes
     })
@@ -131,7 +131,7 @@ function toggleConnect(element) {
 
 function conectarPostes(elementHTML) {    
     
-    let element = localStorage.postes[acharIndicePoste(elementHTML._StringGlobalId)];
+    let element = postes[acharIndicePoste(elementHTML._StringGlobalId)];
     
     if (posteSelecionado == element) {
         
@@ -211,8 +211,8 @@ function toggleArrow(mostrar) {
 
 /* Função de apoio */
 function acharIndicePoste(achar) {
-    for (let indice = 0; indice<localStorage.postes.length; indice++){
-        let posteStringId = localStorage.postes[indice]._StringGlobalId;
+    for (let indice = 0; indice<postes.length; indice++){
+        let posteStringId = postes[indice]._StringGlobalId;
         if (posteStringId.slice(0,5) != achar.slice(0,5)) {
             continue;
         }

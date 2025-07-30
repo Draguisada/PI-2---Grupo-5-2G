@@ -22,7 +22,7 @@ class Poste {
         this.idNotificacao = 0; // id para as notificações | local
 
         this.atualizarPontoMaps();
-        localStorage.postes.push(this);
+        postes.push(this);
     }
 
     setStatus(toStatusNum) { // Recebe valor de, 0, 1, 2
@@ -92,9 +92,9 @@ class Poste {
 
 
                     <a href="./historico.html" onclick="localStorage.setItem('poste', ${this._localId})" target="_blank">Histórico</a>
-                    <p onclick="localStorage.postes[${this._localId}].setStatus(0)">set Desativo</p>
-                    <p onclick="localStorage.postes[${this._localId}].setStatus(1)">set Ativo</p>
-                    <p onclick="localStorage.postes[${this._localId}].setStatus(2)">set Manutenção</p>
+                    <p onclick="postes[${this._localId}].setStatus(0)">set Desativo</p>
+                    <p onclick="postes[${this._localId}].setStatus(1)">set Ativo</p>
+                    <p onclick="postes[${this._localId}].setStatus(2)">set Manutenção</p>
                 </div>
             `,
         };
