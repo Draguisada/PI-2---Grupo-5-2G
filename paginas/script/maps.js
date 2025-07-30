@@ -55,12 +55,27 @@ async function initMap() {
             title: title
         });
 
+        marker.id = ponto.id;
+
         const infoWindow = new google.maps.InfoWindow({
           content: infos.content,
         });
 
+        ponto.objHtml = marker;
+
         marker.addListener("click", () => {
-          infoWindow.open(map, marker);
+            
+            switch (action){
+            case 0:
+                //Conectar poste
+                conectarPostes(marker);
+                break;
+            case 1:
+                // Criar poste
+                atualizarMapa();
+                infoWindow.open(map, marker);
+                
+            }
         });
     }
 
@@ -89,3 +104,50 @@ async function initMap() {
 }
 
 window.initMap = initMap;
+
+
+/* Resto */
+let action = 1;
+let posteSelecionado;
+
+function toggleConnect(element) {
+    // Por enquanto action é só -> 1 => conectar postes
+                                // 0 => Criar postes
+    if (action == 1) {
+        action = 0;
+    } else {
+        action = 1;
+    }
+
+    element.classList.toggle('nao-selecionado')
+    
+}
+
+function conectarPostes(elementHTML) {
+    let id = parseInt(elementHTML.id)-1;
+    
+    
+    element = postes[id];
+    
+    console.log(element.conexcoes);
+    if (posteSelecionado == element) {
+        posteSelecionado = null;
+        console.log('des-selecionado');
+    }
+    else if (posteSelecionado) {    
+        posteSelecionado.conexcoes.push(element);
+
+        posteSelecionado.objHtml.style.background = '';
+        
+        posteSelecionado = null;
+        console.log('des-selecionado');
+    } 
+    else {
+        posteSelecionado = element;
+
+        elementHTML.style.background = 'var(--corBackground)';
+        console.log('selecionado')
+    }
+
+    
+}

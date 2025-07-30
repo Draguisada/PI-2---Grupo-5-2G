@@ -4,7 +4,7 @@ let mapsPontos = [];
 let postes = [];
 
 class Poste {
-    constructor(coord_lat, coord_lng, empresa_dona, regiao, conexcoes = null, empresas_associadas = {}, status = 2) {
+    constructor(coord_lat, coord_lng, empresa_dona, regiao, conexcoes = [], empresas_associadas = {}, status = 2) {
         this.nome = 'Poste #'+ ++idPostes;
         this.id = idPostes;
 
@@ -90,6 +90,9 @@ class Poste {
 
 
                     <a href="./notificacoes.html/${this.id}" target="_blank">Notificacões</a>
+                    <p onclick="postes[${this.id-1}].setStatus(0)">set Desativo</p>
+                    <p onclick="postes[${this.id-1}].setStatus(1)">set Ativo</p>
+                    <p onclick="postes[${this.id-1}].setStatus(2)">set Manutenção</p>
                 </div>
             `,
         };
