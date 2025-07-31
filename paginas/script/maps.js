@@ -1,4 +1,6 @@
 const popUp = document.getElementById('pop-up')
+const recarregarForcado = document.querySelector('main#maps button#recaregar');
+
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -77,8 +79,8 @@ async function initMap() {
                 // Criar poste
                 atualizarMapa();
                 infoWindow.open(map, marker);
-                
             }
+            
         });
     }
 
@@ -91,23 +93,39 @@ async function initMap() {
 
     function carregarPostes() {
 
-        postes.forEach(function(ponto) {
+        empresa_logada.__postes.forEach(function(ponto) {
             ponto.atualizarPontoMaps();
             addAdvancedMarker(ponto);
     });
     }
 
+    function removerInfoWindow() {
+        let infos = document.getElementsByClassName('gm-style-iw-a');
+        let len = infos.length
+        if (len == 0) return;
+        for (let i = 0; i<len; i++) {
+            infos[i].remove();
+        }
+    }
+
     function atualizarMapa() {
+        removerInfoWindow()
         removerMarkers()
         carregarPostes()
     }
 
+    recarregarForcado.addEventListener('click', atualizarMapa);
+
     carregarPostes();
 
-    postes.forEach((poste) => {
+    // Ir pela empresa logada e habilitar todas as conexções dos postes dela por front-end
+    empresa_logada.__postes.forEach((poste) => {
         // To-do
-        poste.conexcoes
+        for (i = 0; i<poste.conexcoes.length; i++) {
+            desenharLinhaEntre(poste, poste.conexcoes[i]);
+        }
     })
+    toggleArrow(false);
 }
 
 window.initMap = initMap;
@@ -134,12 +152,12 @@ function toggleConnect(element) {
 
 function conectarPostes(elementHTML) {    
     
-    let element = postes[acharIndicePoste(elementHTML._StringGlobalId)];
+    let element = empresa_logada.__postes[acharIndicePoste(elementHTML._StringGlobalId)];
     
     if (posteSelecionado == element) {
         
         posteSelecionado = null;
-        element.style.background = '';
+        elementHTML.style.background = '';
         console.log('des-selecionado - igual');
     }
     else if (posteSelecionado) {    
@@ -237,8 +255,8 @@ function criarPoste(e) {
 
 /* Função de apoio */
 function acharIndicePoste(achar) {
-    for (let indice = 0; indice<postes.length; indice++){
-        let posteStringId = postes[indice]._StringGlobalId;
+    for (let indice = 0; indice<empresa_logada.__postes.length; indice++){
+        let posteStringId = empresa_logada.__postes[indice]._StringGlobalId;
         if (posteStringId.slice(0,5) != achar.slice(0,5)) {
             continue;
         }

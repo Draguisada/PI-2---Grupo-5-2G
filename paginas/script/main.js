@@ -1,6 +1,7 @@
 
 // Global -> Todas empresas lê essas variáveis
 let globalIdPostes = 0;
+let empresas = [];
 
 // Local -> Apenas empresa logada lê
 let idPostes = 0;

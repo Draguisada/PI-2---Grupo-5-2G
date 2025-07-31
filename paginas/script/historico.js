@@ -107,5 +107,5 @@ function pegarPoste(poste) { // Objeto poste
 
 let postePegado = localStorage.getItem('poste');
 
-if (postePegado != 'null') pegarPoste(postes[parseInt(postePegado)]);
+if (postePegado != 'null' || postePegado != '') pegarPoste(empresa_logada.__postes[parseInt(postePegado)]);
 localStorage.setItem('poste', null);

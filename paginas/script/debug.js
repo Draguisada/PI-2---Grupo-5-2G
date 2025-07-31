@@ -13,13 +13,10 @@ function postesToString() {
     let conexcoes = ``;
     
     // Esse código utiliza localId, então "não funcionaria" no global
-    postes.forEach((e) => {
+    empresa_logada.__postes.forEach((e) => {
         if (e.conexcoes != []){
-            // conexcoes += e.conexcoes.map((p) => `(postes[${p._localId}])`).join(`, postes[${localId}].adicionarConexcao`);
-            // conexcoes += `, postes[${localId}].adicionarConexcao \n`;
-
             e.conexcoes.forEach((p) => {
-            conexcoes += `postes[${e._localId}].adicionarConexcao(postes[${p._localId}]) \n`;}
+            conexcoes += `empresa_logada.__postes[${e._localId}].adicionarConexcao(empresa_logada.__postes[${p._localId}]) \n`;}
         )};
 
 
@@ -47,13 +44,15 @@ new Poste(-27.20241998975695, -52.08351322563297, empresa_logada.nome, 'IFC - Ca
 new Poste(-27.202623953995204, -52.08324500473148, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
 new Poste(-27.202332917190695, -52.082921798545186, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
 
-// desenharLinhaEntre(-27.2007753911968, -52.08286800859833,-27.200476, -52.082809);
+empresa_logada.__postes[0].adicionarConexcao(empresa_logada.__postes[1]) 
+empresa_logada.__postes[1].adicionarConexcao(empresa_logada.__postes[2]) 
+empresa_logada.__postes[2].adicionarConexcao(empresa_logada.__postes[3]) 
+empresa_logada.__postes[3].adicionarConexcao(empresa_logada.__postes[4]) 
 
 
+empresa_logada.__postes[0].adicionarEmpresaAssociadas("Isada's Corp", 'Luz', 'Internet');
+empresa_logada.__postes[0].adicionarEmpresaAssociadas("LaRa's Corp", 'Internet');
 
-postes[0].adicionarEmpresaAssociadas("Isada's Corp", 'Luz', 'Internet')
-postes[0].adicionarEmpresaAssociadas("LaRa's Corp", 'Internet')
-
-postes[0].novaNotificacao('ola mundo');
-postes[0].novaNotificacao('ola mundo denovo!', 1);
-postes[0].novaNotificacao('ola mundo denovo denovo!');
+empresa_logada.__postes[0].novaNotificacao('ola mundo');
+empresa_logada.__postes[0].novaNotificacao('ola mundo denovo!', 1);
+empresa_logada.__postes[0].novaNotificacao('ola mundo denovo denovo!');

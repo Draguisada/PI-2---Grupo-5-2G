@@ -306,11 +306,6 @@ body#login {
     background-color: rgb(20, 128, 20);
 }
 
-.dropdown-button[title='Meia-fase'] {
-    background-color: #ff9a00;
-    color: #333;
-}
-
 .dropdown-button[title='Manut.'] {
     background-color: rgb(10, 115, 185);
 }
@@ -360,7 +355,7 @@ body:has(main#maps) {
     row-gap: 10px;
 
     & > * {
-        width: 40%;
+        width: 44%;
         border: 2px solid #777;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         cursor: pointer;
@@ -393,7 +388,7 @@ main#maps {
         flex-direction: column;
         row-gap: 10px;
         border: 2.5px solid #777;
-        justify-content: space-around;
+        /* justify-content: space-around; */
 
         padding: 0.8%;
         
