@@ -24,8 +24,9 @@ class Poste {
     }
 
     setStatus(toStatusNum) { // Recebe valor de, 0, 1, 2
-        let toStatus = typeStatus[toStatusNum];
+        const toStatus = typeStatus[toStatusNum];
         let element = this;
+        const originalStatus = this.status;
 
         let listaConexcoes = this.conexcoes;
 
@@ -41,10 +42,12 @@ class Poste {
         for (let i = 0; i<listaConexcoes.length; i++) {
             element = listaConexcoes[i];
             if (element.status == toStatus) {
-                element = listaConexcoes[i];
                 continue;
             };
 
+            if (element.status == typeStatus[2] && !(originalStatus == typeStatus[2]) ) {
+                continue;
+            }
             element.setStatus(typeStatusmenos1[toStatus]);            
         };
 
@@ -91,9 +94,9 @@ class Poste {
 
                     <a href="./historico.html" onclick="localStorage.setItem('poste', ${this._localId})" target="_blank">Histórico de notificações</a>
                     <div class="setStatus">
-                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(0)">set Desativo</p>
-                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1)">set Ativo</p>
-                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2)">set Manutenção</p>
+                        <p onclick=" empresa_logada.__postes[${this._localId}].setStatus(0); recarregarForcado.click();">set Desativo</p>
+                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1); recarregarForcado.click();">set Ativo</p>
+                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2); recarregarForcado.click();">set Manutenção</p>
                     </div>
                 </div>
             `,
