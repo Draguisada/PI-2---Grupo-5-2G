@@ -18,7 +18,7 @@
     <main id="Snotificacoes">
 
         <header class="header">
-            <h1>Histórico de notificações</h1>
+            <h1 id="titulo-principal">Histórico de notificações</h1>
             <select name="nomePosteSelect" id="nomePoste" onchange="handleChangePoste(this.value)">
                 <option value="Poste inválido">Poste inválido</option>
             </select>
@@ -79,8 +79,6 @@
         <a href="notificacoes.html">Notificações</a>
         <a href="mapa.html">Mapa</a>
         <a>Sair</a>
-
-        <select name="empresas" id="empresas" onclick="listarArrayEmElement(this, 'option', empresas)" onload="listarArrayEmElement(this, 'option', empresas)">
 
         </select>
     </aside>

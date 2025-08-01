@@ -1,6 +1,7 @@
 const popUp = document.getElementById('pop-up')
 const recarregarForcado = document.querySelector('main#maps button#recaregar');
 
+let selecionados = [];
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -23,8 +24,8 @@ async function initMap() {
             let lat = e.latLng.lat();
             let lng = e.latLng.lng();
             new Poste(lat, lng, empresa_logada.nome, 'IFC - Campus Concórdia');
+            atualizarMapa();
         }
-        atualizarMapa();
     });
 
     
@@ -68,20 +69,39 @@ async function initMap() {
 
         ponto.objHtml = marker;
 
-        marker.addListener("click", () => {
-            
+        marker.addListener("click", (event) => {
+            if (event.domEvent.ctrlKey && action != 0) action = 2;
             switch (action){
             case 0:
                 //Conectar poste
                 conectarPostes(marker);
                 break;
             case 1:
-                // Criar poste
-                atualizarMapa();
+                // Abrir info postes
+                // atualizarMapa();
                 infoWindow.open(map, marker);
+                break;
+            case 2:
+                // Selecionar postes
+                action = 1;
+                let posteAchado = empresa_logada.__postes[acharIndicePoste(marker._StringGlobalId)];
+
+                if (selecionados.includes(posteAchado)) {
+                    selecionados.splice(selecionados.indexOf(posteAchado), 1);
+                    marker.classList.remove('poste-selecionado');
+                } else {
+                    selecionados.push(posteAchado);
+                    marker.classList.add('poste-selecionado')
+                }
+                break;
+                
             }
             
         });
+
+        marker.addListener("contextmenu", (event) => {
+            console.log('menu');
+        })  ;
     }
 
     function removerMarkers() {
@@ -109,9 +129,10 @@ async function initMap() {
     }
 
     function atualizarMapa() {
-        removerInfoWindow()
-        removerMarkers()
-        carregarPostes()
+        selecionados = [];
+        removerInfoWindow();
+        removerMarkers();
+        carregarPostes();
     }
 
     recarregarForcado.addEventListener('click', atualizarMapa);

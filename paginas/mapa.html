@@ -16,22 +16,22 @@
 <body id="maps">
     <div id="map"></div>
     <script defer async
-      src="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=maps,marker,drawing&callback=initMap"
+      src="https://maps.googleapis.com/maps/api/js?key=&libraries=maps,marker,drawing&callback=initMap"
     ></script>
 
     <main id='maps'>
       <aside id="left">
 
-        <button class="square-button" id="criarPoste" onclick="togglePopUp(true)">
+        <button class="square-button" id="criarPoste" onclick="togglePopUp(true)" title="Criar poste">
           <!-- <img src="../assets/icones/lampada.svg" alt="Criar postes"> -->
            +
         </button>
 
-        <button class="square-button" id="recaregar">
-          <img src="../assets/icones/lampada.svg" alt="Recarregar postes">
+        <button class="square-button" id="recaregar" title="Atualizar/Recarregar postes">
+          <img src="../assets/icones/lampada.svg" alt="Atualizar/Recarregar postes">
         </button>
 
-        <button class="square-button nao-selecionado" id="connect" onclick="toggleConnect(this)">
+        <button class="square-button nao-selecionado" id="connect" onclick="toggleConnect(this)" title="Conectar postes">
           <img src="../assets/icones/pessoa.svg" alt="Conectar postes">
         </button>
 
@@ -47,6 +47,7 @@
       </aside>
 
       <div id="pop-up"> 
+            <h2 onclick="togglePopUp(false)">x</h2>
             <h1>Criando poste</h1>
             <p>Este menu é utilizado para criação mais precisa usando <br> latitude e longitude informados por escrito.</p>
             <div>

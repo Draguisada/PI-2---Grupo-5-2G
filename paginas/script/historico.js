@@ -113,5 +113,9 @@ listarArrayEmElement(nomePoste, 'option', empresa_logada.__postes);
 
 let postePegado = localStorage.getItem('poste');
 
-if (postePegado != 'null' && postePegado != '') pegarPoste(empresa_logada.__postes[parseInt(postePegado)]);
-localStorage.setItem('poste', null);
+if (postePegado != 'null' && postePegado != '') {
+    pegarPoste(empresa_logada.__postes[parseInt(postePegado)])
+} else {
+    pegarPoste(empresa_logada.__postes[0])
+};
+localStorage.setItem('poste', 'null');
