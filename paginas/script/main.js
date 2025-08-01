@@ -11,8 +11,12 @@ let postes = [];
 // Composta por 4 caractéres.
 // const empresa_cod = '0413'; // 0413#1 -> empresa cód 0413 # poste 1
 const empresa_logada = new Empresa("Isada's corp", '0413')
-//
+
+// Debug 
 new Empresa("LaRa's Corp", '1379')
+new Empresa("Sperb's Corp", '4121')
+new Empresa("Veriato's Corp", '0359')
+//
 
 // front-end => Variaveis mudáveis
 const statusColor = ['#FF7979', "#7ED957" ,"#598EFF", "#FF0000", "#00BF63", "#0051FF"]
@@ -28,11 +32,20 @@ const typeSNotmenos1 = {'Ativa': 0, 'Concluida': 1 ,'Manut.': 2}
 
 
 /* !Pega informações globais! */
+function listarArrayEmElement(elementoPai, element, arraySelecionado) {
+    elementoPai.innerHTML = '';
 
-function listarPostesSelection() {
+    arraySelecionado.forEach((item) => {
+        let opcao = document.createElement(element);
+        opcao.obj = item;
+        if (item.nome){
+            opcao.value = item.nome;
+            opcao.innerText = item.nome;
+        } else if (item.titulo) {
+            opcao.value = item.titulo;
+            opcao.innerText = item.titulo;
+        }
 
-}
-
-function listarEmpresasSelection(elementoPai) {
-    let pegarLista = empresas;
+        elementoPai.append(opcao);
+    })
 }

@@ -92,20 +92,26 @@ function popUpToggle(bool) {
 
 
 // 1° parte é a página, agora é a integração com o resto
+// Como é só pra ver os postes da empresa logada, utilizaria um idLocal pra pegar da lista de postes (da empresa logada)
+function handleChangePoste(nome) {
+    let idOf = parseInt(nome.slice(nome.indexOf('#')+1)-1);
+    pegarPoste(empresa_logada.__postes[idOf]);
+}
 
 function pegarPoste(poste) { // Objeto poste
     postePrincipal = poste;
     limparHTMLNot();
-    nomePoste.innerText = poste.titulo;
-    let postes = [...poste.notificacoes]
-    postes.forEach((infos) => {
-        new Notificacao(...infos)
+    nomePoste.value = poste.titulo;
+    let notificacaoes = [...poste.notificacoes];
+    notificacaoes.forEach((infos) => {
+        new Notificacao(...infos);
     })
 }
 
+listarArrayEmElement(nomePoste, 'option', empresa_logada.__postes);
 
 
 let postePegado = localStorage.getItem('poste');
 
-if (postePegado != 'null' || postePegado != '') pegarPoste(empresa_logada.__postes[parseInt(postePegado)]);
+if (postePegado != 'null' && postePegado != '') pegarPoste(empresa_logada.__postes[parseInt(postePegado)]);
 localStorage.setItem('poste', null);
