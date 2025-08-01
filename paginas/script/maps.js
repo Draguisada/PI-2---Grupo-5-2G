@@ -99,9 +99,9 @@ async function initMap() {
             
         });
 
-        marker.addListener("contextmenu", (event) => {
+        marker.addEventListener("contextmenu", (event) => {
             console.log('menu');
-        })  ;
+        });
     }
 
     function removerMarkers() {
@@ -269,8 +269,9 @@ function criarPoste(e) {
     if (lat.includes('°')) lat = coordsStringToNumber(lat)
     if (lng.includes('°')) lng = coordsStringToNumber(lng)
     
-    new Poste(lat, lng, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+    new Poste(parseFloat(lat), parseFloat(lng), empresa_logada.nome, 'IFC - Campus concórdia', [], {});
     togglePopUp(false);
+    recarregarForcado.click();
     
 }
 
@@ -296,6 +297,8 @@ function coordsStringToNumber(coords) {
         'N': 1,
         'E': 1
     }
+    coords = coords.replaceAll(' ', '');
+
     let I_grau = coords.indexOf('°')//°
     let I_minuto = coords.indexOf("'")//'
     let I_segundo = coords.indexOf('"')//"
@@ -305,12 +308,10 @@ function coordsStringToNumber(coords) {
     let minuto = coords.slice(I_grau+1, I_minuto);
     let segundo = coords.slice(I_minuto+1, I_segundo);
 
-    mostrarVariaveis(grau, minuto, segundo, L_rosa);
-
-    let total = grau + "%" + minuto + segundo;
+    let total = `${grau}%${minuto}${segundo}`;
     total = parseFloat(total.replaceAll('.', '').replace('%', '.')) * rosaVento[L_rosa];
-    
-    console.log(total)
+    // console.log(total);
+
     return total;
     
 }
