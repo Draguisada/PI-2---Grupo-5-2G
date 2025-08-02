@@ -1,7 +1,11 @@
-const popUp = document.getElementById('pop-up')
+const popUpCriarPoste = document.querySelector('#pop-up.adicionarPoste');
+const popUpAdicionarAssociadas = document.querySelector('#pop-up.adicionarAssociadas');
 const recarregarForcado = document.querySelector('main#maps button#recaregar');
+const selecionarEmpresaOnLoad = document.getElementById('selecionarEmpresa');
+const selecionarServico = document.getElementById('especificarServico');
 
 let selecionados = [];
+let contextMenuWindow;
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -16,6 +20,7 @@ async function initMap() {
     // addAdvancedMarker(centroDoMapa, "teste");
 
     map.addListener("click", (e) => {
+        if (contextMenuWindow) contextMenuWindow.close();
         // Se estar no mobile, então não pode criar postes clicando
         if (window.innerWidth <= 425) return;
 
@@ -70,6 +75,7 @@ async function initMap() {
         ponto.objHtml = marker;
 
         marker.addListener("click", (event) => {
+            if (contextMenuWindow) contextMenuWindow.close();
             if (event.domEvent.ctrlKey && action != 0) action = 2;
             switch (action){
             case 0:
@@ -99,8 +105,37 @@ async function initMap() {
             
         });
 
-        marker.addEventListener("contextmenu", (event) => {
-            console.log('menu');
+        // @deprecated
+        function showContextMenu(position, marker) {
+            indicePoste = acharIndicePoste(marker._StringGlobalId);
+            
+            if (contextMenuWindow && contextMenuWindow.isOpen) {
+                contextMenuWindow.close();
+
+                if (contextMenuWindow.position.lat() == marker.position['YC'] && contextMenuWindow.position.lng() == marker.position['ZC']) return;
+            }
+
+            const content = `
+                <div id="contenxt-content">
+                    <button class="bigger-button" onclick="deletarPoste(${indicePoste})">Deletar</button>
+                </div>
+            `;
+            
+            contextMenuWindow = new google.maps.InfoWindow({
+                content: content,
+                position: {lat: position.lat, lng: position.lng},
+                headerDisabled: true,
+                pixelOffset: {height: 35, width: 70},
+                ariaLabel: 'context-window'
+            });
+
+            contextMenuWindow.open(map);
+        }
+        // showContextMenu({lat: -100, lng: -100});
+        
+        // Ainda não tem uso, mas pode ter
+        marker.addEventListener("contextmenu", () => {
+            // showContextMenu(marker.position, marker);
         });
     }
 
@@ -251,11 +286,31 @@ function toggleArrow(mostrar) {
     });
 }
 
-function togglePopUp(bool) {
+function togglePopUpCriarPoste(bool) {
     if (bool) {
-        popUp.style.display = 'flex';
+        popUpCriarPoste.style.display = 'flex';
+        togglePopUpAssociadas(false);
     } else {
-        popUp.style.display = 'none';
+        popUpCriarPoste.style.display = 'none';
+    }
+    
+}
+
+function togglePopUpAssociadas(bool) {
+    if (bool) {
+
+        if (selecionados.length < 1) {
+            alert('Selecione postes segurando CTRL e clicando');
+            return;
+        }
+
+        popUpAdicionarAssociadas.style.display = 'flex';
+        listarArrayEmElement(selecionarEmpresaOnLoad, 'p', empresas);
+        criarElementosXVezes(selecionarServico, 'input', selecionarEmpresaOnLoad.childElementCount, 'text', 'servicoTextInput');
+        
+        togglePopUpCriarPoste(false);
+    } else {
+        popUpAdicionarAssociadas.style.display = 'none';
     }
 }
 
@@ -270,7 +325,7 @@ function criarPoste(e) {
     if (lng.includes('°')) lng = coordsStringToNumber(lng)
     
     new Poste(parseFloat(lat), parseFloat(lng), empresa_logada.nome, 'IFC - Campus concórdia', [], {});
-    togglePopUp(false);
+    togglePopUpCriarPoste(false);
     recarregarForcado.click();
     
 }
@@ -315,3 +370,11 @@ function coordsStringToNumber(coords) {
     return total;
     
 }
+
+
+
+
+
+
+/* On Load */
+

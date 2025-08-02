@@ -22,7 +22,7 @@
             <select name="nomePosteSelect" id="nomePoste" onchange="handleChangePoste(this.value)">
                 <option value="Poste inválido">Poste inválido</option>
             </select>
-            <div onclick="popUpToggle(true)">
+            <div onclick="togglePopUp(true)">
                 <p>Criar notificação</p>
                 <button type="button" class="square-button">+</button>
             </div>
@@ -61,11 +61,10 @@
         </section>
 
         <div id="pop-up"> 
+            <h2 onclick="togglePopUp(false)">x</h2>
             <h1>Criando notificação</h1>
-
             <textarea name="descricao" id="descricao" cols="30" rows="3" placeholder="Descrição da notificação"></textarea>
-
-            <h2>Criando notificação no {id-poste}</h2>
+            <h3>Criando notificação no {id-poste}</h3>
             <button onclick="criarNotificacao()">Criar</button>
         </div>
 

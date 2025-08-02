@@ -58,7 +58,7 @@ function criarNotificacao() {
     }
     //
     let descricao = descDeTextbox.value;
-    popUpToggle(false);
+    togglePopUp(false);
     descDeTextbox.value = '';
 
     //
@@ -79,12 +79,12 @@ function acharIndiceDeXemY(elemento, pai) {
     }
 }
 
-function popUpToggle(bool) {
+function togglePopUp(bool) {
     if (!(bool)) {
         popUp.style.display = 'none';
     } else {
         popUp.style.display = 'flex';
-        popUp.children[2].innerText = `Criando notificação no ${postePrincipal.titulo}`
+        popUp.children[3].innerText = `Criando notificação no ${postePrincipal.titulo}`
     }
     
 }
