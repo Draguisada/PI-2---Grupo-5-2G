@@ -14,7 +14,7 @@
     --padding-padrao: 1.5%;
 
     /* Cores */
-    --corAzulPadrao: #0082FB;
+    --corAzulPadrao: #1e73be; /* #0082FB; */
     --corTextoParaAzulPadrao: white;
     --corBackground: #FFC107;
 
@@ -39,7 +39,7 @@ body {
     height: 100svh;
     min-width: fit-content;
 
-    margin-left: 1%;
+    margin-left: 1vw;
     padding-left: 0.5%;
     border-left: 2.5px solid #777;
 
@@ -81,8 +81,8 @@ main {
 
 /* Botões */
 button {
-    background-color: var(--corAzulPadrao);
-    color: var(--corTextoParaAzulPadrao);
+    background-color: var(--corBackground);
+    color: var(--corBorderPadrao);
     border: 0;
 }
 
@@ -90,6 +90,8 @@ button {
 
     min-width: var(--min-size);
     min-height: var(--min-size);
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
 
     /* width: 5svh;
     height: 5svh; */
@@ -192,7 +194,13 @@ body#login {
 /* CSS Notificações */
 #Snotificacoes > .header {
     display: flex;
+    background-color: var(--corAzulPadrao);
+    color: var(--corTextoParaAzulPadrao);
     flex-direction:row;
+    width: 100%;
+    padding-right: 1vw;
+    padding-left: 3svh;
+    transform: translateX(-3svh);
 
     justify-content: space-between;
     align-items: center;
@@ -214,6 +222,9 @@ body#login {
         font-weight: bold;
         unicode-bidi: isolate;
         border: 0;
+
+        background-color: vaR(--corAzulPadrao);
+        color:white;
     }
 }
 
@@ -319,7 +330,7 @@ body#login {
 
     padding-right:var(--padding-padrao);
 
-    background-color: var(--corBackground);
+    background-color: var(--corQuaseBranco);
 
     border-radius: var(--border-radius-padrao);
 
@@ -561,6 +572,7 @@ div#map {
 
     #Snotificacoes > .header {
         flex-direction: column;
+        
         & #titulo-principal {
             text-align: center;
         }
