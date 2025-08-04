@@ -114,11 +114,11 @@ class Notificacao {
 
         this.idPoste = idPoste;
 
-        this.insertNotifc();
+        this.atualizarNotificacao();
     }
 
 
-    insertNotifc() {
+    atualizarNotificacao() {
 
         this.innerHTML = `<div class="notificacao">
 
@@ -133,12 +133,11 @@ class Notificacao {
                 </div>
 
                 <div class="botoes">
-                    <button class="dropdown-button" onclick="dropdownButton(this)" title="${typeNot[this.status]}">${typeNot[this.status]}</button>
-                    <div class="dropdown-conteudo">
-                        <button onclick="changeStatusTo(this)">${typeNot[0]}</button>
-                        <button onclick="changeStatusTo(this)">${typeNot[1]}</button>
-                        <button onclick="changeStatusTo(this)">${typeNot[2]}</button>
-                    </div>
+                    <select title="${typeNot[this.status]}" value="${typeNot[this.status]}" class="dropdown" name="select-status" onchange='changeStatusTo(this)'>${typeNot[this.status]}
+                        <option>${typeNot[0]}</option>
+                        <option>${typeNot[1]}</option>
+                        <option>${typeNot[2]}</option>
+                    </select>
 
                     <button class="lixo" onclick="deleteNotificacao(this)"></button>
                 </div>

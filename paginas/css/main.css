@@ -243,7 +243,7 @@ main#mainNotific .header {
     }
 }
 
-#Snotificacoes {
+#Snotificacoes, #mainNotific {
 
     & .botoes {
         display: flex;
@@ -354,43 +354,32 @@ main#mainNotific .header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-
-.dropdown-button {
-    width:76.42px;
-    min-width: fit-content;
-
-    border: 0;
-
-    border-radius: var(--border-radius-padrao);
-    font-weight: bolder;
-
+.botoes {
+    display: flex;
 }
 
-.dropdown-button[title='Ativa'] {
+.dropdown {
+    font-size: 1.5rem;
+
+    border: 0;
+    border-radius: var(--border-radius-padrao);
+
+    color: white;
+}
+
+.dropdown[title='Ativa'] {
     background-color: rgb(238, 44, 10);
 }
 
-.dropdown-button[title='Concluida'] {
+.dropdown[title='Concluida'] {
     background-color: rgb(20, 128, 20);
 }
 
-.dropdown-button[title='Manut.'] {
+.dropdown[title='Manut.'] {
     background-color: rgb(10, 115, 185);
 }
 
-.dropdown-conteudo {
-    display: none;
-
-    position: absolute;
-    transform: translateY(50%);
-
-    flex-direction: column;
-
-    background-color: var(--corBackground);
-
-}
-
-.dropdown-conteudo button {
+.dropdown option {
     height: 1.8rem;
     background-color: var(--corAzulPadrao);
     border: 0;

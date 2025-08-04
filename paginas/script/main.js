@@ -67,3 +67,20 @@ function criarElementosXVezes(elementoPai, element, vezes, tipo = '', clase = ''
         elementoPai.append(opcao);
     }
 }
+
+function acharIndiceDeXemY(elemento, pai) {
+    let lista = pai.children;
+    for (let i = 0; i < lista.length; i++) {
+        if (lista[i] == elemento) {
+            return i;
+        }
+    }
+}
+
+function removeItemDeArray(item, array) {
+    for (let i = 0; i< array.length; i++) {
+        if (array[i] == item) {
+            array.splice(i, 1);
+        }
+    }
+}

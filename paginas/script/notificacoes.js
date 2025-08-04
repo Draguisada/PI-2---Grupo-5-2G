@@ -24,7 +24,31 @@ function toggleCriarNotificacao(bool) {
     
 }
 
+function changeStatusTo(element) {    
+    element.title = element.value;
+
+    // Para mudar no objeto Poste
+    let notTotal = element.parentElement.parentElement;
+    let id = notTotal.children[0].children[1];
+
+    let [poste, notif, index] = acharPostePeloID(id); // Retorna o poste e a notificação
+
+    notif[3] = typeSNotmenos1[element.value];
+}
+
+function deleteNotificacao(e) {
+    // Para mudar no objeto Poste
+    let notTotal = e.parentElement.parentElement;
+    let id = notTotal.children[0].children[1];
+
+    let [poste, notif, index] = acharPostePeloID(id);
+    poste.notificacoes.splice(index, 1, '');
+
+    notTotal.remove();
+}
+
 function adicionarNotificacao(notificacao) {
+    notificacao.atualizarNotificacao();
     sectionNot.innerHTML = `${notificacao.innerHTML} ${sectionNot.innerHTML}`;   
 }
 
@@ -36,9 +60,24 @@ function carregarTodasNotificacoes(arrayEmpresa) {
         })
     }
 
+    selecionarTextoCertoDropdowns()
 }
 
+function selecionarTextoCertoDropdowns() {
+    let dropdowns = document.getElementsByClassName('dropdown');
+    for (let i = 0; i < dropdowns.length; i++) {
+        let element = dropdowns[i];
+        let index = typeSNotmenos1[element.title];
+        element.selectedIndex = index;
+    };
+}
 
+function acharPostePeloID(idTotal) {
+    indices = idTotal.innerText.split('#')[1].split('-');
+    //o indice[0] é o indice do poste, e o indice[1] é o indice da notificação dentro do poste.
+    return [empresa_logada.__postes[indices[0]], empresa_logada.__postes[indices[0]].notificacoes[indices[1]-1], parseInt(indices[1])-1]
+    // Retorna o poste e a notificação
+}
 
 
 

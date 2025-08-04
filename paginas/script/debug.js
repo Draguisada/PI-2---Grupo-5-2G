@@ -59,4 +59,4 @@ empresa_logada.__postes[0].novaNotificacao('ola mundo denovo denovo!');
 
 empresa_logada.__postes[3].novaNotificacao('teste no 4');
 
-empresa_logada.__postes[5].novaNotificacao('Onibus bateu forte, ix...');
+empresa_logada.__postes[5].novaNotificacao('Onibus bateu forte, ix...', 2);
