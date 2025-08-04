@@ -72,9 +72,9 @@ class Poste {
     novaNotificacao(descricao, status = 0) {
         // Por enquanto, vai ser uma lista de notificações que ficam armazenadas numa lista dentro do objeto poste, que quando
         // entra na página de notificações, você plota o poste que você quer ver e ele puxa as notificações
-        // Por enquanto, sem o banco de dados, irá ser preciso criar tudo no main.js
+        // Por enquanto, sem o banco de dados, irá ser preciso criar tudo no main.js/debug.js
 
-        this.notificacoes.push([descricao, ++this.idNotificacao, new Date().toLocaleString(), status]) // Status
+        this.notificacoes.push([descricao, ++this.idNotificacao, new Date().toLocaleString(), status, this._localId]) // Status
     }
 
     atualizarPontoMaps() {
@@ -106,11 +106,13 @@ class Poste {
 
 
 class Notificacao {
-    constructor(descricaoNotificacao='', idNotificacao, data, status = 0) {
+    constructor(descricaoNotificacao='', idNotificacao, data, status = 0, idPoste) {
         this.descricaoNotificacao = descricaoNotificacao;
         this.idNotificacao = idNotificacao;
         this.data = data;
         this.status = status;
+
+        this.idPoste = idPoste;
 
         this.insertNotifc();
     }
@@ -118,11 +120,11 @@ class Notificacao {
 
     insertNotifc() {
 
-        secNot.innerHTML = `<div class="notificacao">
+        this.innerHTML = `<div class="notificacao">
 
                 <div class="identificacao">
                     <p>Notificação ${this.data}</p>
-                    <p>ID #${this.idNotificacao}</p>
+                    <p>ID #${this.idPoste}-${this.idNotificacao}</p>
                 </div>
 
                 <div class="descricao">
@@ -141,7 +143,7 @@ class Notificacao {
                     <button class="lixo" onclick="deleteNotificacao(this)"></button>
                 </div>
 
-        </div> ${secNot.innerHTML}`
+        </div>`
 
 
         // let notListened = document.getElementById('notListened');

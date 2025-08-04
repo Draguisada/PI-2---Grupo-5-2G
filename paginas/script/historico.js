@@ -10,7 +10,7 @@
 let postePrincipal;
 
 const popUp = document.getElementById('pop-up');
-const secNot = document.getElementById('sec-notificacoes');
+const sectionNot = document.getElementById('sec-notificacoes');
 const nomePoste = document.getElementById('nomePoste');
 const descDeTextbox = document.querySelector('#pop-up #descricao');
 
@@ -32,7 +32,7 @@ function changeStatusTo(element) {
 
     // Para mudar no objeto Poste
     let notTotal = element.parentElement.parentElement.parentElement;
-    let index = secNot.childElementCount - acharIndiceDeXemY(notTotal, secNot) - 1; //-1 pra ajustar pro Array
+    let index = sectionNot.childElementCount - acharIndiceDeXemY(notTotal, sectionNot) - 1; //-1 pra ajustar pro Array
 
     postePrincipal.notificacoes[index][3] = typeSNotmenos1[mudarPara];
 
@@ -44,7 +44,7 @@ function deleteNotificacao(e) {
 
     // Para mudar no objeto Poste
     let notTotal = e.parentElement.parentElement.parentElement;
-    let index = secNot.childElementCount - acharIndiceDeXemY(notTotal, secNot) - 1; //-1 pra ajustar pro Array
+    let index = sectionNot.childElementCount - acharIndiceDeXemY(notTotal, sectionNot) - 1; //-1 pra ajustar pro Array
 
     postePrincipal.notificacoes.pop(index);
 
@@ -67,7 +67,7 @@ function criarNotificacao() {
 }
 
 function limparHTMLNot() {
-    secNot.innerHTML = '';
+    sectionNot.innerHTML = '';
 }
 
 function acharIndiceDeXemY(elemento, pai) {
@@ -89,6 +89,9 @@ function togglePopUp(bool) {
     
 }
 
+function adicionarNotificacao(notificacao) {
+    
+}
 
 
 // 1° parte é a página, agora é a integração com o resto

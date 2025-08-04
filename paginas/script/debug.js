@@ -56,3 +56,7 @@ empresa_logada.__postes[0].adicionarEmpresaAssociadas("LaRa's Corp", 'Internet')
 empresa_logada.__postes[0].novaNotificacao('ola mundo');
 empresa_logada.__postes[0].novaNotificacao('ola mundo denovo!', 1);
 empresa_logada.__postes[0].novaNotificacao('ola mundo denovo denovo!');
+
+empresa_logada.__postes[3].novaNotificacao('teste no 4');
+
+empresa_logada.__postes[5].novaNotificacao('Onibus bateu forte, ix...');

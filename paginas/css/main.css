@@ -81,9 +81,14 @@ main {
 
 /* Botões */
 button {
+    background-color: var(--corAzulPadrao);
+    color: var(--corTextoParaAzulPadrao);
+    border: 0;
+}
+
+main#Snotificacoes .header button, main#mainNotific .header button {
     background-color: var(--corBackground);
     color: var(--corBorderPadrao);
-    border: 0;
 }
 
 .square-button {
@@ -191,8 +196,18 @@ body#login {
     }
 }
 
-/* CSS Notificações */
-#Snotificacoes > .header {
+/* Css notificações */
+
+main#mainNotific .header {
+
+    & > h1 {
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* CSS header */
+/* #Snotificacoes > */ .header {
     display: flex;
     background-color: var(--corAzulPadrao);
     color: var(--corTextoParaAzulPadrao);
