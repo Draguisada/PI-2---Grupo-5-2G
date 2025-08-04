@@ -127,7 +127,17 @@ main#Snotificacoes .header button, main#mainNotific .header button {
     width: 3svh;
     height: 3svh;
 
-    background-image: url(../../assets//icones/trashfull.svg);
+    background-image: url(../../assets/icones/trashfull.svg);
+    background-size: cover;
+    background-color: transparent;
+    border: 0;
+}
+
+.irHistorico {
+    width: var(--min-size);
+    height: var(--min-size);
+
+    background-image: url(../../assets/icones/pessoa.svg);
     background-size: cover;
     background-color: transparent;
     border: 0;
@@ -198,13 +208,30 @@ body#login {
 
 /* Css notificações */
 
-main#mainNotific .header {
 
-    & > h1 {
-        margin-left: 50%;
-        transform: translateX(-50%);
-    }
+.hr {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
 }
+
+.hr::before,
+.hr::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--corBorderPadrao);
+}
+
+.hr span {
+  padding: 0 10px 0 var(--padding-padrao) ;
+  font-weight: bold;
+}
+
+.hr a {
+    margin: 0 var(--padding-padrao) 0 0;
+}
+
 
 /* CSS header */
 /* #Snotificacoes > */ .header {
@@ -260,6 +287,7 @@ main#mainNotific .header {
     }
 
 }
+/* Sessão só pra mostrar em 1 não mostra no outro */
 
 #pop-up.adicionarAssociadas,  #pop-up.adicionarPoste, #pop-up {
     display: flex;
@@ -365,6 +393,8 @@ main#mainNotific .header {
     border-radius: var(--border-radius-padrao);
 
     color: white;
+
+    padding: 0 var(--padding-padrao);
 }
 
 .dropdown[title='Ativa'] {
@@ -570,16 +600,31 @@ div#map {
 
     }
 
+    .header {
+        padding: 0;
+        transform: translateX(0);
+    }
+
+    main {
+        width: 100%;
+    }
+
     body {
         flex-wrap: wrap;
     }
 
-    #Snotificacoes > .header {
-        flex-direction: column;
-        
-        & #titulo-principal {
-            text-align: center;
-        }
+    #titulo-principal {
+        text-align: center;
+
+        font-size: 1rem;
+    }
+
+    .square-button {
+        font-size: 1rem;
+    }
+
+    p:has(+ .square-button) {
+        display: none;
     }
 
     main#Snotificacoes {

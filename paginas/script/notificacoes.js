@@ -49,15 +49,24 @@ function deleteNotificacao(e) {
 
 function adicionarNotificacao(notificacao) {
     notificacao.atualizarNotificacao();
-    sectionNot.innerHTML = `${notificacao.innerHTML} ${sectionNot.innerHTML}`;   
+    sectionNot.innerHTML = `${notificacao.innerHTML} ${sectionNot.innerHTML}`;
 }
 
 function carregarTodasNotificacoes(arrayEmpresa) {
+    sectionNot.innerHTML = '';
 
     for (let i = 0; i < arrayEmpresa.length; i++) {
-        arrayEmpresa[i].notificacoes.forEach((infos) => {
-            adicionarNotificacao(new Notificacao(...infos))
-        })
+        if (arrayEmpresa[i].notificacoes.length >= 1){
+            arrayEmpresa[i].notificacoes.forEach((infos) => {
+                if (infos){
+                    adicionarNotificacao(new Notificacao(...infos))
+                }
+            });
+
+            sectionNot.innerHTML = `<div class='hr'><span>${arrayEmpresa[i].titulo}</span>
+                                    <a class="irHistorico" onclick="localStorage.setItem('poste', ${i})" href="./historico.html" target="_blank"></a></div>
+                                    ${sectionNot.innerHTML}`;
+        }
     }
 
     selecionarTextoCertoDropdowns()
@@ -79,6 +88,9 @@ function acharPostePeloID(idTotal) {
     // Retorna o poste e a notificação
 }
 
+function recarregarPagina() {
+    carregarTodasNotificacoes(empresa_logada.__postes);
+}
 
 
 carregarTodasNotificacoes(empresa_logada.__postes)

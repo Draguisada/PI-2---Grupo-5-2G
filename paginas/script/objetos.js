@@ -140,6 +140,7 @@ class Notificacao {
                     </select>
 
                     <button class="lixo" onclick="deleteNotificacao(this)"></button>
+                    
                 </div>
 
         </div>`

@@ -83,17 +83,6 @@ function adicionarNotificacao(notificacao) {
     sectionNot.innerHTML = `${notificacao.innerHTML} ${sectionNot.innerHTML}`;   
 }
 
-function carregarTodasNotificacoes(arrayEmpresa) {
-
-    for (let i = 0; i < arrayEmpresa.length; i++) {
-        arrayEmpresa[i].notificacoes.forEach((infos) => {
-            adicionarNotificacao(new Notificacao(...infos))
-        })
-    }
-
-    selecionarTextoCertoDropdowns()
-}
-
 function selecionarTextoCertoDropdowns() {
     let dropdowns = document.getElementsByClassName('dropdown');
     for (let i = 0; i < dropdowns.length; i++) {
