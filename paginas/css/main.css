@@ -137,7 +137,7 @@ main#Snotificacoes .header button, main#mainNotific .header button {
     width: var(--min-size);
     height: var(--min-size);
 
-    background-image: url(../../assets/icones/pessoa.svg);
+    background-image: url(../../assets/icones/irNotificacao.svg);
     background-size: cover;
     background-color: transparent;
     border: 0;

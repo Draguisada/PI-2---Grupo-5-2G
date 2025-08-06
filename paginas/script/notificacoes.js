@@ -21,7 +21,6 @@ function toggleCriarNotificacao(bool) {
     } else {
         popUp.style.display = 'flex';
     }
-    
 }
 
 function changeStatusTo(element) {    

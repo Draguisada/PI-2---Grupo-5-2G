@@ -14,15 +14,6 @@ const sectionNot = document.getElementById('sec-notificacoes');
 const nomePoste = document.getElementById('nomePoste');
 const descDeTextbox = document.querySelector('#pop-up #descricao');
 
-// @deprecated
-// function dropdownButton(event) {
-//     let pai = event.parentNode;
-//     let conteudo = pai.getElementsByClassName('dropdown-conteudo')[0];
-
-//     // let crioncas = conteudo.childNodes;
-
-//     conteudo.classList.toggle('show-flex');
-// }
 
 function changeStatusTo(element) {    
     element.title = element.value;

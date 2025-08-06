@@ -109,7 +109,7 @@ class Notificacao {
     constructor(descricaoNotificacao='', idNotificacao, data, status = 0, idPoste) {
         this.descricaoNotificacao = descricaoNotificacao;
         this.idNotificacao = idNotificacao;
-        this.data = data;
+        this.data = data; 
         this.status = status;
 
         this.idPoste = idPoste;
@@ -144,24 +144,18 @@ class Notificacao {
                 </div>
 
         </div>`
-
-
-        // let notListened = document.getElementById('notListened');
-
-        // notListened.addEventListener('click', changeDropdown);
-
-
-        // notListened.id = '';
     }
 }
 
 class Empresa {
-    constructor(nome, cod) {
+    constructor(nome, cod, associacoes = []) {
         this.nome = nome;
         this.__cod = cod;
 
         this.__postes = [];
         this.__idPostes;
+
+        this.__associacoes = [];
 
 
         empresas.push(this);
