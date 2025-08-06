@@ -1001,3 +1001,67 @@ body#index{
     & footer img{
     height: 130px;
     }
+
+
+
+
+    /* Footer */
+    /* Estilo do footer */
+.footer {
+  background-color: #1e73be;
+  color: white;
+  padding: 20px 0;
+  margin-top: 50px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.footer-info,
+.footer-copy,
+.footer-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instagram-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.instagram-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Responsivo */
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+  .footer-info,
+  .footer-copy,
+  .footer-center {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .footer-center {
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+  }
+}
