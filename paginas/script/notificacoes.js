@@ -22,10 +22,11 @@ function acharIndiceDeXemY(elemento, pai) {
 function toggleCriarNotificacao(bool) {
     if (!(bool)) {
         popUp.style.display = 'none';
+        descDeTextbox.value = '';
     } else {
         popUp.style.display = 'flex';
         listarArrayEmElement(nomePoste, 'option', empresa_logada.__postes);
-        selecionarTextoCertoDropdowns()
+        nomePoste.selectedIndex = indiceSelecionado-1;
     }
 }
 
@@ -102,9 +103,6 @@ function handleChangePoste(nome) {
     posteSelecionado = parseInt(indiceSelecionado-1);
 };
 
-function selecionarTextoCertoDropdowns() {
-    nomePoste.selectedIndex = indiceSelecionado-1;
-}
 
 function criarNotificacao() {
     let text = descDeTextbox.value;
