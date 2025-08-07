@@ -1,6 +1,10 @@
 const descDeTextbox = document.querySelector('#pop-up #descricao');
 const popUp = document.getElementById('pop-up');
 const sectionNot = document.getElementById('sec-notificacoes');
+const nomePoste = document.getElementById('nomePoste');
+
+let posteSelecionado;
+let indiceSelecionado;
 
 function limparHTMLNot() {
     sectionNot.innerHTML = '';
@@ -20,6 +24,8 @@ function toggleCriarNotificacao(bool) {
         popUp.style.display = 'none';
     } else {
         popUp.style.display = 'flex';
+        listarArrayEmElement(nomePoste, 'option', empresa_logada.__postes);
+        selecionarTextoCertoDropdowns()
     }
 }
 
@@ -91,5 +97,23 @@ function recarregarPagina() {
     carregarTodasNotificacoes(empresa_logada.__postes);
 }
 
+function handleChangePoste(nome) {
+    indiceSelecionado = nome.slice(nome.indexOf('#')+1)
+    posteSelecionado = parseInt(indiceSelecionado-1);
+};
 
-carregarTodasNotificacoes(empresa_logada.__postes)
+function selecionarTextoCertoDropdowns() {
+    nomePoste.selectedIndex = indiceSelecionado-1;
+}
+
+function criarNotificacao() {
+    let text = descDeTextbox.value;
+
+    empresa_logada.__postes[posteSelecionado].novaNotificacao(text);
+    toggleCriarNotificacao(false);
+
+    carregarTodasNotificacoes(empresa_logada.__postes);
+}
+
+handleChangePoste('Poste #1');
+carregarTodasNotificacoes(empresa_logada.__postes);
