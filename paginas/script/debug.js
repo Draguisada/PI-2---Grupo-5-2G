@@ -190,10 +190,19 @@ empresa_logada.__postes[3].adicionarConexcao(empresa_logada.__postes[4])
 
 empresa_logada.__postes[0].adicionarEmpresaAssociadas("LaRa's Corp", 'Internet');
 
-empresa_logada.__postes[0].novaNotificacao('ola mundo');
-empresa_logada.__postes[0].novaNotificacao('ola mundo denovo!', 1);
-empresa_logada.__postes[0].novaNotificacao('ola mundo denovo denovo!');
+empresa_logada.__postes[0].novaNotificacao('Poste caiu devido a chuva intensa', 1);
+empresa_logada.__postes[0].novaNotificacao('Ônibus bateu, derrubando-o', 1);
+empresa_logada.__postes[0].novaNotificacao('Rompimento nos fios de luz por árvore cair neles', 1);
 
-empresa_logada.__postes[3].novaNotificacao('teste no 4');
+empresa_logada.__postes[3].novaNotificacao('Poste desconectado', 2);
 
-empresa_logada.__postes[5].novaNotificacao('Onibus bateu forte, ix...', 2);
+empresa_logada.__postes[5].novaNotificacao('Carro bateu, rompendo alguns fios', 0);
+
+
+
+
+empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 1);empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 1);
+empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 1);empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 1);
+empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 1);empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 1);
+empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 2);empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 2);
+empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 0);empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para mostrar o que acontece se ter muitas notificações.', 0);
