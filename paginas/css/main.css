@@ -1044,6 +1044,7 @@ body#index{
     /* Footer */
     /* Estilo do footer */
 .footer {
+  width: 100%;
   background-color: #1e73be;
   color: white;
   padding: 20px 0;
