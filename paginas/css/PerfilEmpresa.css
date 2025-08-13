@@ -1,10 +1,10 @@
-body {
+body#perfil-empresa {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
+
 
 header {
     position: fixed;
@@ -178,4 +178,5 @@ footer {
 
 .dados strong {
     color: #4f46e5;
+}
 }
