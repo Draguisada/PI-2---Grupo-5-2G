@@ -8,7 +8,7 @@ let selecionados = [];
 let contextMenuWindow;
 
 async function initMap() {
-    const { Map } = await google.maps.importLibrary("maps");
+    const { Map } =     await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
     map = new google.maps.Map(document.getElementById("map"), {
         center: centroDoMapa,
@@ -137,6 +137,24 @@ async function initMap() {
         marker.addEventListener("contextmenu", () => {
             // showContextMenu(marker.position, marker);
         });
+        
+
+        function atualizarVisibilidadeDosMarcadores() {
+            const zoomAtual = map.getZoom();
+            const mostrar = zoomAtual > 10;
+            const marks = document.querySelectorAll('gmp-advanced-marker');
+
+
+            marks.forEach(marker => {
+                marker.style.display = mostrar ? '' : 'none';
+            });
+        }
+
+        atualizarVisibilidadeDosMarcadores();
+
+        // Atualizar visibilidade quando o zoom mudar
+        map.addListener("zoom_changed", atualizarVisibilidadeDosMarcadores);
+
     }
 
     function removerMarkers() {

@@ -1,6 +1,6 @@
 :root {
     /* Padronização */
-    font-family: inter;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -24,13 +24,6 @@
 }
 
 /*import de fontes*/
-
-.inter-<normal> {
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-}
 
 /*-----------------------*/
 
@@ -468,11 +461,12 @@ body:has(main#maps) {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: var(--padding-padrao);
     row-gap: 10px;
 
     & > * {
+        text-align: center;
         width: 44%;
         border: 2px solid #777;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -483,6 +477,21 @@ body:has(main#maps) {
         padding: var(--padding-padrao);
         margin: 0;
     }
+}
+
+.historicoInfo {
+        width: 95%;
+        display: flex;
+        justify-content: center;
+        border: 2px solid #777;
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+
+        border-radius: var(--border-radius-padrao);
+
+        padding: var(--padding-padrao);
+        margin: 0;
+        margin-bottom: 0.8rem;
 }
 
 main#maps {
