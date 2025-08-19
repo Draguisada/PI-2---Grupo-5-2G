@@ -4,8 +4,13 @@
   <meta charset="UTF-8">
   <title>Login Empresa</title>
   <link rel="stylesheet" href="css/main.css">
-
+  <script src="script/objetos.js" defer></script>
+  
+  
+  <script src="script/main.js" defer></script>
+  <script src="script/debug.js" defer></script>
   <script src="script/login.js" defer></script>
+  <script src="script/contas.js" defer></script>
 </head>
 <body id="login">
   <img src="../assets/icones/logo.png" alt="Logo" class="logo">
@@ -18,14 +23,14 @@
         <a class="bigger-button nao-selecionado" onclick="setQuem(1)">Funcionário</a>
       </div>  
       <form>
-        <input type="email" placeholder="E-mail" class="input-texts" required>
-        <input type="password" placeholder="Senha" class="input-texts" required>
-        <input type="password" placeholder="Código único da empresa" class="input-texts" required>
+        <input type="email" placeholder="E-mail" class="input-texts" id="email" required autofocus>
+        <input type="password" placeholder="Senha" class="input-texts" id="senha" required>
+        <!-- <input type="text" placeholder="Código único da empresa" class="input-texts" id="codUnic"  required  > -->
+        <input type="text" placeholder="Código único da empresa" class="input-texts" id="codUnic" >  <!-- Apenas o require muda!! -->
 
-        
+        <button class="bigger-button" id="login-button" >Logar</button>  
       </form>
-      <a href="mapa.html">
-        <button type="submit" class="bigger-button">LOGIN</button></a>
+        
 
     </div>
   </main>

@@ -10,12 +10,7 @@ let postes = [];
 // Banco de dados -> Depende do usuário de entrada
 // Composta por 4 caractéres.
 // const empresa_cod = '0413'; // 0413#1 -> empresa cód 0413 # poste 1
-const empresa_logada = new Empresa("Isada's corp", '0413')
 
-// Debug 
-new Empresa("LaRa's Corp", '1379')
-new Empresa("Sperb's Corp", '4121')
-new Empresa("Veriato's Corp", '0359')
 
 // new Empresa("LaRa's Corp", '1379');new Empresa("LaRa's Corp", '1379');new Empresa("LaRa's Corp", '1379');new Empresa("LaRa's Corp", '1379');
 // new Empresa("Sperb's Corp", '4121');new Empresa("Sperb's Corp", '4121');new Empresa("Sperb's Corp", '4121');new Empresa("Sperb's Corp", '4121');

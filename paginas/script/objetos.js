@@ -147,9 +147,12 @@ class Notificacao {
 }
 
 class Empresa {
-    constructor(nome, cod, associacoes = []) {
+    constructor(nome, cod, email, senha, associacoes = []) {
         this.nome = nome;
         this.__cod = cod;
+
+        this.__senha = senha;
+        this.__email = email;
 
         this.__postes = [];
         this.__idPostes;
