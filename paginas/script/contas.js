@@ -380,8 +380,131 @@ empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para
 }
 
 function larasCorp() {
+    
     empresa_logada = empresas[1];
+    new Poste(42.69513794052411, 23.3207784609221, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.695067545798324, 23.32073688668237, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69501882463248, 23.32053849784517, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.695028188556996, 23.32063806977479, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.695032131261634, 23.320375389541425, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.6949306065373, 23.320365906500513, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69505578748425, 23.320190470243553, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69508535774983, 23.31989125522631, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.695127248935336, 23.31949012259564, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69510852111473, 23.319637109729783, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69514617193187, 23.319297626261246, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69520347584103, 23.319091243109916, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69524049224694, 23.318983266786315, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.695444705860695, 23.31905099256394, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69571221447053, 23.319121415558456, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69591490623889, 23.319132518231477, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.695995057549496, 23.318976950108613, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69606126942363, 23.31902522987088, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.6959985423867, 23.319223713337983, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69608914808639, 23.319233101069536, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.696137238750204, 23.31906479245385, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69524373514648, 23.32080548635867, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69557982691271, 23.320910649109095, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.696014039030736, 23.32101977608347, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69585303938606, 23.320994965650083, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69599933569037, 23.319437782194665, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.695959368986195, 23.319708804897026, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69591156438928, 23.319968640218082, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.695854920980985, 23.320339489062317, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69591110375059, 23.3206663053352, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69625631829344, 23.32095926387299, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69643767886128, 23.32084167416566, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69666930707714, 23.32073736071558, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69581191192736, 23.321211992452454, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69613028050348, 23.321241389879308, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69634063553026, 23.321134370134722, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.696514603457814, 23.321021521947845, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69664089871449, 23.321042523556017, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69686809076104, 23.321103215017875, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69709381119322, 23.32097080686827, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.697288968281, 23.32110072452878, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69747328274515, 23.321367197978486, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.697445192073374, 23.321482891077665, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.697277633416405, 23.32159194604816, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69757606607065, 23.32186763456186, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69764752462153, 23.321500640878455, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.697750030537115, 23.32153193491346, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.6978319307613, 23.321152104886348, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69792268128119, 23.320784305845283, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69800288206036, 23.320421344800664, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69820163682644, 23.31993006182968, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69816233398348, 23.320287321914435, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69814056309717, 23.320634999176416, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.698126764320556, 23.32095552595933, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69805211558041, 23.319610758098346, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69828817308451, 23.319434106174096, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.698386656276945, 23.319128474304563, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69841983763915, 23.318729026014797, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.698220248790804, 23.318672127769283, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+new Poste(42.69813400649733, 23.319141538294613, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
 
+empresa_logada.__postes[0].adicionarConexcao(empresa_logada.__postes[1]) 
+empresa_logada.__postes[1].adicionarConexcao(empresa_logada.__postes[3]) 
+empresa_logada.__postes[2].adicionarConexcao(empresa_logada.__postes[4]) 
+empresa_logada.__postes[2].adicionarConexcao(empresa_logada.__postes[5]) 
+empresa_logada.__postes[3].adicionarConexcao(empresa_logada.__postes[2]) 
+empresa_logada.__postes[4].adicionarConexcao(empresa_logada.__postes[6]) 
+empresa_logada.__postes[6].adicionarConexcao(empresa_logada.__postes[7]) 
+empresa_logada.__postes[7].adicionarConexcao(empresa_logada.__postes[9]) 
+empresa_logada.__postes[8].adicionarConexcao(empresa_logada.__postes[10]) 
+empresa_logada.__postes[9].adicionarConexcao(empresa_logada.__postes[8]) 
+empresa_logada.__postes[10].adicionarConexcao(empresa_logada.__postes[11]) 
+empresa_logada.__postes[11].adicionarConexcao(empresa_logada.__postes[12]) 
+empresa_logada.__postes[12].adicionarConexcao(empresa_logada.__postes[13]) 
+empresa_logada.__postes[13].adicionarConexcao(empresa_logada.__postes[14]) 
+empresa_logada.__postes[14].adicionarConexcao(empresa_logada.__postes[15]) 
+empresa_logada.__postes[15].adicionarConexcao(empresa_logada.__postes[18]) 
+empresa_logada.__postes[15].adicionarConexcao(empresa_logada.__postes[16]) 
+empresa_logada.__postes[16].adicionarConexcao(empresa_logada.__postes[17]) 
+empresa_logada.__postes[17].adicionarConexcao(empresa_logada.__postes[20]) 
+empresa_logada.__postes[18].adicionarConexcao(empresa_logada.__postes[19]) 
+empresa_logada.__postes[21].adicionarConexcao(empresa_logada.__postes[0]) 
+empresa_logada.__postes[22].adicionarConexcao(empresa_logada.__postes[21]) 
+empresa_logada.__postes[23].adicionarConexcao(empresa_logada.__postes[24]) 
+empresa_logada.__postes[23].adicionarConexcao(empresa_logada.__postes[29]) 
+empresa_logada.__postes[24].adicionarConexcao(empresa_logada.__postes[22]) 
+empresa_logada.__postes[26].adicionarConexcao(empresa_logada.__postes[25]) 
+empresa_logada.__postes[27].adicionarConexcao(empresa_logada.__postes[26]) 
+empresa_logada.__postes[28].adicionarConexcao(empresa_logada.__postes[27]) 
+empresa_logada.__postes[29].adicionarConexcao(empresa_logada.__postes[28]) 
+empresa_logada.__postes[30].adicionarConexcao(empresa_logada.__postes[23]) 
+empresa_logada.__postes[31].adicionarConexcao(empresa_logada.__postes[30]) 
+empresa_logada.__postes[32].adicionarConexcao(empresa_logada.__postes[31]) 
+empresa_logada.__postes[34].adicionarConexcao(empresa_logada.__postes[33]) 
+empresa_logada.__postes[35].adicionarConexcao(empresa_logada.__postes[34]) 
+empresa_logada.__postes[36].adicionarConexcao(empresa_logada.__postes[35]) 
+empresa_logada.__postes[37].adicionarConexcao(empresa_logada.__postes[36]) 
+empresa_logada.__postes[38].adicionarConexcao(empresa_logada.__postes[37]) 
+empresa_logada.__postes[39].adicionarConexcao(empresa_logada.__postes[32]) 
+empresa_logada.__postes[39].adicionarConexcao(empresa_logada.__postes[38]) 
+empresa_logada.__postes[40].adicionarConexcao(empresa_logada.__postes[39]) 
+empresa_logada.__postes[41].adicionarConexcao(empresa_logada.__postes[42]) 
+empresa_logada.__postes[41].adicionarConexcao(empresa_logada.__postes[40]) 
+empresa_logada.__postes[41].adicionarConexcao(empresa_logada.__postes[40]) 
+empresa_logada.__postes[42].adicionarConexcao(empresa_logada.__postes[43]) 
+empresa_logada.__postes[44].adicionarConexcao(empresa_logada.__postes[43]) 
+empresa_logada.__postes[45].adicionarConexcao(empresa_logada.__postes[41]) 
+empresa_logada.__postes[45].adicionarConexcao(empresa_logada.__postes[44]) 
+empresa_logada.__postes[46].adicionarConexcao(empresa_logada.__postes[45]) 
+empresa_logada.__postes[47].adicionarConexcao(empresa_logada.__postes[46]) 
+empresa_logada.__postes[48].adicionarConexcao(empresa_logada.__postes[47]) 
+empresa_logada.__postes[49].adicionarConexcao(empresa_logada.__postes[52]) 
+empresa_logada.__postes[49].adicionarConexcao(empresa_logada.__postes[48]) 
+empresa_logada.__postes[50].adicionarConexcao(empresa_logada.__postes[51]) 
+empresa_logada.__postes[51].adicionarConexcao(empresa_logada.__postes[49]) 
+empresa_logada.__postes[52].adicionarConexcao(empresa_logada.__postes[53]) 
+empresa_logada.__postes[53].adicionarConexcao(empresa_logada.__postes[47]) 
+empresa_logada.__postes[54].adicionarConexcao(empresa_logada.__postes[50]) 
+empresa_logada.__postes[55].adicionarConexcao(empresa_logada.__postes[54]) 
+empresa_logada.__postes[56].adicionarConexcao(empresa_logada.__postes[59]) 
+empresa_logada.__postes[57].adicionarConexcao(empresa_logada.__postes[56]) 
+empresa_logada.__postes[58].adicionarConexcao(empresa_logada.__postes[57]) 
+empresa_logada.__postes[59].adicionarConexcao(empresa_logada.__postes[55]) 
 
 }
 
