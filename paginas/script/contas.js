@@ -1,10 +1,10 @@
 let empresa_logada;
 
 // Debug 
-new Empresa("Isada's Corp", '0413', 'i@c.com', '1234')
-new Empresa("LaRa's Corp", '1379', 'l@c.com', '1234')
-new Empresa("Sperb's Corp", '4121', 's@c.com', '1234')
-new Empresa("Veriato's Corp", '0359', 'v@c.com', '1234')
+new Empresa("Isada's Corp", '0413', 'i@c.com', '1234');
+new Empresa("LaRa's Corp", '1379', 'l@c.com', '1234');
+new Empresa("Sperb's Corp", '4121', 's@c.com', '1234');
+new Empresa("Veriato's Corp", '0359', 'v@c.com', '1234');
 
 function isadasCorp() {
 empresa_logada = empresas[0];
@@ -189,7 +189,7 @@ empresa_logada.__postes[1].novaNotificacao('Notificação teste, ultilizada para
 function larasCorp() {
     empresa_logada = empresas[1];
 
-
+new Poste(-27.20041294862781, -52.08717046943353, empresa_logada.nome, 'IFC - Campus concórdia', [], {});
 }
 
 function sperbCorp() {

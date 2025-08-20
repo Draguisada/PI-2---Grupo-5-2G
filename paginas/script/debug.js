@@ -16,7 +16,8 @@ function postesToString() {
     empresa_logada.__postes.forEach((e) => {
         if (e.conexcoes != []){
             e.conexcoes.forEach((p) => {
-            conexcoes += `empresa_logada.__postes[${e._localId}].adicionarConexcao(empresa_logada.__postes[${p._localId}]) \n`;}
+                if (!p) return;
+                conexcoes += `empresa_logada.__postes[${e._localId}].adicionarConexcao(empresa_logada.__postes[${p._localId}]) \n`;}
         )};
 
 

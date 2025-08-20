@@ -105,19 +105,19 @@ async function initMap() {
             
         });
 
-        // @deprecated
         function showContextMenu(position, marker) {
             indicePoste = acharIndicePoste(marker._StringGlobalId);
             
             if (contextMenuWindow && contextMenuWindow.isOpen) {
                 contextMenuWindow.close();
+                const pos = JSON.parse(JSON.stringify(marker.position))
 
-                if (contextMenuWindow.position.lat() == marker.position['YC'] && contextMenuWindow.position.lng() == marker.position['ZC']) return;
+                if (contextMenuWindow.position.lat() == pos['lat'] && contextMenuWindow.position.lng() == pos['lng']) return;
             }
 
             const content = `
                 <div id="contenxt-content">
-                    <button class="bigger-button" onclick="deletarPoste(${indicePoste})">Deletar</button>
+                    <button class="bigger-button" onclick="empresa_logada[${marker._localId}].apoptose()">Deletar</button>
                 </div>
             `;
             
@@ -135,7 +135,7 @@ async function initMap() {
         
         // Ainda não tem uso, mas pode ter
         marker.addEventListener("contextmenu", () => {
-            // showContextMenu(marker.position, marker);
+            showContextMenu(marker.position, marker);
         });
         
 

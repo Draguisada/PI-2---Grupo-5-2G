@@ -77,6 +77,11 @@ class Poste {
         this.notificacoes.push([descricao, ++this.idNotificacao, new Date().toLocaleString(), status, this._localId]) // Status
     }
 
+    apoptose() {
+        // Se deletar
+        console.log('apoptose');
+    }
+
     atualizarPontoMaps() {
         this.obj = {
             lat: this.lat,
