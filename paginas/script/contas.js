@@ -1,6 +1,6 @@
 let empresa_logada;
 
-// Debug 
+// Debug -> cria as empresas para pegar as infos dela. Assim que o back-end for implementado esse arquivo inexistirá.
 new Empresa("Isada's Corp", '0413', 'i@c.com', '1234')
 new Empresa("LaRa's Corp", '1379', 'l@c.com', '1234')
 new Empresa("Sperb's Corp", '4121', 's@c.com', '1234')
@@ -670,6 +670,7 @@ function veriatoCorp() {
 
 }
 
+// Depende da validação, vai entrar em alguma dessas empresas como principal e dá boa
 logarEm = localStorage.getItem('empresa_logada');
 switch (logarEm) {
     case '0':

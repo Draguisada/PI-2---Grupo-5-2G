@@ -5,25 +5,29 @@ let empresas = [];
 
 // Local -> Apenas empresa logada lê
 let idPostes = 0;
-// let postes = [];
-
-// Banco de dados -> Depende do usuário de entrada
-// Composta por 4 caractéres.
 
 // front-end => Variaveis mudáveis
 const statusColor = ['#FF7979', "#7ED957" ,"#598EFF", "#FF0000", "#00BF63", "#0051FF"]
-const centroDoMapa = { lat: -27.200476, lng: -52.082809 }; // Entrada do IF
+// @deprecated vai virar da empresa específico
+const centroDoMapa = { lat: -27.200476, lng: -52.082809 }; // Entrada do IF ->
+
 let map;
 // Status geral
 const typeStatus = ['Desligado', 'Ativo' ,'Em manutenção'];
-const typeStatusmenos1 = {'Desligado': 0, 'Ativo': 1, 'Em manutenção': 2}
+const typeStatusmenos1 = {'Desligado': 0, 'Ativo': 1, 'Em manutenção': 2} // Como se fosse uma função na menos 1, só o contrário da "dict" normal
 // Status da notificação
+// Mesma coisa que o status geral
 const typeNot = ['Ativa', 'Concluida','Manut.'];
 const typeSNotmenos1 = {'Ativa': 0, 'Concluida': 1 ,'Manut.': 2}
 
 
 
 /* !Pega informações globais! */
+// Pega uma lista de algo e transforma em objetos, então a estrutura base é:
+// <objeto onchange ou onclick="listarArrayEmElement(this, 'objeto', array)">
+// this -> o objeto criado para colocar o array dentro, podendo ser uma <ul> com <li> dentro.
+// 'objeto' -> o <li> do <ul>, a <option> do <select>, que as informações do array vão para
+// Array de objetos
 function listarArrayEmElement(elementoPai, element, arraySelecionado) {
     elementoPai.innerHTML = '';
 
@@ -42,6 +46,7 @@ function listarArrayEmElement(elementoPai, element, arraySelecionado) {
     })
 }
 
+// Cria um elemento tantas vezes, mais front-end
 function criarElementosXVezes(elementoPai, element, vezes, tipo = '', clase = '') {
     elementoPai.innerHTML = '';
 

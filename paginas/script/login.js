@@ -27,6 +27,8 @@ function empresa() {
 
 }
 
+
+// Validação
 logar.addEventListener('click', (e) => {
 
     const emailSelecionado = document.getElementById('email').value;

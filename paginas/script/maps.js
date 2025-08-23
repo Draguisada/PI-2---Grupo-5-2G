@@ -4,39 +4,46 @@ const recarregarForcado = document.querySelector('main#maps button#recaregar');
 const selecionarEmpresaOnLoad = document.getElementById('selecionarEmpresa');
 const selecionarServico = document.getElementById('especificarServico');
 
+// Postes selecionados
 let selecionados = [];
+
+// Botão direito do mouse
 let contextMenuWindow;
 
+// Função inicial para o mapa do google maps
 async function initMap() {
+    // Inicializações básicas
     const { Map } =     await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
     map = new google.maps.Map(document.getElementById("map"), {
-        center: centroDoMapa,
+        center: centroDoMapa, // To-do @Draguisada
         zoom: 18,
         mapId: 'posteMapas'
     });
 
-
-    // addAdvancedMarker(centroDoMapa, "teste");
-
+    // Quando clicar no mapa ele vai tentar criar um poste.
     map.addListener("click", (e) => {
+        // Se uma contextMenuWindow estiver aberta, feche-a
         if (contextMenuWindow) contextMenuWindow.close();
         // Se estar no mobile, então não pode criar postes clicando
         if (window.innerWidth <= 425) return;
 
+        // confirmação para a criação do poste
         const confirmacao = confirm("Deseja adicionar um novo marcador aqui?");
         if (confirmacao) {        
             let lat = e.latLng.lat();
             let lng = e.latLng.lng();
+            // Cria o poste, adicionando-o no empresa_logada.__postes, uma lista com todos os postes (ele adiciona dentro o proprio objeto)
             new Poste(lat, lng, empresa_logada.nome, 'IFC - Campus Concórdia');
+            // Atualiza o mapa, "adicionando" o novo poste
             atualizarMapa();
         }
     });
 
-    
+   // Função de adicionar postes usando o objeto "ponto" 
     function addAdvancedMarker(ponto) {
         const infos = ponto.obj;
-
+        // Criando o icone do poste
         glyphColor = statusColor[typeStatusmenos1[ponto.status]]
         glyphBorderColor = statusColor[typeStatusmenos1[ponto.status] + (statusColor.length/2) ] // 
 
@@ -74,9 +81,15 @@ async function initMap() {
 
         ponto.objHtml = marker;
 
+        // Neste poste, quando você clica pode, ou abrir as informações dele
+        // Marcar o poste como selecionado
+        // Marcar o poste para conectar ele a outro poste.
         marker.addListener("click", (event) => {
             if (contextMenuWindow) contextMenuWindow.close();
+            // Se estiver com o CTRL segurado vai adicionar como selecionado
             if (event.domEvent.ctrlKey && action != 0) action = 2;
+
+            // Switch case para mudas as ações dependendo da "ação" action
             switch (action){
             case 0:
                 //Conectar poste
@@ -84,7 +97,7 @@ async function initMap() {
                 break;
             case 1:
                 // Abrir info postes
-                // atualizarMapa();
+                // O normal
                 infoWindow.open(map, marker);
                 break;
             case 2:
@@ -92,6 +105,7 @@ async function initMap() {
                 action = 1;
                 let posteAchado = empresa_logada.__postes[acharIndicePoste(marker._StringGlobalId)];
 
+                // Lógica da seleção de postes
                 if (selecionados.includes(posteAchado)) {
                     selecionados.splice(selecionados.indexOf(posteAchado), 1);
                     marker.classList.remove('poste-selecionado');
@@ -105,6 +119,7 @@ async function initMap() {
             
         });
 
+        // Abrir o botão direito do mapa, tem só o excluir por enquanto
         function showContextMenu(position, marker) {
             indicePoste = acharIndicePoste(marker._StringGlobalId);
             
@@ -131,9 +146,9 @@ async function initMap() {
 
             contextMenuWindow.open(map);
         }
-        // showContextMenu({lat: -100, lng: -100});
         
-        // Ainda não tem uso, mas pode ter
+        
+        // Detectar o botão direito nos marcadores
         marker.addEventListener("contextmenu", () => {
             showContextMenu(marker.position, marker);
         });
@@ -157,6 +172,7 @@ async function initMap() {
 
     }
 
+    // Remover o HTML dos postes, usado para atualizá-los
     function removerMarkers() {
         const marks = document.querySelectorAll('gmp-advanced-marker');
         marks.forEach((e) => {
@@ -164,8 +180,8 @@ async function initMap() {
         })
     }
 
+    // Adicionar o HTML dos postes
     function carregarPostes() {
-
         empresa_logada.__postes.forEach(function(ponto) {
             ponto.atualizarPontoMaps();
             addAdvancedMarker(ponto);
@@ -188,13 +204,14 @@ async function initMap() {
         carregarPostes();
     }
 
+    // Salva vidas :pray:
     recarregarForcado.addEventListener('click', atualizarMapa);
 
+    // Quando tudo carregar certo vai carregar todos os postes
     carregarPostes();
 
     // Ir pela empresa logada e habilitar todas as conexções dos postes dela por front-end
     empresa_logada.__postes.forEach((poste) => {
-        // To-do
         for (i = 0; i<poste.conexcoes.length; i++) {
             desenharLinhaEntre(poste, poste.conexcoes[i]);
         }
@@ -209,6 +226,7 @@ window.initMap = initMap;
 let action = 1;
 let posteSelecionado;
 
+// Função para manusear as ações, dizendo se: quando vc clica ele tá selecionando ou abrindo ou qualquer outra coisa.
 function toggleConnect(element) {
     // Por enquanto action é só -> 1 => conectar postes
                                 // 0 => Criar postes
@@ -224,6 +242,16 @@ function toggleConnect(element) {
     
 }
 
+/* Função de conectar postes, ele usa a variável "posteSelecionado", ele entra o parâmetro o poste que acabou de clicar
+a lógica base é:
+SE tem um poste selecionado:
+    Conectar aquele poste ao poste que você acabou de clicar
+    fim
+Se não:
+    o poste que você acabou de clicar é um posteSelecionado, então no proximo conectará
+
+(Junto disto uns frufru)
+*/
 function conectarPostes(elementHTML) {    
     
     let element = empresa_logada.__postes[acharIndicePoste(elementHTML._StringGlobalId)];
@@ -252,12 +280,15 @@ function conectarPostes(elementHTML) {
 
 }
 
-// Local pro mapa, sla como fica no BD
+
 let Linhas = [];
 
+// Puramente Front-end para representar as conexções dos mapas
 function desenharLinhaEntre(lat1, lng1, lat2, lng2, mostrar = true) {
     let obj1 = lat1;
     let obj2 = lng1;
+    // ele de principio espera lat e lng de ambos postes, mas se enviar só os objetos
+    // Ele irá pegar e definicar pra cada coisa.
     if (typeof(lat1) == 'object') {
         lat1 = obj1.lat;
         lng1 = obj1.lng;
@@ -265,7 +296,7 @@ function desenharLinhaEntre(lat1, lng1, lat2, lng2, mostrar = true) {
         lng2 = obj2.lng;
     }
 
-
+    // Icone da seta
     const setaIcon = {
     icon: {
         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
@@ -286,11 +317,13 @@ function desenharLinhaEntre(lat1, lng1, lat2, lng2, mostrar = true) {
         icons: [setaIcon]
     });
 
+    // Adicionar seta ao mapa.
     setaLine.setMap(map);
     Linhas.push(setaLine);
     
 }
 
+// Mostrar ou Esconder as setas
 function toggleArrow(mostrar) {
     if (!Linhas) return;
     Linhas.forEach((linha) => {
@@ -304,6 +337,7 @@ function toggleArrow(mostrar) {
     });
 }
 
+// esses popups são apenas htmls que aparecerem e somem com um style.display, nada de mais.
 function togglePopUpCriarPoste(bool) {
     if (bool) {
         popUpCriarPoste.style.display = 'flex';
@@ -332,7 +366,9 @@ function togglePopUpAssociadas(bool) {
     }
 }
 
-function criarPoste(e) {
+// Criar um poste com o popUp
+// Ele processa os dados e então envia para os objetos poste (e atualiza o mapa)
+function criarPoste() {
 
     let lat = document.getElementById('PopUpLat').value;
     let lng = document.getElementById('PopUpLng').value;
@@ -362,8 +398,10 @@ function acharIndicePoste(achar) {
     }
 }
 
+
+// Transformar 27°18'36.9"S 52°11'53.7"W em {lat: -27.18369}
 function coordsStringToNumber(coords) {
-    //27°18'36.9"S 52°11'53.7"W
+    
     let rosaVento = {
         'S': -1,
         'W': -1,
@@ -388,11 +426,3 @@ function coordsStringToNumber(coords) {
     return total;
     
 }
-
-
-
-
-
-
-/* On Load */
-

@@ -1,3 +1,5 @@
+// Muitas das funções daqui são iguais a do historico
+
 const descDeTextbox = document.querySelector('#pop-up #descricao');
 const popUp = document.getElementById('pop-up');
 const sectionNot = document.getElementById('sec-notificacoes');
@@ -6,6 +8,7 @@ const nomePoste = document.getElementById('nomePoste');
 let posteSelecionado;
 let indiceSelecionado;
 
+// Limpar os dados das notificações
 function limparHTMLNot() {
     sectionNot.innerHTML = '';
 }
@@ -30,6 +33,9 @@ function toggleCriarNotificacao(bool) {
     }
 }
 
+// Mudar status de alguma notificação
+// Aparentemente eu tava com preguiça e não fiz algo usando a classe notificação
+// Se conseguir fazer por aqui tudo bem, mas se achar melhor colocar no objetos.js eu coloco. @SamuVortmann
 function changeStatusTo(element) {    
     element.title = element.value;
 
@@ -42,6 +48,7 @@ function changeStatusTo(element) {
     notif[3] = typeSNotmenos1[element.value];
 }
 
+// Deletar deletar notificação (apenas html) ??? mds eu tava com mt preguiça, esse nem tem implementação geral ~ Bruno
 function deleteNotificacao(e) {
     // Para mudar no objeto Poste
     let notTotal = e.parentElement.parentElement;
@@ -53,11 +60,13 @@ function deleteNotificacao(e) {
     notTotal.remove();
 }
 
+// Adiciona os objetos Notificações, e atualiza eles antes de colocar no html
 function adicionarNotificacao(notificacao) {
     notificacao.atualizarNotificacao();
     sectionNot.innerHTML = `${notificacao.innerHTML} ${sectionNot.innerHTML}`;
 }
 
+// Pega as notificações e adiciona ela no principal da página
 function carregarTodasNotificacoes(arrayEmpresa) {
     sectionNot.innerHTML = '';
 
@@ -78,6 +87,7 @@ function carregarTodasNotificacoes(arrayEmpresa) {
     selecionarTextoCertoDropdowns()
 }
 
+// Apenas front-end
 function selecionarTextoCertoDropdowns() {
     let dropdowns = document.getElementsByClassName('dropdown');
     for (let i = 0; i < dropdowns.length; i++) {
@@ -103,7 +113,7 @@ function handleChangePoste(nome) {
     posteSelecionado = parseInt(indiceSelecionado-1);
 };
 
-
+// Criar nova notificação usando o objetos.js
 function criarNotificacao() {
     let text = descDeTextbox.value;
 
@@ -113,5 +123,6 @@ function criarNotificacao() {
     carregarTodasNotificacoes(empresa_logada.__postes);
 }
 
+// Valores padrão
 handleChangePoste('Poste #1');
 carregarTodasNotificacoes(empresa_logada.__postes);

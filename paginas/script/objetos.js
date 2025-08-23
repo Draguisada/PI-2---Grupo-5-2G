@@ -23,6 +23,7 @@ class Poste {
         empresa_logada.__postes.push(this);
     }
 
+    // Método para mudar o status do poste, usando o dict "toStatus" para o texto (no main.js tem o dict)
     setStatus(toStatusNum) { // Recebe valor de, 0, 1, 2
         const toStatus = typeStatus[toStatusNum];
         let element = this;
@@ -33,12 +34,13 @@ class Poste {
         // Elemento atual mudar
         this.status = toStatus;
 
-        // SE não ter postes associados.
+        // SE não ter postes conectados.
         if (!(listaConexcoes)) {
             return;
         }
 
-        // Mudar postes associados
+        // Mudar postes conectados
+        // Ele chama esse mesmo métodos nos outros postes.
         for (let i = 0; i<listaConexcoes.length; i++) {
             element = listaConexcoes[i];
             if (element.status == toStatus) {
@@ -53,6 +55,7 @@ class Poste {
 
     }
 
+    // Acho que aqui o BD brilha @SamuVortmann
     adicionarEmpresaAssociadas(empresa, ...servico) {
         this.associadas[empresa] = [servico];
     }
@@ -77,11 +80,13 @@ class Poste {
         this.notificacoes.push([descricao, ++this.idNotificacao, new Date().toLocaleString(), status, this._localId]) // Status
     }
 
+    // Deletar o proprio poste da existência.
     apoptose() {
         // Se deletar
-        console.log('apoptose');
+        empresa_logada.__postes[this._localId] = null;
     }
 
+    // Criar / atualizar o menuzinho no mapa.
     atualizarPontoMaps() {
         this.obj = {
             lat: this.lat,
@@ -109,19 +114,21 @@ class Poste {
 }
 
 
+// Estrutura da notificação
 class Notificacao {
     constructor(descricaoNotificacao='', idNotificacao, data, status = 0, idPoste) {
-        this.descricaoNotificacao = descricaoNotificacao;
-        this.idNotificacao = idNotificacao;
-        this.data = data; 
-        this.status = status;
+        this.descricaoNotificacao = descricaoNotificacao; // - text
+        this.idNotificacao = idNotificacao; // global
+        this.data = data;  // Tempo
+        this.status = status; // é igual do poste, mas tem as nomenclaturas específicas
 
-        this.idPoste = idPoste;
+        this.idPoste = idPoste; // do poste dono, seria um idPoste(fk)
 
         this.atualizarNotificacao();
     }
 
 
+    // Front-end, pegando informações do poste e faz mostrar
     atualizarNotificacao() {
 
         this.innerHTML = `<div class="notificacao">
@@ -151,6 +158,7 @@ class Notificacao {
     }
 }
 
+// por enquanto não faz nada de mais, apenas cria o objeto.
 class Empresa {
     constructor(nome, cod, email, senha, associacoes = []) {
         this.nome = nome;
@@ -163,6 +171,7 @@ class Empresa {
         this.__idPostes;
 
         this.__associacoes = [];
+        this.centroMapa = {}
 
 
         empresas.push(this);
