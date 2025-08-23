@@ -1,12 +1,6 @@
 
 
-// // debug inicio
-// const botoesObj = document.getElementsByClassName('botoes')[0];
-
-// console.log(botoesObj);
-
-// botoesObj.addEventListener('click', changeDropdown);
-// // debug fim
+// Muitas das funções daqui são iguais a da notificação
 let postePrincipal;
 
 const popUp = document.getElementById('pop-up');
@@ -114,6 +108,7 @@ function pegarPoste(poste) { // Objeto poste
 listarArrayEmElement(nomePoste, 'option', empresa_logada.__postes);
 
 
+// Pegar poste pelo localStorage, mas dá pra fazer pelo href
 let postePegado = localStorage.getItem('poste');
 
 if (postePegado == '' || postePegado == null || postePegado == 'null') {
