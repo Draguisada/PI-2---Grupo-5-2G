@@ -8,7 +8,7 @@ let selecionados = [];
 let contextMenuWindow;
 
 async function initMap() {
-    const { Map } = await google.maps.importLibrary("maps");
+    const { Map } =     await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
     map = new google.maps.Map(document.getElementById("map"), {
         center: centroDoMapa,
@@ -105,19 +105,19 @@ async function initMap() {
             
         });
 
-        // @deprecated
         function showContextMenu(position, marker) {
             indicePoste = acharIndicePoste(marker._StringGlobalId);
             
             if (contextMenuWindow && contextMenuWindow.isOpen) {
                 contextMenuWindow.close();
+                const pos = JSON.parse(JSON.stringify(marker.position))
 
-                if (contextMenuWindow.position.lat() == marker.position['YC'] && contextMenuWindow.position.lng() == marker.position['ZC']) return;
+                if (contextMenuWindow.position.lat() == pos['lat'] && contextMenuWindow.position.lng() == pos['lng']) return;
             }
 
             const content = `
                 <div id="contenxt-content">
-                    <button class="bigger-button" onclick="deletarPoste(${indicePoste})">Deletar</button>
+                    <button class="bigger-button" onclick="empresa_logada[${marker._localId}].apoptose()">Deletar</button>
                 </div>
             `;
             
@@ -135,8 +135,26 @@ async function initMap() {
         
         // Ainda não tem uso, mas pode ter
         marker.addEventListener("contextmenu", () => {
-            // showContextMenu(marker.position, marker);
+            showContextMenu(marker.position, marker);
         });
+        
+
+        function atualizarVisibilidadeDosMarcadores() {
+            const zoomAtual = map.getZoom();
+            const mostrar = zoomAtual > 10;
+            const marks = document.querySelectorAll('gmp-advanced-marker');
+
+
+            marks.forEach(marker => {
+                marker.style.display = mostrar ? '' : 'none';
+            });
+        }
+
+        atualizarVisibilidadeDosMarcadores();
+
+        // Atualizar visibilidade quando o zoom mudar
+        map.addListener("zoom_changed", atualizarVisibilidadeDosMarcadores);
+
     }
 
     function removerMarkers() {

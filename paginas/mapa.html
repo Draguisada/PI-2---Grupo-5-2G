@@ -10,6 +10,7 @@
     <script src="script/objetos.js"></script>
     <script src="script/main.js" defer></script>
     <script src="script/debug.js" defer></script>
+    <script src="script/contas.js" defer></script>
     
     <script src="script/maps.js" defer></script>
 </head>
@@ -28,24 +29,24 @@
         </button>
 
         <button class="square-button" id="recaregar" title="Atualizar/Recarregar postes">
-          <img src="../assets/icones/lampada.svg" alt="Atualizar/Recarregar postes">
+          <img src="../assets/icones/lampMapa.png" alt="Atualizar/Recarregar postes">
         </button>
 
         <button class="square-button nao-selecionado" id="connect" onclick="toggleConnect(this)" title="Conectar postes">
-          <img src="../assets/icones/Conectarpostes.svg" alt="Conectar postes">
+          <img src="../assets/icones/redeMapa.png" alt="Conectar postes">
         </button>
 
         <button class="square-button nao-selecionado" id="addAssociadas" onclick="togglePopUpAssociadas(true)" title="Adicionar empresas associadas em postes selecionados.">
-          <img src="../assets/icones/adicionarEmpresa.svg" alt="Adicionar empresas associadas em postes selecionados.">
+          <img src="../assets/icones/empresaMapa.png" alt="Adicionar empresas associadas em postes selecionados.">
         </button>
 
       </aside>
 
       <aside id="right" class="main-header">
-        <a href="PerfilEmpresa.html"><img src="../assets/icones/pessoa.svg" alt="Seu perfil"></a>
+        <a href="PerfilEmpresa.html" class="buttons-right"><img src="../assets/icones/login.png" alt="Seu perfil"></a>
         <a href="">Mapa</a>
-        <a href="notificacoes.html">Notificações</a>
-        <a href="../index.html">Sair</a>
+        <a href="notificacoes.html" class="buttons-right">Notificações</a>
+        <a href="../index.html" class="buttons-right">Sair</a>
       </aside>
 
       <div id="pop-up" class="adicionarPoste"> 

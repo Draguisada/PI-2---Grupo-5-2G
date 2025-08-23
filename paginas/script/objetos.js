@@ -77,6 +77,11 @@ class Poste {
         this.notificacoes.push([descricao, ++this.idNotificacao, new Date().toLocaleString(), status, this._localId]) // Status
     }
 
+    apoptose() {
+        // Se deletar
+        console.log('apoptose');
+    }
+
     atualizarPontoMaps() {
         this.obj = {
             lat: this.lat,
@@ -88,15 +93,14 @@ class Poste {
                     <h2>${this.titulo}</h2>
                     <h3 class="maps-status" title="${this.status}">Status: ${this.status}</h3>
 
-                    <p>Empresa dona: ${this.dona}</p>
-                    <p>Empresas associadas: ${Object.keys(this.associadas)}</p>
+                    <p><strong>Empresa dona:</strong> ${this.dona}</p>
+                    <p><strong>Empresas associadas:</strong> ${Object.keys(this.associadas)}</p>
 
-
-                    <a href="./historico.html" onclick="localStorage.setItem('poste', ${this._localId})" target="_blank">Histórico de notificações</a>
+                    <a href="./historico.html" onclick="localStorage.setItem('poste', ${this._localId})" target="_blank" class="historicoInfo">Histórico de notificações</a>
                     <div class="setStatus">
-                        <p onclick=" empresa_logada.__postes[${this._localId}].setStatus(0); recarregarForcado.click();">set Desativo</p>
-                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1); recarregarForcado.click();">set Ativo</p>
-                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2); recarregarForcado.click();">set Manutenção</p>
+                        <p onclick=" empresa_logada.__postes[${this._localId}].setStatus(0); recarregarForcado.click();">Desativar</p>
+                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1); recarregarForcado.click();">Ativar</p>
+                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2); recarregarForcado.click();">Em Manutenção</p>
                     </div>
                 </div>
             `,
@@ -148,9 +152,12 @@ class Notificacao {
 }
 
 class Empresa {
-    constructor(nome, cod, associacoes = []) {
+    constructor(nome, cod, email, senha, associacoes = []) {
         this.nome = nome;
         this.__cod = cod;
+
+        this.__senha = senha;
+        this.__email = email;
 
         this.__postes = [];
         this.__idPostes;
