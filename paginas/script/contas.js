@@ -1,9 +1,9 @@
 let empresa_logada;
 
 // Debug -> cria as empresas para pegar as infos dela. Assim que o back-end for implementado esse arquivo inexistirá.
-new Empresa("Isada's Corp", '0413', 'i@c.com', '1234')
-new Empresa("LaRa's Corp", '1379', 'l@c.com', '1234')
-new Empresa("Sperb's Corp", '4121', 's@c.com', '1234')
+new Empresa("Isada's Corp", '0413', 'i@c.com', '1234', {lat: -27.200476, lng: -52.082809}, 18)
+new Empresa("LaRa's Corp", '1379', 'l@c.com', '1234', {lat: 42.69671749668624, lng: 23.319675813346773}, 17)
+new Empresa("Sperb's Corp", '4121', 's@c.com', '1234', {lat: -27.446246207225315, lng: -51.859554432192745}, 17)
 new Empresa("Veriato's Corp", '0359', 'v@c.com', '1234')
 
 function isadasCorp() {

@@ -9,7 +9,7 @@ let idPostes = 0;
 // front-end => Variaveis mudáveis
 const statusColor = ['#FF7979', "#7ED957" ,"#598EFF", "#FF0000", "#00BF63", "#0051FF"]
 // @deprecated vai virar da empresa específico
-const centroDoMapa = { lat: -27.200476, lng: -52.082809 }; // Entrada do IF ->
+
 
 let map;
 // Status geral

@@ -160,7 +160,7 @@ class Notificacao {
 
 // por enquanto não faz nada de mais, apenas cria o objeto.
 class Empresa {
-    constructor(nome, cod, email, senha, associacoes = []) {
+    constructor(nome, cod, email, senha, centroMapa = {lat: -15.728489034461877, lng: -54.19223643029647}, zoom = 5) {
         this.nome = nome;
         this.__cod = cod;
 
@@ -170,10 +170,22 @@ class Empresa {
         this.__postes = [];
         this.__idPostes;
 
-        this.__associacoes = [];
-        this.centroMapa = {}
+
+        this.zoom = zoom;
+        this.centroMapa = centroMapa;
 
 
         empresas.push(this);
+    }
+
+    //const centroDoMapa = { lat: -27.200476, lng: -52.082809 }; // Entrada do IF ->
+    mudarCentro(lat, lng, zoom) {
+        mostrarVariaveis(lat,lng, zoom)
+
+        this.centroMapa = {
+            lat,
+            lng,
+        }
+        this.zoom = zoom;
     }
 }

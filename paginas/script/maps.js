@@ -16,10 +16,14 @@ async function initMap() {
     const { Map } =     await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
     map = new google.maps.Map(document.getElementById("map"), {
-        center: centroDoMapa, // To-do @Draguisada
-        zoom: 18,
+        center: empresa_logada.centroMapa,
+        zoom: empresa_logada.zoom,
         mapId: 'posteMapas'
     });
+
+    function irMeio() {
+        map.center = empresa_logada.centroMapa;
+    }
 
     // Quando clicar no mapa ele vai tentar criar um poste.
     map.addListener("click", (e) => {
@@ -156,7 +160,7 @@ async function initMap() {
 
         function atualizarVisibilidadeDosMarcadores() {
             const zoomAtual = map.getZoom();
-            const mostrar = zoomAtual > 10;
+            const mostrar = zoomAtual > 5;
             const marks = document.querySelectorAll('gmp-advanced-marker');
 
 
