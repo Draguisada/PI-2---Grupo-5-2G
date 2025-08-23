@@ -71,12 +71,17 @@ body {
         align-self: center;
     }
 
-    & a {
-        color:black;
-        font-size: 1.5rem;
-        font-weight: bolder;
+    & a {text-decoration: none;
+  font-size: 1.1rem;
+  color: #0056b3; /* azul coerente com o header */
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--padding-padrao);
+  border-radius: 8px;
 
-        margin-top: 1.5svh;
+  
     }
 }
 
