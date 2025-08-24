@@ -897,7 +897,6 @@ body#index{
     }
     & nav ul{
         float: left;
-        margin-left: 65%;
     }
     & nav li{
         font-size: large;
@@ -951,6 +950,8 @@ body#index{
     & .banner img{
         width: 100%;
         height: auto;
+        z-index: -1;
+        position: relative;
     }
 
     & .who{

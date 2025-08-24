@@ -45,3 +45,16 @@ let objs = '';
 
     console.log(objs);
 }
+
+function abrirTodasGuias() {
+    const paginas = ['index', 'cadastroEmpresa', 'cadastroFuncionario', 'historico', 'login', 'mapa', 'notificacoes', 'PerfilEmpresa'];
+    const sufix = '.html';
+    const url = "file:///home/bruno/IFC/Tecnico/2Ano/GitHub/PI-2---Grupo-5-2G/";
+
+    paginas.forEach((pag) => {
+        let prefix = '';
+        if (pag != 'index') prefix = 'paginas/';
+
+        window.open(`${url}${prefix}${pag}${sufix}`, '_blank');
+    });
+}
