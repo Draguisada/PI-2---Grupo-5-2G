@@ -2,7 +2,7 @@ const popUpCriarPoste = document.querySelector('#pop-up.adicionarPoste');
 const popUpAdicionarAssociadas = document.querySelector('#pop-up.adicionarAssociadas');
 const recarregarForcado = document.querySelector('main#maps button#recaregar');
 const selecionarEmpresaOnLoad = document.getElementById('selecionarEmpresa');
-const selecionarServico = document.getElementById('especificarServico');
+const especificarServico = document.getElementById('especificarServico');
 
 // Postes selecionados
 let selecionados = [];
@@ -341,6 +341,34 @@ function toggleArrow(mostrar) {
     });
 }
 
+// Adicionar empresas associadas.
+function adicionarEmpresaAssociadas(event) {
+    let adicionarServico = [];
+    let adicionarEmpresa = [];
+    
+    for (let i = 0; i < especificarServico.childElementCount; i++) {
+        let valor = especificarServico.childNodes[i].value;
+        if (!valor) continue;
+        console.log('adicionado empresa ' + empresas[i].nome);
+        // ID da empresa => Serviço
+        adicionarServico.push(valor);
+        adicionarEmpresa.push(empresas[i]);
+    }
+
+    // Passa por todo poste e adiciona a empresa associada
+    selecionados.forEach((e) => {
+        for (let i = 0; i<adicionarServico.length; i++){
+            e.adicionarEmpresaAssociadas(adicionarEmpresa[i].nome, ...adicionarServico[i]);
+        }
+    })
+
+    for (let i = 0; i < especificarServico.childElementCount; i++) {
+        especificarServico.childNodes[i].value = '';
+    }
+    recarregarForcado.click();
+    togglePopUpAssociadas(false);
+}
+
 // esses popups são apenas htmls que aparecerem e somem com um style.display, nada de mais.
 function togglePopUpCriarPoste(bool) {
     if (bool) {
@@ -362,7 +390,7 @@ function togglePopUpAssociadas(bool) {
 
         popUpAdicionarAssociadas.style.display = 'flex';
         listarArrayEmElement(selecionarEmpresaOnLoad, 'p', empresas);
-        criarElementosXVezes(selecionarServico, 'input', selecionarEmpresaOnLoad.childElementCount, 'text', 'servicoTextInput');
+        criarElementosXVezes(especificarServico, 'input', selecionarEmpresaOnLoad.childElementCount, 'text', 'servicoTextInput');
         
         togglePopUpCriarPoste(false);
     } else {
