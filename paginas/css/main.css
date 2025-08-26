@@ -37,10 +37,11 @@ body {
     margin-left: 3svh;
     margin-right: 3svh;
 
-    background-color: #f1f1f1;
+    background-color: #ffffff;
 }
 
 .main-header {
+
     width: 12%;
     min-width: fit-content;
     height: 100svh;
@@ -59,32 +60,33 @@ body {
     justify-content: flex-start;
     gap: 2svh;
 
-    background: #fff;
+    background: #f7f7f7;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);}
 
     & img {
+        margin-top: 10px;
         width: 60px;
         height: 60px;
         min-width: var(--min-size);
         min-height: var(--min-size);
-        border-radius: 50%;
+        border-radius: 0%;
         object-fit: cover;
-
-        border: 2px solid #ddd;
-        background: #f9f9f9;
     }
 
-    HEAD & a {
+     & a {
         text-decoration: none;
         font-size: 1.1rem;
-        color: #0056b3;
-        /* azul coerente com o header */
+        color: #0ea5e9;
         font-weight: 500;
         display: flex;
         align-items: center;
         gap: 8px;
         padding: var(--padding-padrao);
         border-radius: 8px;
+        
+        width: 160px;
+        height: 30px;
+        
 
 
         & a {
@@ -1386,6 +1388,6 @@ body {
         }
 
         & .dados strong {
-            color: #4f46e5;
+            color: #f4b400;
         }
     }
