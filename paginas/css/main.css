@@ -93,8 +93,9 @@ body {
         min-width: fit-content;
 
         &:hover {
-            background-color: whitesmoke;
+            
             color: var(--corAzulPadrao);
+            background-color: color-mix(in srgb, var(--corAzulPadrao) 60%, whitesmoke 40%);
         }
 
         &:active {
@@ -103,6 +104,11 @@ body {
     }
 }
 
+
+#maps .buttons-right {
+    justify-content: center;
+    display: flex;
+}
 
 main {
     width: 85%;
