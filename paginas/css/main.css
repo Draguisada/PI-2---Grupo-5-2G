@@ -102,6 +102,22 @@ body {
             transform: scale(0.97);
         }
     }
+
+    & p {
+        
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-radius: 8px;
+        text-decoration: none;
+        width: 60%;
+        min-width: fit-content;
+        margin: 0;
+        
+        /*esses*/
+        background: var(--corQuaseBranco);
+        transition: background-color 0.2s ease, color 0.s ease;
+        color: #777;
+    }
 }
 
 
@@ -1431,3 +1447,8 @@ body#perfil-empresa {
 }
 }
 
+
+.square-button:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    transform: translateY(-2px); /* levanta o botão */
+}
