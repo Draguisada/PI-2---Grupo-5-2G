@@ -42,17 +42,26 @@
         </button>
 
         <button class="square-button nao-selecionado" id="addAssociadas" onclick="empresa_logada.mudarCentro(map.center.lat(), map.center.lng(), map.getZoom())" title="Centralizar o mapa nesta conta.">
-          <img src="../assets/icones/insta_w.png" alt="Centralizar o mapa nesta conta">
+          <img src="../assets/icones/centalizar_mapa.svg" alt="Centralizar o mapa nesta conta">
         </button>
 
       </aside>
 
-      <aside id="right" class="main-header">
-        <a href="PerfilEmpresa.html" class="buttons-right"><img src="../assets/icones/login.png" alt="Seu perfil"></a>
-        <a href=""  class="buttons-right">Mapa</a>
-        <a href="notificacoes.html" class="buttons-right">Notificações</a>
-        <a href="../index.html" class="buttons-right">Sair</a>
-      </aside>
+      <!-- Header principal -->
+    <aside class="main-header">
+        <img src="../assets/icones/login.png" alt="Seu perfil" id="iconeEmpresa">
+        <div id="perfilEmpresa" style="display: none;">
+            <p><strong>{Nome da Empresa}</strong> </p>
+            <p><strong>CNPJ:</strong> 00.000.000/0000-00</p>
+            <p><strong>Telefone:</strong> (11) 91234-5678</p>
+        </div>
+        <!-- <h1>Histórico</h1> -->
+        <a href="notificacoes.html">Notificações</a>
+        <a href="mapa.html">Mapa</a>
+        <a href="../index.html">Sair</a>
+
+        </select>
+    </aside>
 
       <div id="pop-up" class="adicionarPoste"> 
         <h2 onclick="togglePopUpCriarPoste(false)">x</h2>

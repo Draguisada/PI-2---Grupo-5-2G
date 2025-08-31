@@ -20,6 +20,15 @@ const typeStatusmenos1 = {'Desligado': 0, 'Ativo': 1, 'Em manutenção': 2} // C
 const typeNot = ['Ativa', 'Concluida','Manut.'];
 const typeSNotmenos1 = {'Ativa': 0, 'Concluida': 1 ,'Manut.': 2}
 
+// Código para mostrar as informações da empresa
+const perfilEmpresa = document.getElementById('perfilEmpresa');
+document.getElementById('iconeEmpresa').addEventListener('click', (e) => {
+    if (perfilEmpresa.style.display == 'none') {
+        perfilEmpresa.style.display = 'block';
+    } else {
+        perfilEmpresa.style.display = 'none';
+    }
+});
 
 
 /* !Pega informações globais! */
