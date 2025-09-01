@@ -29,26 +29,47 @@ function empresa() {
 
 
 // Validação
-logar.addEventListener('click', (e) => {
-
-    const emailSelecionado = document.getElementById('email').value;
-    if (emailSelecionado.search('@') == -1) {
+logar.addEventListener('click', async (e) => {
+    // Debug
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    if (email.search('@') == -1) {
         e.preventDefault();
     }
-    const senhaSelecionado = document.getElementById('senha').value;
-    const codUnicSelecionado = document.getElementById('codUnic').value;
+    
+    const senha = document.getElementById('senha').value;
 
-    for (let i = 0; i < empresas.length; i++){
-        let empresa = empresas[i];
-        if (empresa.__email == emailSelecionado && empresa.__senha == senhaSelecionado /* && empresa.__cod == codUnicSelecionado*/) {
-            localStorage.setItem('empresa_logada', i);
-            e.preventDefault();
-            // window.location.replace('mapa.html');
-            window.location.href = 'mapa.html'; 
+    console.log(JSON.stringify({
+        email,
+        senha,
+    }));
+
+    const response = await fetch('http://localhost:3001/loginEmpresas', {
+        method: "POST",
+        body: JSON.stringify({
+            email,
+            senha,
+        })
+    })
+    console.log(response);
+
+    const data = await response.json();
+
+    console.log(data);
+
+
+    // for (let i = 0; i < empresas.length; i++){
+    //     let empresa = empresas[i];
+    //     if (empresa.__email == email && empresa.__senha == senha /* && empresa.__cod == codUnicSelecionado*/) {
+    //         localStorage.setItem('empresa_logada', i);
+    //         e.preventDefault();
+    //         // window.location.replace('mapa.html');
+    //         window.location.href = 'mapa.html'; 
             
-            return;
-        };
-    }
+    //         return;
+    //     };
+    // }
 
     
 })
