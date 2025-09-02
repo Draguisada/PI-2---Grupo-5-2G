@@ -215,7 +215,6 @@ async function initMap() {
                 }
             }
             
-
             new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), nome_empresa_dona, [], {}, ponto.status, ponto.id, ponto.id_empresa_dona)    
         });
         atualizarMapa();

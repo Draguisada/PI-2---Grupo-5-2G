@@ -77,6 +77,17 @@ function selecionarTextoCertoDropdowns() {
     };
 }
 
+function selecionarTextoCertoDropdownsTitulo(id_poste) {
+    let dropdowns = nomePoste;
+    for (let i = 0; i < dropdowns.length; i++) {
+        if (dropdowns[i].obj.bd_id == id_poste) {
+            nomePoste.selectedIndex = i;
+            break;
+        }
+
+    };
+}
+
 function acharPostePeloID(idTotal) {
     indices = idTotal.innerText.split('#')[1].split('-');
     //o indice[0] é o indice do poste, e o indice[1] é o indice da notificação dentro do poste.
@@ -135,7 +146,7 @@ async function carregarPostesDoBD() {
 }
 
 async function carregarNotificacoesDoBD(id_poste) {
-    const response = await fetch('http://localhost:3001/postes/notificacoes', {
+    const response = await fetch('http://localhost:3001/empresa/postes', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -153,9 +164,11 @@ async function carregarNotificacoesDoBD(id_poste) {
         sectionNot.innerHTML += temp.innerHTML;
     });
 
+    selecionarTextoCertoDropdowns();
+    selecionarTextoCertoDropdownsTitulo(id_poste);
+
 }
 
 
 
 carregarPostesDoBD();
-
