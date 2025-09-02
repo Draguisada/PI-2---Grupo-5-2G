@@ -124,5 +124,38 @@ function criarNotificacao() {
 }
 
 // Valores padrão
+
+
+
+
+
+// BD
+
+async function carregarPostesDoBD() {
+    const response = await fetch('http://localhost:3001/postes', {
+        method: "GET",
+    });
+
+    const postes = await response.json();
+
+    postes.forEach(function(ponto) {
+        new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), empresa_logada.db_id, [], {}, ponto.status, ponto.id)    
+    });
+    carregarTodasNotificacoes(empresa_logada.__postes);
+}
+
+async function carregarNotificacoesDoBD() {
+    const response = await fetch('http://localhost:3001/notificacoes/:id_empresa', {
+        method: "GET",
+    });
+
+    const postes = await response.json();
+
+    postes.forEach(function(ponto) {
+        new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), empresa_logada.db_id, [], {}, ponto.status, ponto.id)    
+    });
+    carregarTodasNotificacoes(empresa_logada.__postes);
+}
+
+carregarPostesDoBD();
 handleChangePoste('Poste #1');
-carregarTodasNotificacoes(empresa_logada.__postes);

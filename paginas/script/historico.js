@@ -91,7 +91,7 @@ function handleChangePoste(nome) {
     pegarPoste(empresa_logada.__postes[idOf]);
 }
 
-function pegarPoste(poste) { // Objeto poste
+async function pegarPoste(poste) { // Objeto poste
     postePrincipal = poste;
     limparHTMLNot();
     nomePoste.value = poste.titulo;
@@ -105,15 +105,30 @@ function pegarPoste(poste) { // Objeto poste
     selecionarTextoCertoDropdowns()
 }
 
-listarArrayEmElement(nomePoste, 'option', empresa_logada.__postes);
+// BD
+
+async function carregarPostesDoBD() {
+    const response = await fetch('http://localhost:3001/postes', {
+        method: "GET",
+    });
+
+    const postes = await response.json();
+
+    postes.forEach(function(ponto) {
+        new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), empresa_logada.db_id, [], {}, ponto.status, ponto.id)    
+    });
+    
+    // Pegar poste pelo localStorage, mas dá pra fazer pelo href
+    let postePegado = localStorage.getItem('poste');
+
+    if (postePegado == '' || postePegado == null || postePegado == 'null') {
+        pegarPoste(empresa_logada.__postes[0])
+    } else {
+        pegarPoste(empresa_logada.__postes[parseInt(postePegado)])
+    };
+    localStorage.setItem('poste', '');
+}
 
 
-// Pegar poste pelo localStorage, mas dá pra fazer pelo href
-let postePegado = localStorage.getItem('poste');
+carregarPostesDoBD();
 
-if (postePegado == '' || postePegado == null || postePegado == 'null') {
-    pegarPoste(empresa_logada.__postes[0])
-} else {
-    pegarPoste(empresa_logada.__postes[parseInt(postePegado)])
-};
-localStorage.setItem('poste', '');
