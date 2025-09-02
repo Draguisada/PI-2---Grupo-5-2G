@@ -102,11 +102,10 @@ async function pegarPoste(poste) { // Objeto poste
         }
     });
 
-    selecionarTextoCertoDropdowns()
+    selecionarTextoCertoDropdowns();
 }
 
 // BD
-
 async function carregarPostesDoBD() {
     const response = await fetch('http://localhost:3001/postes', {
         method: "GET",
@@ -118,6 +117,8 @@ async function carregarPostesDoBD() {
         new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), empresa_logada.db_id, [], {}, ponto.status, ponto.id)    
     });
     
+    listarArrayEmElement(nomePoste, 'option',empresa_logada.__postes)
+
     // Pegar poste pelo localStorage, mas dá pra fazer pelo href
     let postePegado = localStorage.getItem('poste');
 
