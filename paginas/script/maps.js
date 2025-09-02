@@ -194,14 +194,29 @@ async function initMap() {
     }
 
     async function carregarPostesDoBD() {
-        const response = await fetch('http://localhost:3001/postes', {
+        const postesRq = await fetch('http://localhost:3001/postes', {
+            method: "GET",
+        })
+        
+        const nomeEmpresasRq = await fetch('http://localhost:3001/nomeEmpresas', {
             method: "GET",
         })
 
-        const postes = await response.json();
+        const postes = await postesRq.json();
+        const nomeId = await nomeEmpresasRq.json();
 
         postes.forEach(function(ponto) {
-            new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), empresa_logada.db_id, [], {}, ponto.status, ponto.id)    
+            empresa_dona = ponto.id_empresa_dona;
+            let nome_empresa_dona = '';
+            for (let i = 0; i < nomeId.length; i++) {
+                if (nomeId[i].id == empresa_dona) {
+                    nome_empresa_dona = nomeId[i].nome;
+                    break;
+                }
+            }
+            
+
+            new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), nome_empresa_dona, [], {}, ponto.status, ponto.id, ponto.id_empresa_dona)    
         });
         atualizarMapa();
     }

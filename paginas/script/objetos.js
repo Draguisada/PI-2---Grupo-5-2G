@@ -1,5 +1,5 @@
 class Poste {
-    constructor(coord_lat, coord_lng, empresa_dona, conexcoes = [], empresas_associadas = {}, status = 1, bd_id) {
+    constructor(coord_lat, coord_lng, empresa_dona, conexcoes = [], empresas_associadas = {}, status = 1, bd_id, id_empresa_dona) {
         this.titulo = 'Poste #'+ ++idPostes;
         this._globalId = globalIdPostes;
         this._localId = idPostes-1;
@@ -10,6 +10,7 @@ class Poste {
         // this.regiao = regiao; // Str
 
         this.dona = empresa_dona; // Str
+        this.id_empresa_dona = id_empresa_dona; // Str
         this.associadas = empresas_associadas; // Objeto {empresa: serviço: array}
         this.status = typeStatus[status]; // Apenas -> 1: Ativo ; 0: Desligado ; 2: Em manutenção;
         this.bd_id = bd_id;
@@ -93,28 +94,52 @@ class Poste {
 
     // Criar / atualizar o menuzinho no mapa.
     atualizarPontoMaps() {
-        this.obj = {
-            lat: this.lat,
-            lng: this.lng,
-            title: this.titulo,
-            
-            content: `
-                <div class="maps-content">
-                    <h2>${this.titulo}</h2>
-                    <h3 class="maps-status" title="${this.status}">Status: ${this.status}</h3>
+        if (this.id_empresa_dona == localStorage.getItem('id_empresa_logada')) {
+                this.obj = {
+                lat: this.lat,
+                lng: this.lng,
+                title: this.titulo,
+                
+                content: `
+                    <div class="maps-content">
+                        <h2>${this.titulo}</h2>
+                        <h3 class="maps-status" title="${this.status}">Status: ${this.status}</h3>
 
-                    <p><strong>Empresa dona:</strong> ${this.dona}</p>
-                    <p><strong>Empresas associadas:</strong> ${Object.keys(this.associadas)}</p>
+                        <p><strong>Empresa dona:</strong> ${this.dona}</p>
+                        <p><strong>Empresas associadas:</strong> ${Object.keys(this.associadas)}</p>
 
-                    <a href="./historico.html" onclick="localStorage.setItem('poste', ${this._localId})" target="_blank" class="historicoInfo">Histórico de notificações</a>
-                    <div class="setStatus">
-                        <p onclick=" empresa_logada.__postes[${this._localId}].setStatus(0); recarregarForcado.click();">Desativar</p>
-                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1); recarregarForcado.click();">Ativar</p>
-                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2); recarregarForcado.click();">Em Manutenção</p>
+                        <a href="./historico.html" onclick="localStorage.setItem('poste', ${this._localId})" target="_blank" class="historicoInfo">Histórico de notificações</a>
+                        <div class="setStatus">
+                            <p onclick=" empresa_logada.__postes[${this._localId}].setStatus(0); recarregarForcado.click();">Desativar</p>
+                            <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1); recarregarForcado.click();">Ativar</p>
+                            <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2); recarregarForcado.click();">Em Manutenção</p>
+                        </div>
                     </div>
-                </div>
-            `,
-        };
+                `,
+            };
+        } else {
+                            this.obj = {
+                lat: this.lat,
+                lng: this.lng,
+                title: this.titulo,
+                
+                content: `
+                    <div class="maps-content">
+                        <h2>${this.titulo}</h2>
+                        <h3 class="maps-status" title="${this.status}">Status: ${this.status}</h3>
+
+                        <p><strong>Empresa dona:</strong> ${this.dona}</p>
+                        <p><strong>Empresas associadas:</strong> ${Object.keys(this.associadas)}</p>
+
+                        <div class="setStatus">
+                            <p onclick=" empresa_logada.__postes[${this._localId}].setStatus(0); recarregarForcado.click();">Desativar</p>
+                            <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1); recarregarForcado.click();">Ativar</p>
+                            <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2); recarregarForcado.click();">Em Manutenção</p>
+                        </div>
+                    </div>
+                `,
+            };
+        }
     }
 }
 
