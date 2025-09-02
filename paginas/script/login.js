@@ -52,12 +52,18 @@ logar.addEventListener('click', async (e) => {
             senha,
         })
     })
-    console.log(response);
 
     const data = await response.json();
 
-    console.log(data);
+    if (!data.empresa) return;
 
+    localStorage.clear();
+    let id = data.empresa.id;
+    let strang = JSON.stringify(data)
+    localStorage.setItem('empresa', strang);
+    localStorage.setItem('id_empresa_logada', id);
+
+    window.location.href = 'mapa.html';
 
     // for (let i = 0; i < empresas.length; i++){
     //     let empresa = empresas[i];

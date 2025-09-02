@@ -1,5 +1,5 @@
 class Poste {
-    constructor(coord_lat, coord_lng, empresa_dona, regiao, conexcoes = [], empresas_associadas = {}, status = 1) {
+    constructor(coord_lat, coord_lng, empresa_dona, conexcoes = [], empresas_associadas = {}, status = 1, bd_id) {
         this.titulo = 'Poste #'+ ++idPostes;
         this._globalId = globalIdPostes;
         this._localId = idPostes-1;
@@ -7,11 +7,12 @@ class Poste {
 
         this.lat = coord_lat;
         this.lng = coord_lng;
-        this.regiao = regiao; // Str
+        // this.regiao = regiao; // Str
 
         this.dona = empresa_dona; // Str
         this.associadas = empresas_associadas; // Objeto {empresa: serviço: array}
         this.status = typeStatus[status]; // Apenas -> 1: Ativo ; 0: Desligado ; 2: Em manutenção;
+        this.bd_id = bd_id;
 
         this.conexcoes = conexcoes; // Lista objetos de outros postes => Ou null
         // Conexões vai servir como apenas ir, nunca voltar (se ter um loop vai dar problema)
@@ -160,11 +161,13 @@ class Notificacao {
 
 // por enquanto não faz nada de mais, apenas cria o objeto.
 class Empresa {
-    constructor(nome, cod, email, senha, centroMapa = {lat: -15.728489034461877, lng: -54.19223643029647}, zoom = 5) {
+    constructor(nome, codigo, email, centro_lat, centro_lng, zoom = 5, cnpj, id) {
         this.nome = nome;
-        this.__cod = cod;
+        this.__cod = codigo;
 
-        this.__senha = senha;
+        this.db_id = id;
+
+        // this.__senha = senha;
         this.__email = email;
 
         this.__postes = [];
@@ -172,7 +175,7 @@ class Empresa {
 
 
         this.zoom = zoom;
-        this.centroMapa = centroMapa;
+        this.centroMapa = {lat: centro_lat, lng: centro_lng};
 
 
         empresas.push(this);

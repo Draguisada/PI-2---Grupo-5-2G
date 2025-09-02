@@ -7,6 +7,7 @@ const especificarServico = document.getElementById('especificarServico');
 // Postes selecionados
 let selecionados = [];
 
+
 // Botão direito do mouse
 let contextMenuWindow;
 
@@ -38,7 +39,7 @@ async function initMap() {
             let lat = e.latLng.lat();
             let lng = e.latLng.lng();
             // Cria o poste, adicionando-o no empresa_logada.__postes, uma lista com todos os postes (ele adiciona dentro o proprio objeto)
-            new Poste(lat, lng, empresa_logada.nome, 'IFC - Campus Concórdia');
+            new Poste(lat, lng, empresa_logada.nome);
             // Atualiza o mapa, "adicionando" o novo poste
             atualizarMapa();
         }
@@ -191,6 +192,25 @@ async function initMap() {
             addAdvancedMarker(ponto);
     });
     }
+
+    async function carregarPostesDoBD() {
+        const response = await fetch('http://localhost:3001/postes', {
+            method: "GET",
+        })
+
+        const postes = await response.json();
+
+        postes.forEach(function(ponto) {
+            new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), empresa_logada.db_id, [], {}, ponto.status, ponto.id)    
+        });
+        atualizarMapa();
+    }
+    carregarPostesDoBD();
+    
+
+        
+
+
 
     function removerInfoWindow() {
         let infos = document.getElementsByClassName('gm-style-iw-a');
@@ -410,7 +430,7 @@ function criarPoste() {
     if (lat.includes('°')) lat = coordsStringToNumber(lat)
     if (lng.includes('°')) lng = coordsStringToNumber(lng)
     
-    new Poste(parseFloat(lat), parseFloat(lng), empresa_logada.nome, 'IFC - Campus concórdia', [], {});
+    new Poste(parseFloat(lat), parseFloat(lng), empresa_logada.nome, [], {});
     togglePopUpCriarPoste(false);
     recarregarForcado.click();
     
@@ -458,3 +478,4 @@ function coordsStringToNumber(coords) {
     return total;
     
 }
+
