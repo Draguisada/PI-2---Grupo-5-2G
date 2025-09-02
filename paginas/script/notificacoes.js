@@ -74,7 +74,7 @@ function carregarTodasNotificacoes(arrayEmpresa) {
         if (arrayEmpresa[i].notificacoes.length >= 1){
             arrayEmpresa[i].notificacoes.forEach((infos) => {
                 if (infos){
-                    adicionarNotificacao(new Notificacao(...infos))
+                    adicionarNotificacao(infos);
                 }
             });
 
@@ -133,8 +133,14 @@ function criarNotificacao() {
 
 async function carregarPostesDoBD() {
     const response = await fetch('http://localhost:3001/postes', {
-        method: "GET",
-    });
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id_empresa: localStorage.id_empresa_logada,
+        })
+    })
 
     const postes = await response.json();
 
@@ -145,17 +151,25 @@ async function carregarPostesDoBD() {
 }
 
 async function carregarNotificacoesDoBD() {
-    const response = await fetch('http://localhost:3001/notificacoes/:id_empresa', {
-        method: "GET",
-    });
+    const response = await fetch('http://localhost:3001/notificacoes', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id_empresa: localStorage.id_empresa_logada,
+        })
+    })
 
-    const postes = await response.json();
+    const notificacoes = await response.json();
+    console.log(notificacoes);
 
-    postes.forEach(function(ponto) {
-        new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), empresa_logada.db_id, [], {}, ponto.status, ponto.id)    
+    notificacoes.forEach(function(ponto) {
+        new Notificacao(ponto.descricao, ponto.id, ponto.data, ponto.status, ponto.id_poste_associado)    
     });
     carregarTodasNotificacoes(empresa_logada.__postes);
 }
 
 carregarPostesDoBD();
+carregarNotificacoesDoBD();
 handleChangePoste('Poste #1');

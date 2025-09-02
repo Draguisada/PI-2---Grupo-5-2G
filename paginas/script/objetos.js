@@ -81,6 +81,10 @@ class Poste {
         this.notificacoes.push([descricao, ++this.idNotificacao, new Date().toLocaleString(), status, this._localId]) // Status
     }
 
+    adicionarNotificacao(notificacao) {
+        this.notificacoes.push(notificacao)
+    }
+
     // Deletar o proprio poste da existência.
     apoptose() {
         // Se deletar
@@ -126,6 +130,13 @@ class Notificacao {
         this.idPoste = idPoste; // do poste dono, seria um idPoste(fk)
 
         this.atualizarNotificacao();
+
+        for (let i = 0; i< empresa_logada.__postes.length; i++) {
+            if (empresa_logada.__postes[i].bd_id == idPoste) {
+                empresa_logada.__postes[i].adicionarNotificacao(this);
+                break;
+            }
+        }
     }
 
 

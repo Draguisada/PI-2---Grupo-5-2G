@@ -87,10 +87,11 @@ function acharPostePeloID(idTotal) {
 // 1° parte é a página, agora é a integração com o resto
 // Como é só pra ver os postes da empresa logada, utilizaria um idLocal pra pegar da lista de postes (da empresa logada)
 function handleChangePoste(nome) {
-    let idOf = parseInt(nome.slice(nome.indexOf('#')+1)-1);
-    pegarPoste(empresa_logada.__postes[idOf]);
+    let idOf = empresa_logada.__postes[parseInt(nome.slice(nome.indexOf('#')+1)-1)].bd_id;
+    carregarNotificacoesDoBD(idOf)
 }
 
+// @deprecated
 async function pegarPoste(poste) { // Objeto poste
     postePrincipal = poste;
     limparHTMLNot();
@@ -108,27 +109,52 @@ async function pegarPoste(poste) { // Objeto poste
 // BD
 async function carregarPostesDoBD() {
     const response = await fetch('http://localhost:3001/postes', {
-        method: "GET",
-    });
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id_empresa: localStorage.id_empresa_logada,
+        })
+    })
 
     const postes = await response.json();
 
     postes.forEach(function(ponto) {
         new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), empresa_logada.db_id, [], {}, ponto.status, ponto.id)    
     });
-    
-    listarArrayEmElement(nomePoste, 'option',empresa_logada.__postes)
 
-    // Pegar poste pelo localStorage, mas dá pra fazer pelo href
+    listarArrayEmElement(nomePoste, 'option', empresa_logada.__postes);
+
     let postePegado = localStorage.getItem('poste');
-
     if (postePegado == '' || postePegado == null || postePegado == 'null') {
-        pegarPoste(empresa_logada.__postes[0])
+        carregarNotificacoesDoBD(1)
     } else {
-        pegarPoste(empresa_logada.__postes[parseInt(postePegado)])
+        carregarNotificacoesDoBD(postePegado)
     };
-    localStorage.setItem('poste', '');
 }
+
+async function carregarNotificacoesDoBD(id_poste) {
+    const response = await fetch('http://localhost:3001/postes/notificacoes', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id_poste,
+        })
+    })
+
+    const notificacoes = await response.json();
+
+    sectionNot.innerHTML = '';
+    notificacoes.forEach(function(ponto) {
+        let temp = new Notificacao(ponto.descricao, ponto.id, ponto.data, ponto.status, ponto.id_poste_associado)    
+        sectionNot.innerHTML += temp.innerHTML;
+    });
+
+}
+
 
 
 carregarPostesDoBD();
