@@ -39,7 +39,7 @@ let objs = '';
     empresa_logada.__postes.forEach((e) => {
 
 
-        objs += `INSERT INTO poste (id, coord_lat, coord_lng, empresa_dona, regiao, status, conexcoes) VALUES (${e._globalId}, ${e.lat}, ${e.lng}, ${localStorage.getItem('empresa_logada')}, ${e.regiao}, ${e.status}, {});\n`;
+        objs += `INSERT INTO postes (lat, lng, id_empresa_dona, status) VALUES (${e.lat}, ${e.lng}, 3, 1);\n`;
 
     });
 

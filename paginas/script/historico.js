@@ -32,8 +32,8 @@ function deleteNotificacao(e) {
     notTotal.remove();
 }
 
-function criarNotificacao() {
-    if (!(postePrincipal)) {
+async function criarNotificacao() {
+    if (!(nomePoste.value)) {
         alert('Sem nenhum poste selecionado!');
         return;
     }
@@ -43,8 +43,18 @@ function criarNotificacao() {
     descDeTextbox.value = '';
 
     //
-    postePrincipal.novaNotificacao(descricao);
-    pegarPoste(postePrincipal)
+    await fetch('http://localhost:3001/criarnotificacao', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            descricao,
+            status: 1,
+            id_poste_associado: localStorage.getItem('poste')
+        })
+    })
+    carregarNotificacoesDoBD(localStorage.getItem('poste'))
 }
 
 function limparHTMLNot() {
@@ -58,7 +68,7 @@ function togglePopUp(bool) {
         popUp.style.display = 'none';
     } else {
         popUp.style.display = 'flex';
-        popUp.children[3].innerText = `Criando notificação no ${postePrincipal.titulo}`
+        popUp.children[3].innerText = `Criando notificação no ${nomePoste.value}`
     }
     
 }
@@ -119,7 +129,7 @@ async function pegarPoste(poste) { // Objeto poste
 
 // BD
 async function carregarPostesDoBD() {
-    const response = await fetch('http://localhost:3001/postes', {
+    const response = await fetch('http://localhost:3001/mapa/postes', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -138,7 +148,7 @@ async function carregarPostesDoBD() {
     listarArrayEmElement(nomePoste, 'option', empresa_logada.__postes);
 
     let postePegado = localStorage.getItem('poste');
-    if (postePegado == '' || postePegado == null || postePegado == 'null') {
+    if (postePegado == '' || postePegado == null || postePegado == 'null' || postePegado == 'undefined') {
         carregarNotificacoesDoBD(1)
     } else {
         carregarNotificacoesDoBD(postePegado)
@@ -146,7 +156,7 @@ async function carregarPostesDoBD() {
 }
 
 async function carregarNotificacoesDoBD(id_poste) {
-    const response = await fetch('http://localhost:3001/empresa/postes', {
+    const response = await fetch(`http://localhost:3001/postes/notificacoes`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -166,6 +176,7 @@ async function carregarNotificacoesDoBD(id_poste) {
 
     selecionarTextoCertoDropdowns();
     selecionarTextoCertoDropdownsTitulo(id_poste);
+    localStorage.setItem('poste', id_poste);
 
 }
 

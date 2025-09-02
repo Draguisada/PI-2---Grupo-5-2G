@@ -45,7 +45,7 @@ logar.addEventListener('click', async (e) => {
         senha,
     }));
 
-    const response = await fetch('http://localhost:3001/loginEmpresas', {
+    const response = await fetch('http://localhost:3001/loginempresas', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -58,7 +58,10 @@ logar.addEventListener('click', async (e) => {
 
     const data = await response.json();
 
-    if (!data.empresa) return;
+    if (!data.empresa) {
+        alert(data.mensagem);
+        return
+    };
 
     localStorage.clear();
     let id = data.empresa.id;

@@ -87,37 +87,45 @@ class Poste {
     }
 
     // Deletar o proprio poste da existência.
-    apoptose() {
+    async apoptose() {
         // Se deletar
+        if (!this.bd_id) return;
+
+        await fetch(`http://localhost:3001/postes/${this.bd_id}`, {
+            method: "DELETE",
+        });
+
         empresa_logada.__postes[this._localId] = null;
+
+        recarregarForcado.click();
+        recarregarForcado.click();
     }
 
     // Criar / atualizar o menuzinho no mapa.
     atualizarPontoMaps() {
-        if (true) {
-                this.obj = {
-                lat: this.lat,
-                lng: this.lng,
-                title: this.titulo,
-                
-                content: `
-                    <div class="maps-content">
-                        <h2>${this.titulo}</h2>
-                        <h3 class="maps-status" title="${this.status}">Status: ${this.status}</h3>
+        this.obj = {
+            lat: this.lat,
+            lng: this.lng,
+            title: this.titulo,
+            
+            content: `
+                <div class="maps-content">
+                    <h2>${this.titulo}</h2>
+                    <h3 class="maps-status" title="${this.status}">Status: ${this.status}</h3>
 
-                        <p><strong>Empresa dona:</strong> ${this.dona}</p>
-                        <p><strong>Empresas associadas:</strong> ${Object.keys(this.associadas)}</p>
+                    <p><strong>Empresa dona:</strong> ${this.dona}</p>
+                    <p><strong>Empresas associadas:</strong> ${Object.keys(this.associadas)}</p>
 
-                        <a href="./historico.html" onclick="localStorage.setItem('poste', ${this.bd_id})" target="_blank" class="historicoInfo">Histórico de notificações</a>
-                        <div class="setStatus">
-                            <p onclick=" empresa_logada.__postes[${this._localId}].setStatus(0); recarregarForcado.click();">Desativar</p>
-                            <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1); recarregarForcado.click();">Ativar</p>
-                            <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2); recarregarForcado.click();">Em Manutenção</p>
-                        </div>
+                    <a href="./historico.html" onclick="localStorage.setItem('poste', ${this.bd_id})" target="_blank" class="historicoInfo">Histórico de notificações</a>
+                    <div class="setStatus">
+                        <p onclick=" empresa_logada.__postes[${this._localId}].setStatus(0); recarregarForcado.click();">Desativar</p>
+                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1); recarregarForcado.click();">Ativar</p>
+                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2); recarregarForcado.click();">Em Manutenção</p>
                     </div>
-                `,
-            };
-        }
+                </div>
+            `,
+        };
+        
     }
 }
 
@@ -175,7 +183,7 @@ class Notificacao {
 
 // por enquanto não faz nada de mais, apenas cria o objeto.
 class Empresa {
-    constructor(nome, codigo, email, centro_lat, centro_lng, zoom = 5, cnpj, id) {
+    constructor(nome, codigo, email = '', centro_lat = '', centro_lng = '', zoom = 5, cnpj = '', id) {
         this.nome = nome;
         this.__cod = codigo;
 

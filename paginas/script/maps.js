@@ -4,6 +4,8 @@ const recarregarForcado = document.querySelector('main#maps button#recaregar');
 const selecionarEmpresaOnLoad = document.getElementById('selecionarEmpresa');
 const especificarServico = document.getElementById('especificarServico');
 
+
+
 // Postes selecionados
 let selecionados = [];
 
@@ -39,6 +41,17 @@ async function initMap() {
             let lat = e.latLng.lat();
             let lng = e.latLng.lng();
             // Cria o poste, adicionando-o no empresa_logada.__postes, uma lista com todos os postes (ele adiciona dentro o proprio objeto)
+            fetch('http://localhost:3001/postesCriar', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    latitude: lat, longitude: lng,
+                    empresa_id: localStorage.id_empresa_logada,
+                    status: '1',
+                })
+            })
             new Poste(lat, lng, empresa_logada.nome);
             // Atualiza o mapa, "adicionando" o novo poste
             atualizarMapa();
@@ -79,6 +92,7 @@ async function initMap() {
         marker._globalId = ponto._globalId;
         marker._localId = ponto._localId;
         marker._StringGlobalId = ponto._StringGlobalId;
+        marker.bd_id = ponto.bd_id;
 
         const infoWindow = new google.maps.InfoWindow({
           content: infos.content,
@@ -137,7 +151,7 @@ async function initMap() {
 
             const content = `
                 <div id="contenxt-content">
-                    <button class="bigger-button" onclick="empresa_logada[${marker._localId}].apoptose()">Deletar</button>
+                    <button class="bigger-button" onclick="empresa_logada.__postes[${marker._localId}].apoptose()">Deletar</button>
                 </div>
             `;
             
@@ -187,15 +201,23 @@ async function initMap() {
 
     // Adicionar o HTML dos postes
     function carregarPostes() {
+        // carregarPostesDoBD();
         empresa_logada.__postes.forEach(function(ponto) {
-            ponto.atualizarPontoMaps();
+            if (!ponto) return;
+            // ponto.atualizarPontoMaps();
             addAdvancedMarker(ponto);
     });
     }
 
     async function carregarPostesDoBD() {
-        const postesRq = await fetch('http://localhost:3001/postes', {
-            method: "GET",
+        const postesRq = await fetch('http://localhost:3001/mapa/postes', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id_empresa: localStorage.id_empresa_logada,
+            })
         })
         
         const nomeEmpresasRq = await fetch('http://localhost:3001/nomeEmpresas', {
@@ -204,6 +226,11 @@ async function initMap() {
 
         const postes = await postesRq.json();
         const nomeId = await nomeEmpresasRq.json();
+        
+        nomeId.forEach((empresaBase) => {
+            new Empresa(empresaBase.nome, '', '', '', '', '', '', empresaBase.id)
+        })
+        
 
         postes.forEach(function(ponto) {
             empresa_dona = ponto.id_empresa_dona;
@@ -220,11 +247,6 @@ async function initMap() {
         atualizarMapa();
     }
     carregarPostesDoBD();
-    
-
-        
-
-
 
     function removerInfoWindow() {
         let infos = document.getElementsByClassName('gm-style-iw-a');
@@ -453,7 +475,8 @@ function criarPoste() {
 /* Função de apoio */
 function acharIndicePoste(achar) {
     for (let indice = 0; indice<empresa_logada.__postes.length; indice++){
-        let posteStringId = empresa_logada.__postes[indice]._StringGlobalId;
+        try {
+            let posteStringId = empresa_logada.__postes[indice]._StringGlobalId;
         if (posteStringId.slice(0,5) != achar.slice(0,5)) {
             continue;
         }
@@ -461,6 +484,10 @@ function acharIndicePoste(achar) {
         if (posteStringId == achar) {
             return indice;
         }
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 }
 
