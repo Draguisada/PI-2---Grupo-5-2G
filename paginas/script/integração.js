@@ -1,21 +1,21 @@
 
-async function criarNotificacao(){
+// async function criarNotificacao(){
 
-    const texto = document.getElementById('descricao').value;
-    const id_do_poste = document.getElementById('nomePoste').value; // no html não tem opção de id, temos que arrumar isso ou só colocar id invés de nome
-    const status = document.getElementById('').value; // ainda não tem ou o meu ta bugado
+//     const texto = document.getElementById('descricao').value;
+//     const id_do_poste = document.getElementById('nomePoste').value; // no html não tem opção de id, temos que arrumar isso ou só colocar id invés de nome
+//     const status = document.getElementById('').value; // ainda não tem ou o meu ta bugado
 
-    response = await fetch('http://localhost:3001/criarnotificacao', {
-         method: "POST",
-         body: JSON.stringify({
-            texto,
-            id_do_poste,
-            status
-        })
-    });
-}
+//     response = await fetch('http://localhost:3001/criarnotificacao', {
+//          method: "POST",
+//          body: JSON.stringify({
+//             texto,
+//             id_do_poste,
+//             status
+//         })
+//     });
+// }
 
-const data = await response.json();
+// const data = await response.json();
 
 
 
@@ -28,8 +28,7 @@ async function editarNotificacao(id) {
             status
         })
         
-    });
-    
+    });  
 }
 
 
@@ -40,7 +39,6 @@ async function deletarNotificacao(id) {
             id
         })
     }
-
 )};
 
 

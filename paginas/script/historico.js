@@ -8,28 +8,30 @@ const sectionNot = document.getElementById('sec-notificacoes');
 const nomePoste = document.getElementById('nomePoste');
 const descDeTextbox = document.querySelector('#pop-up #descricao');
 
-
-function changeStatusTo(element) {    
+async function changeStatusTo(element, bd_id) {    
     element.title = element.value;
-
-    // Para mudar no objeto Poste
-    let notTotal = element.parentElement.parentElement;
-    let id = notTotal.children[0].children[1];
-
-    let [poste, notif, index] = acharPostePeloID(id); // Retorna o poste e a notificação
-
-    notif[3] = typeSNotmenos1[element.value];
+    
+    response = await fetch(`http://localhost:3001/editarnotificacao/${bd_id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            status: typeSNotmenos1[element.title]
+        })
+        
+    });
+    carregarNotificacoesDoBD(localStorage.getItem('poste'));
 }
 
-function deleteNotificacao(e) {
+async function deleteNotificacao(e) {
     // Para mudar no objeto Poste
-    let notTotal = e.parentElement.parentElement;
-    let id = notTotal.children[0].children[1];
+    await fetch(`http://localhost:3001/deletarnotificacao/${e}`, {
+            method: "DELETE"
+        }
+    );
 
-    let [poste, notif, index] = acharPostePeloID(id);
-    poste.notificacoes.splice(index, 1, '');
-
-    notTotal.remove();
+    carregarNotificacoesDoBD(localStorage.getItem('poste'));
 }
 
 async function criarNotificacao() {
@@ -101,7 +103,7 @@ function selecionarTextoCertoDropdownsTitulo(id_poste) {
 function acharPostePeloID(idTotal) {
     indices = idTotal.innerText.split('#')[1].split('-');
     //o indice[0] é o indice do poste, e o indice[1] é o indice da notificação dentro do poste.
-    return [empresa_logada.__postes[indices[0]], empresa_logada.__postes[indices[0]].notificacoes[indices[1]-1], parseInt(indices[1])-1]
+    return [empresa_logada.__postes[indices[1]-1], parseInt(indices[1])-1]
     // Retorna o poste e a notificação
 }
 

@@ -18,9 +18,12 @@ async function initMap() {
     // Inicializações básicas
     const { Map } =     await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+    let logada = JSON.parse(localStorage.getItem('empresa'))
+
     map = new google.maps.Map(document.getElementById("map"), {
-        center: empresa_logada.centroMapa,
-        zoom: empresa_logada.zoom,
+        center: {lat: parseFloat(logada.empresa.centro_lat), lng: parseFloat(logada.empresa.centro_lng)},
+        zoom: logada.empresa.zoom,
         mapId: 'posteMapas'
     });
 
@@ -52,9 +55,10 @@ async function initMap() {
                     status: '1',
                 })
             })
-            new Poste(lat, lng, empresa_logada.nome);
+            // new Poste(lat, lng, empresa_logada.nome);
             // Atualiza o mapa, "adicionando" o novo poste
-            atualizarMapa();
+            // atualizarMapa();
+            carregarPostesDoBD()
         }
     });
 
@@ -204,12 +208,14 @@ async function initMap() {
         // carregarPostesDoBD();
         empresa_logada.__postes.forEach(function(ponto) {
             if (!ponto) return;
-            // ponto.atualizarPontoMaps();
+            ponto.atualizarPontoMaps();
             addAdvancedMarker(ponto);
     });
     }
 
     async function carregarPostesDoBD() {
+        removerMarkers();
+        idPostes = 0;
         const postesRq = await fetch('http://localhost:3001/mapa/postes', {
             method: "POST",
             headers: {
@@ -224,9 +230,18 @@ async function initMap() {
             method: "GET",
         })
 
+        const associadasRq = await fetch('http://localhost:3001/empresasassociadas', {
+            method: "GET",
+        })
+        
+        
+
         const postes = await postesRq.json();
         const nomeId = await nomeEmpresasRq.json();
-        
+        const associadas = await associadasRq.json();
+
+        empresas = [];
+        empresa_logada.__postes = [];
         nomeId.forEach((empresaBase) => {
             new Empresa(empresaBase.nome, '', '', '', '', '', '', empresaBase.id)
         })
@@ -241,12 +256,22 @@ async function initMap() {
                     break;
                 }
             }
+
+            let associadasObj = {}
+            for (let i = 0; i < associadas.length; i++) {
+                if (ponto.id == associadas[i].id_poste) {
+                    associadasObj[associadas[i].nome_empresa_associada] = '';
+                    // break;
+                }
+            }
             
-            new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), nome_empresa_dona, [], {}, ponto.status, ponto.id, ponto.id_empresa_dona)    
+            new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), nome_empresa_dona, [], associadasObj, ponto.status, ponto.id, ponto.id_empresa_dona)    
         });
         atualizarMapa();
     }
     carregarPostesDoBD();
+
+    
 
     function removerInfoWindow() {
         let infos = document.getElementsByClassName('gm-style-iw-a');
@@ -265,7 +290,8 @@ async function initMap() {
     }
 
     // Salva vidas :pray:
-    recarregarForcado.addEventListener('click', atualizarMapa);
+    recarregarForcado.addEventListener('click', carregarPostesDoBD);
+    
 
     // Quando tudo carregar certo vai carregar todos os postes
     carregarPostes();
@@ -281,6 +307,10 @@ async function initMap() {
 
 window.initMap = initMap;
 
+function handleMudarStatus(id, status) {
+    empresa_logada.__postes[id].setStatus(status);
+    recarregarForcado.click();
+}
 
 /* Resto */
 let action = 1;

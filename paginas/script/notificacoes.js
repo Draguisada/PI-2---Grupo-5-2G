@@ -36,28 +36,31 @@ function toggleCriarNotificacao(bool) {
 // Mudar status de alguma notificação
 // Aparentemente eu tava com preguiça e não fiz algo usando a classe notificação
 // Se conseguir fazer por aqui tudo bem, mas se achar melhor colocar no objetos.js eu coloco. @SamuVortmann
-function changeStatusTo(element) {    
+async function changeStatusTo(element, bd_id) {    
     element.title = element.value;
-
-    // Para mudar no objeto Poste
-    let notTotal = element.parentElement.parentElement;
-    let id = notTotal.children[0].children[1];
-
-    let [poste, notif, index] = acharPostePeloID(id); // Retorna o poste e a notificação
-
-    notif[3] = typeSNotmenos1[element.value];
+    
+    response = await fetch(`http://localhost:3001/editarnotificacao/${bd_id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            status: typeSNotmenos1[element.title]
+        })
+        
+    });
+    carregarPostesDoBD();
 }
 
 // Deletar deletar notificação (apenas html) ??? mds eu tava com mt preguiça, esse nem tem implementação geral ~ Bruno
-function deleteNotificacao(e) {
+async function deleteNotificacao(e) {
     // Para mudar no objeto Poste
-    let notTotal = e.parentElement.parentElement;
-    let id = notTotal.children[0].children[1];
+    await fetch(`http://localhost:3001/deletarnotificacao/${e}`, {
+            method: "DELETE"
+        }
+    );
 
-    let [poste, notif, index] = acharPostePeloID(id);
-    poste.notificacoes.splice(index, 1, '');
-
-    notTotal.remove();
+    carregarPostesDoBD();
 }
 
 // Adiciona os objetos Notificações, e atualiza eles antes de colocar no html
@@ -72,15 +75,17 @@ function carregarTodasNotificacoes(arrayEmpresa) {
 
     for (let i = 0; i < arrayEmpresa.length; i++) {
         if (arrayEmpresa[i].notificacoes.length >= 1){
-            arrayEmpresa[i].notificacoes.forEach((infos) => {
-                if (infos){
-                    adicionarNotificacao(infos);
-                }
+            let idPoste;
+                arrayEmpresa[i].notificacoes.forEach((infos) => {
+                    if (infos){
+                        adicionarNotificacao(infos);
+                        idPoste = infos.idPoste;
+                    }
             });
-
             sectionNot.innerHTML = `<div class='hr'><span>${arrayEmpresa[i].titulo}</span>
-                                    <a class="irHistorico" onclick="localStorage.setItem('poste', ${i})" href="./historico.html" target="_blank"></a></div>
+                                    <a class="irHistorico" onclick="localStorage.setItem('poste', ${idPoste})" href="./historico.html" target="_blank"></a></div>
                                     ${sectionNot.innerHTML}`;
+
         }
     }
 
@@ -114,25 +119,43 @@ function handleChangePoste(nome) {
 };
 
 // Criar nova notificação usando o objetos.js
-function criarNotificacao() {
-    let text = descDeTextbox.value;
+async function criarNotificacao() {
 
-    empresa_logada.__postes[posteSelecionado].novaNotificacao(text);
+    if (!(nomePoste.value)) {
+        alert('Sem nenhum poste selecionado!');
+        return;
+    }
+    //
+    let descricao = descDeTextbox.value;
     toggleCriarNotificacao(false);
+    descDeTextbox.value = '';
 
-    carregarTodasNotificacoes(empresa_logada.__postes);
+    let id_poste_associado = empresa_logada.__postes[parseInt(nomePoste.value.split('#')[1])-1].bd_id;
+
+    //
+    await fetch('http://localhost:3001/criarnotificacao', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            descricao,
+            status: 1,
+            id_poste_associado
+        })
+    })
+    carregarPostesDoBD()
 }
 
+
 // Valores padrão
-
-
-
-
 
 // BD
 
 async function carregarPostesDoBD() {
-    const response = await fetch('http://localhost:3001/postes', {
+    empresa_logada.__postes = [];
+    idPostes = 0;
+    const response = await fetch('http://localhost:3001/mapa/postes', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -147,10 +170,12 @@ async function carregarPostesDoBD() {
     postes.forEach(function(ponto) {
         new Poste(parseFloat(ponto.lat), parseFloat(ponto.lng), empresa_logada.db_id, [], {}, ponto.status, ponto.id)    
     });
-    carregarTodasNotificacoes(empresa_logada.__postes);
+    // carregarTodasNotificacoes(empresa_logada.__postes);
+    carregarNotificacoesDoBD();
 }
 
 async function carregarNotificacoesDoBD() {
+
     const response = await fetch('http://localhost:3001/notificacoes', {
         method: "POST",
         headers: {
@@ -171,5 +196,5 @@ async function carregarNotificacoesDoBD() {
 }
 
 carregarPostesDoBD();
-carregarNotificacoesDoBD();
+// carregarNotificacoesDoBD();
 handleChangePoste('Poste #1');

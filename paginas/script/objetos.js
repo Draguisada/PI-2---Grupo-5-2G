@@ -26,7 +26,21 @@ class Poste {
     }
 
     // Método para mudar o status do poste, usando o dict "toStatus" para o texto (no main.js tem o dict)
-    setStatus(toStatusNum) { // Recebe valor de, 0, 1, 2
+    async setStatus(toStatusNum) { // Recebe valor de, 0, 1, 2 
+            // Editar status no BD
+            
+            await fetch(`http://localhost:3001/postes/${this.bd_id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    status: toStatusNum
+                })
+                
+            });
+            
+        
         const toStatus = typeStatus[toStatusNum];
         let element = this;
         const originalStatus = this.status;
@@ -60,6 +74,25 @@ class Poste {
     // Acho que aqui o BD brilha @SamuVortmann
     adicionarEmpresaAssociadas(empresa, ...servico) {
         this.associadas[empresa] = [servico];
+
+        let id_empresa_bd;
+        for (let i = 0; i < empresas.length; i++) {
+            if (empresas[i].nome == empresa) {
+                id_empresa_bd = empresas[i].db_id;
+                break;
+            }
+        }
+
+        fetch(`http://localhost:3001/associar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id_empresa: id_empresa_bd,
+                id_poste: this.bd_id
+            })
+        })
     }
 
     adicionarServico(empresa, servico) {
@@ -118,9 +151,9 @@ class Poste {
 
                     <a href="./historico.html" onclick="localStorage.setItem('poste', ${this.bd_id})" target="_blank" class="historicoInfo">Histórico de notificações</a>
                     <div class="setStatus">
-                        <p onclick=" empresa_logada.__postes[${this._localId}].setStatus(0); recarregarForcado.click();">Desativar</p>
-                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(1); recarregarForcado.click();">Ativar</p>
-                        <p onclick="empresa_logada.__postes[${this._localId}].setStatus(2); recarregarForcado.click();">Em Manutenção</p>
+                        <p onclick="handleMudarStatus(${this._localId}, 0)">Desativar</p>
+                        <p onclick="handleMudarStatus(${this._localId}, 1)">Ativar</p>
+                        <p onclick="handleMudarStatus(${this._localId}, 2)">Em Manutenção</p>
                     </div>
                 </div>
             `,
@@ -167,13 +200,13 @@ class Notificacao {
                 </div>
 
                 <div class="botoes">
-                    <select title="${typeNot[this.status]}" value="${typeNot[this.status]}" class="dropdown" name="select-status" onchange='changeStatusTo(this)'>${typeNot[this.status]}
+                    <select title="${typeNot[this.status]}" value="${typeNot[this.status]}" class="dropdown" name="select-status" onchange='changeStatusTo(this, ${this.idNotificacao})'>${typeNot[this.status]}
                         <option>${typeNot[0]}</option>
                         <option>${typeNot[1]}</option>
                         <option>${typeNot[2]}</option>
                     </select>
 
-                    <button class="lixo" onclick="deleteNotificacao(this)"></button>
+                    <button class="lixo" onclick="deleteNotificacao(${this.idNotificacao})"></button>
                     
                 </div>
 
@@ -204,13 +237,34 @@ class Empresa {
     }
 
     //const centroDoMapa = { lat: -27.200476, lng: -52.082809 }; // Entrada do IF ->
-    mudarCentro(lat, lng, zoom) {
-        mostrarVariaveis(lat,lng, zoom)
+    async mudarCentro(lat, lng, zoom) {
+        // mostrarVariaveis(lat,lng, zoom)
 
         this.centroMapa = {
             lat,
             lng,
         }
         this.zoom = zoom;
+
+        
+        let res = await fetch('http://localhost:3001/editarcentro', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                lat,
+                lng,
+                zoom,
+                id: localStorage.id_empresa_logada
+            })
+            
+        });
+
+        let data = await res.json()
+
+        localStorage.setItem('empresa', JSON.stringify({empresa: data}));
+
+        alert('Centro mudado com sucesso');
     }
 }

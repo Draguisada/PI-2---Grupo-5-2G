@@ -5,6 +5,7 @@
   <title>Cadastro Empresa</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="icon" href="../assets/icones/logo.png">
+  <script src="script/cadastro.js" defer></script>
 </head>
 <body id="login">
   <img src="../assets/icones/logo.png" alt="Logo" class="logo">
@@ -12,18 +13,20 @@
     <div id="form-login">
       <h2>Cadastro empresarial</h2>
       
-      <form>
+      <div>
         <!-- <a href="#" class="esqueceu">ESQUECEU A SENHA?</a> -> Teria falar com sua empresa chefe -->
-        <input name="nome" type="nome" placeholder="Nome da empresa" id="nome" class="input-texts" required>
+        <input name="nome" type="text" placeholder="Nome da empresa" id="nome" class="input-texts" required>
         <input name="email" type="email" placeholder="E-mail da empresa" id="email" class="input-texts" required>
-        <input name="cnpj" type="CNPJ" placeholder="CNPJ" id="cnpj" class="input-texts"  required>
+        <input name="cnpj" type="text" placeholder="CNPJ" id="cnpj" class="input-texts"  required>
+        <input name="telefone" type="tel" placeholder="Telefone" id="tel" class="input-texts" required>
+        <input name="codigo" type="text" placeholder="Código único de 4 dígitos da empresa" id="cod" class="input-texts"  required>
         <input name="senha" type="password" placeholder="Senha" id="senha" class="input-texts" required>
-        <input name="confirm-senha" type="password" placeholder="Confirmar senha"  class="input-texts" required>
+        <input name="confirm-senha" type="password" placeholder="Confirmar senha"  class="input-texts" id="confirm-senha" required>
 
-        <!-- Por enquanto, não tem indentificação -->
         
-      </form>
-      <a href="mapa.html"><button type="submit" class="bigger-button">Cadastrar</button></a>
+        <button class="bigger-button" onclick="handleSubmit(event)">Cadastrar</button>  
+      </div>
+      
 
     </div>
   </main>
