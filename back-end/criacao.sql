@@ -18,11 +18,9 @@ CREATE TABLE empresas (
 
 CREATE TABLE postes (
     id SERIAL PRIMARY KEY,
-    lat VARCHAR(30) NOT NULL, -- Isso deu problema usando DECIMAL(2, 20),
-    lng VARCHAR(30) NOT NULL, -- Vou usar VARCHAR e no código {{converte}} para FLOAT
+    lat VARCHAR(30) NOT NULL, 
+    lng VARCHAR(30) NOT NULL, 
     id_empresa_dona INT NOT NULL,
-    -- conexcoes
-    -- empresas_associadas
     status INT NOT NULL,
 
     CONSTRAINT fk_empresa_dona FOREIGN KEY (id_empresa_dona) REFERENCES empresas(id) ON DELETE CASCADE ON UPDATE CASCADE

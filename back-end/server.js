@@ -5,12 +5,16 @@ const cors = require('cors');
 const pgp = require('pg-promise')();
 const jwt = require('jsonwebtoken');
 
+// Configurações mais avançadas.
 const  DB_HOST = 'localhost';
 const  DB_PORT = 5432;
 const  DB_NAME = 'visux';
-const  DB_USER = 'bruno';
-const  DB_PASS = '1234';
-const JWT_SECRET = "90d0af04bc640175822155f4b675b977a16633eda4b3005da54a0182cac641d1"
+//===========================//
+// MODIFICAR ESSAS VARIÁVEIS // por padrão
+//===========================//
+const  DB_USER = '';
+const  DB_PASS = '';
+
 
 const  PORT = 3001;
 
@@ -29,7 +33,7 @@ app.use(express.json());
 
 
 // ---------------- HELPERS JWT ----------------
-
+const JWT_SECRET = "90d0af04bc640175822155f4b675b977a16633eda4b3005da54a0182cac641d1"
 function gerarToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: '8h' });
 }
